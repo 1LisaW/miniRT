@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: tklimova <tklimova@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 10:49:49 by tklimova          #+#    #+#             */
-/*   Updated: 2024/03/25 13:16:28 by tklimova         ###   ########.fr       */
+/*   Updated: 2024/03/25 14:23:27 by tklimova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # define ERR_WRONG_FILE_EXT 2
 # define ERR_READ_FILE 3
 # define ERR_PARSE_DATA 4
+# define ERR_ALLOC_ERR 5
 
 # define AMBIENT_LIGHTNING_TOKEN "A"
 # define CAMERA_TOKEN "C"
@@ -80,7 +81,7 @@ typedef struct s_mini_rt_data
 	t_g_objects		*objs;
 }			t_mini_rt_data;
 
-int		is_validate_extantion(char *str, char *extantion, t_mini_rt_data *data);
+int		is_valid_extension(char *str, char *extantion, t_mini_rt_data *data);
 
 void	handle_error(int err_no, char *text, t_mini_rt_data *data);
 
@@ -88,8 +89,8 @@ void	init_mini_rt_data(t_mini_rt_data *data);
 
 void	ft_read_file(t_mini_rt_data *data);
 
-char	*ft_read_substr(t_mini_rt_data *data);
+char	*ft_read_substr(t_mini_rt_data *data, int *eol);
 
-void	ft_parse_ambient_light(t_mini_rt_data *data);
+void	ft_parse_ambient_light(t_mini_rt_data *data, int *eol);
 
 #endif

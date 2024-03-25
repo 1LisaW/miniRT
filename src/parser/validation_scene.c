@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   validation_scene.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: tklimova <tklimova@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 10:43:50 by tklimova          #+#    #+#             */
-/*   Updated: 2024/03/25 12:24:56 by tklimova         ###   ########.fr       */
+/*   Updated: 2024/03/25 14:23:32 by tklimova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/miniRT.h"
 
-int	is_validate_extantion(char *str, char *extantion, t_mini_rt_data *data)
+int	is_valid_extension(char *str, char *extantion, t_mini_rt_data *data)
 {
 	int	idx_ext_start;
 	int	ext_len;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: tklimova <tklimova@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 10:38:52 by tklimova          #+#    #+#             */
-/*   Updated: 2024/03/25 11:31:42 by tklimova         ###   ########.fr       */
+/*   Updated: 2024/03/25 14:23:32 by tklimova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,10 @@ void	validate_args(int argc, char **argv, t_mini_rt_data *data)
 {
 	if (argc != 2)
 		handle_error(ERR_WRONG_ARG, NULL, data);
-	if (argc == 2 && is_validate_extantion(argv[1], ".rt", data))
+	if (argc == 2 && is_valid_extension(argv[1], ".rt", data))
 		data->fd = open(argv[1], O_RDONLY);
 	if (!data->err_code && data->fd == -1)
 		handle_error(ERR_READ_FILE, argv[1], data);
-	// else
-	// 	printf("⛔ ⚠️ Number o\n");
 }
 
 void	parse_scene(int argc, char **argv, t_mini_rt_data *data)
