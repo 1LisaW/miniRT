@@ -6,7 +6,7 @@
 /*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 11:26:43 by tklimova          #+#    #+#             */
-/*   Updated: 2024/03/25 11:27:01 by tklimova         ###   ########.fr       */
+/*   Updated: 2024/03/26 18:15:00 by tklimova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ void	*ft_free_all_split_alloc(char **split, size_t elts)
 	size_t	i;
 
 	i = 0;
+	if (!split)
+		return (NULL);
 	while (i < elts)
 	{
 		free(split[i]);

@@ -6,7 +6,7 @@
 /*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 10:50:40 by tklimova          #+#    #+#             */
-/*   Updated: 2024/03/25 10:53:05 by tklimova         ###   ########.fr       */
+/*   Updated: 2024/03/26 13:21:26 by tklimova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ char	*ft_reallocate(char *str, int plus_size)
 	}
 	new_str[i] = 0;
 	new_str[i + 1] = 0;
-	new_str[i + 2] = 0;
 	free(str);
 	return (new_str);
 }

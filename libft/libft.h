@@ -6,7 +6,7 @@
 /*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 10:49:22 by tklimova          #+#    #+#             */
-/*   Updated: 2024/03/25 12:55:17 by tklimova         ###   ########.fr       */
+/*   Updated: 2024/03/26 18:51:45 by tklimova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ int		ft_isdigit(int c);
 int		ft_atoi(const char *str);
 
 char	*ft_substr(char *s, unsigned int start, int len);
+
+void	*ft_free_all_split_alloc(char **split, size_t elts);
 
 char	**ft_split(char *s, char c);
 
