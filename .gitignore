@@ -53,3 +53,4 @@ dkms.conf
 
 venv/
 .vscode/
+minilibx-linux/

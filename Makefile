@@ -14,9 +14,14 @@ PARSER_FILES = parse_scene validation_scene parse_helpers validate_helpers \
 				get_rgb get_coords shape parse_shape\
 				parse_ambient_light parse_camera parse_light parse_sphere parse_plane parse_cylinder \
 				log_parsed_data
+
+IMG_FILES = create_win win_events init_img_data get_start_img
+
 SRC_DIR		= src
 
 PARSER_DIR	= parser
+
+IMG_DIR = image
 
 OBJ_DIR	=	build
 
@@ -24,18 +29,24 @@ SRC	=	$(addsuffix .c, $(FILES))
 
 PARSER_SRC	=	$(addprefix $(PARSER_DIR)/, $(addsuffix .c, $(PARSER_FILES)))
 
+IMG_SRC	=	$(addprefix $(IMG_DIR)/, $(addsuffix .c, $(IMG_FILES)))
+
 SRCS	= $(addprefix $(SRC_DIR)/, $(SRC))
 
 PARSER_SRCS	=	$(addprefix $(SRC_DIR)/, $(PARSER_SRC))
+
+IMG_SRCS	=	$(addprefix $(SRC_DIR)/, $(IMG_SRC))
 
 OBJS	=	$(addsuffix .o, $(FILES))
 
 PARSER_OBJS	=	$(addsuffix .o, $(PARSER_FILES))
 
-ALL_OBJS = $(OBJS) $(addprefix $(PARSER_DIR)/, $(PARSER_OBJS))
+IMG_OBJS	=	$(addsuffix .o, $(IMG_FILES))
+
+ALL_OBJS = $(OBJS) $(addprefix $(PARSER_DIR)/, $(PARSER_OBJS)) $(addprefix $(IMG_DIR)/, $(IMG_OBJS))
 
 %.o : %.c
-		$(CC) -c $(CFLAGS) $< -o $@
+		$(CC) -c $(CFLAGS) -I/usr/include -Imlx_linux -O3 $< -o $@
 
 
 all:	$(NAME)
@@ -50,11 +61,18 @@ $(addprefix $(OBJ_DIR)/$(PARSER_DIR)/, $(PARSER_OBJS)): $(PARSER_SRCS)
 		$(CC) -c $(CFLAGS) $(PARSER_SRCS)
 		mv $(PARSER_OBJS) $(OBJ_DIR)/$(PARSER_DIR)/
 
+
+$(addprefix $(OBJ_DIR)/$(IMG_DIR)/, $(IMG_OBJS)): $(IMG_SRCS)
+		@mkdir -p $(OBJ_DIR)/$(IMG_DIR)
+		$(CC) -c $(CFLAGS) $(IMG_SRCS)
+		mv $(IMG_OBJS) $(OBJ_DIR)/$(IMG_DIR)/
+
 $(LIB):
 	cd libft && $(MAKE) all
 
 $(NAME):	$(addprefix $(OBJ_DIR)/, $(ALL_OBJS)) $(LIB)
-		$(CC) $(addprefix $(OBJ_DIR)/, $(ALL_OBJS))  -I include $(LIB) -lreadline -o $(NAME)
+		cd minilibx-linux && $(MAKE) all
+		$(CC) $(addprefix $(OBJ_DIR)/, $(ALL_OBJS))  -I include $(LIB) -Lminilibx-linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME)
 
 run:
 	valgrind --suppressions=suppressions.supp --leak-check=full --show-leak-kinds=all --child-silent-after-fork=yes ./minishell
@@ -62,9 +80,11 @@ run:
 clean:
 	$(RM) $(addprefix $(OBJ_DIR)/, $(ALL_OBJS)) $(OBJ_DIR)
 	cd libft && $(MAKE) clean
+	cd minilibx-linux && $(MAKE) clean
 
 fclean:	clean
 	$(RM) $(NAME)
+	cd minilibx-linux && $(MAKE) fclean
 	cd libft && $(MAKE) fclean
 
 re:	fclean all
