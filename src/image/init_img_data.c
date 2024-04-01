@@ -1,34 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_reallocate.c                                    :+:      :+:    :+:   */
+/*   init_img_data.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/25 10:50:40 by tklimova          #+#    #+#             */
-/*   Updated: 2024/03/26 13:21:26 by tklimova         ###   ########.fr       */
+/*   Created: 2024/03/31 19:10:56 by tklimova          #+#    #+#             */
+/*   Updated: 2024/03/31 22:52:19 by tklimova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../includes/miniRT.h"
 
-char	*ft_reallocate(char *str, int plus_size)
+void	init_img_data(t_img_data **img_data_l)
 {
-	char	*new_str;
-	int		i;
+	t_img_data	*img_data;
 
-	new_str = NULL;
-	i = 0;
-	new_str = malloc(sizeof(char) * (ft_strlen(str) + plus_size));
-	if (!new_str)
-		return (NULL);
-	while (str && str[i])
-	{
-		new_str[i] = str[i];
-		i++;
-	}
-	new_str[i] = 0;
-	new_str[i + 1] = 0;
-	free(str);
-	return (new_str);
+	img_data = NULL;
+	img_data = malloc(sizeof(t_img_data));
+	if (!img_data)
+		return ;
+	img_data->colors_data = NULL;
+	img_data->x_coord_nb = 0;
+	img_data->y_coord_nb = 0;
+	img_data->w_width = 800;
+	img_data->w_height = 400;
+	img_data->img_step = 0;
+	img_data->z = 100;
+	*img_data_l = img_data;
 }
