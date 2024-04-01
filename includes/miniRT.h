@@ -6,7 +6,7 @@
 /*   By: tklimova <tklimova@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 10:49:49 by tklimova          #+#    #+#             */
-/*   Updated: 2024/03/28 14:48:27 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2024/04/01 15:23:53 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,5 +93,25 @@ void	ft_read_file(t_mini_rt_data *data);
 char	*ft_read_substr(t_mini_rt_data *data, int *eol);
 
 void	ft_parse_ambient_light(t_mini_rt_data *data, int *eol);
+
+// vector_ops
+
+void	vector_add(float *origin, float *vector1, float *vector2, \
+	float *result);
+
+void	vector_subtract(float *origin, float *vector1, float *vector2, \
+	float *result);
+
+void	vector_multiply(float *origin, float *vector1, float *vector2, \
+	float *result);
+
+float	get_dot_product(float *vector_1, float *vector_2);
+
+void	vector_divide(float *origin, float *vector1, float *vector2, \
+	float *result);
+
+float	get_vector_length(float *position1, float *position2);
+
+void	normalize_vector(float *origin, float *vector);
 
 #endif
