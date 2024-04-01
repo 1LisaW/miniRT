@@ -6,7 +6,7 @@
 /*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 10:38:52 by tklimova          #+#    #+#             */
-/*   Updated: 2024/03/26 18:54:28 by tklimova         ###   ########.fr       */
+/*   Updated: 2024/03/31 22:31:14 by tklimova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,17 @@ int	main(int argc, char **argv)
 {
 	t_mini_rt_data	*data;
 	int				err_code;
+	t_vars			*vars;
 
+	vars = NULL;
 	data = (t_mini_rt_data *) malloc(sizeof(t_mini_rt_data));
-	if (!data)
+	vars = (t_vars *) malloc(sizeof(t_vars));
+	if (!data || !vars)
 		exit(1);
 	init_mini_rt_data(data);
 	parse_scene(argc, argv, data);
 	err_code = data->err_code;
+	create_win(vars);
 	delete_mini_rt_data(data);
 	data = NULL;
 	return (err_code);

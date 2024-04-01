@@ -6,7 +6,7 @@
 /*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 10:49:49 by tklimova          #+#    #+#             */
-/*   Updated: 2024/03/27 22:09:10 by tklimova         ###   ########.fr       */
+/*   Updated: 2024/03/31 23:29:43 by tklimova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@
 # include <unistd.h>
 # include <limits.h>
 # include "../libft/libft.h"
+# include "../minilibx-linux/mlx.h"
+
 
 typedef struct s_ambient_light
 {
@@ -148,5 +150,45 @@ void		ft_free_4_str(char *str1, char *str2, char *str3,
 				char *str4);
 
 void		ft_print_data(t_mini_rt_data *data);
+
+typedef struct s_data
+{
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}			t_data;
+
+typedef struct s_img_data
+{
+	int		**colors_data;
+	int		is_guide;
+	int		w_width;
+	int		w_height;
+	int		y_coord_nb;
+	int		x_coord_nb;
+	int		z;
+	int		img_step;
+}				t_img_data;
+
+typedef struct s_vars
+{
+	void		*mlx;
+	void		*win;
+	t_img_data	*img_data;
+}				t_vars;
+
+void	init_img_data(t_img_data	**img_data);
+
+void	set_start_img_colors(t_data *img, t_vars *vars);
+
+void	free_coords(t_img_data *img_data);
+
+void	create_win(t_vars *vars);
+
+int	win_close(int keycode, t_vars *vars);
+
+int	win_destroy(t_vars *vars);
 
 #endif
