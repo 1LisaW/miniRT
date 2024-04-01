@@ -6,7 +6,7 @@
 /*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 10:49:49 by tklimova          #+#    #+#             */
-/*   Updated: 2024/04/01 15:23:53 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2024/04/01 19:18:34 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,11 +194,9 @@ int	win_destroy(t_vars *vars);
 
 // vector_ops
 
-void	vector_add(float *origin, float *vector1, float *vector2, \
-	float *result);
+void	vector_add(float *origin, float *direction,	float *result);
 
-void	vector_subtract(float *origin, float *vector1, float *vector2, \
-	float *result);
+void	vector_subtract(float *origin, float *direction, float *result);
 
 void	vector_multiply(float *origin, float *vector1, float *vector2, \
 	float *result);
