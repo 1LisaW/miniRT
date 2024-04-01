@@ -21,6 +21,7 @@
 *.a
 *.la
 *.lo
+minilibx-linux
 
 # Shared objects (inc. Windows DLLs)
 *.dll
@@ -29,6 +30,7 @@
 *.dylib
 
 # Executables
+miniRT
 *.exe
 *.out
 *.app
