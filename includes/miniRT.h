@@ -6,7 +6,7 @@
 /*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 10:49:49 by tklimova          #+#    #+#             */
-/*   Updated: 2024/04/01 19:18:34 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2024/04/02 15:01:42 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -209,5 +209,7 @@ void	vector_divide(float *origin, float *vector1, float *vector2, \
 float	get_vector_length(float *position1, float *position2);
 
 void	normalize_vector(float *origin, float *vector);
+
+void	copy_f_vector(float *src, float *dest);
 
 #endif
