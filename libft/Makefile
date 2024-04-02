@@ -18,16 +18,16 @@ OBJ	=	$(addsuffix .o, $(FILES))
 all:	$(NAME)
 
 %.o : %.c
-		$(CC) -c $(CFLAGS) $< -o $@
+	@$(CC) -c $(CFLAGS) $< -o $@
 
 $(NAME): $(OBJ)
-		${AR} $(NAME) $(OBJ)
+	@${AR} $(NAME) $(OBJ)
 
 clean:
-	$(RM) $(OBJ)
+	@$(RM) $(OBJ)
 
 fclean:	clean
-	$(RM) $(NAME)
+	@$(RM) $(NAME)
 
 re:	fclean all
 
