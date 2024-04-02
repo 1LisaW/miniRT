@@ -2,6 +2,7 @@ NAME        = miniRT
 LIB         = libft.a
 CC          = cc
 CFLAGS      = -Wall -Wextra -Werror -g
+TESTING_FLAGS = -g
 RM          = rm -rf
 FILES       = main log_error miniRT_data
 
@@ -32,11 +33,27 @@ IMG_OBJS	= $(addprefix $(LINKED_OBJS)/, $(addsuffix .o, $(IMG_FILES)))
 VEC_OPS_OBJS	= $(addprefix $(LINKED_OBJS)/, $(addsuffix .o, $(VEC_OPS_FILES)))
 ALL_OBJS    = $(OBJS) $(PARSER_OBJS) $(IMG_OBJS)
 
+# COLORS
+BLACK:="\033[1;30m"
+RED:="\033[1;31m"
+GREEN:="\033[1;32m"
+PURPLE:="\033[1;35m"
+CYAN:="\033[1;36m"
+WHITE:="\033[1;37m"
+EOC:="\033[0;0m"
+
 %.o : %.c
+	@echo $(CYAN) "Compiling $@...🛠️" $(EOC)
 	@mkdir -p $(LINKED_OBJS)
 	@$(CC) -c $(CFLAGS)  -I/usr/include -Imlx_linux -O3 $< -o $@
 
 all: submodule $(NAME)
+	@echo $(GREEN) "OK COMPILED" $(EOC)
+
+testing: CFLAGS = $(TESTING_FLAGS)
+
+testing: submodule $(NAME)
+	@echo $(RED) "WARNING: COMPILED WITHOUT MANDATORY FLAGS" $(EOC)
 
 submodule:
 	@git submodule update --init
@@ -69,13 +86,15 @@ clean:
 	@$(RM) $(LINKED_OBJS)
 	@$(MAKE) clean -C $(MINILIBX_DIR) -s
 	@cd libft && $(MAKE) clean
+	@echo $(RED) "Cleaned..." $(EOC)
 
 fclean: clean
 	@$(RM) $(NAME)
 	@cd libft && $(MAKE) fclean
+	@echo $(PURPLE) "Full Cleaned...🧹" $(EOC)
 
 re: fclean all
 	@git submodule update --remote -q
 
-.PHONY: all clean fclean re submodule
+.PHONY: all clean fclean re submodule testing
 
