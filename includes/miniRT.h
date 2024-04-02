@@ -6,7 +6,7 @@
 /*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 10:49:49 by tklimova          #+#    #+#             */
-/*   Updated: 2024/04/02 15:01:42 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2024/04/02 19:10:14 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <math.h>
+# include <float.h>
 # include <limits.h>
 # include "../libft/libft.h"
 # include "../minilibx-linux/mlx.h"
@@ -211,5 +212,11 @@ float	get_vector_length(float *position1, float *position2);
 void	normalize_vector(float *origin, float *vector);
 
 void	copy_f_vector(float *src, float *dest);
+
+// SDF functions
+
+float	sd_selector(float *curr_pt, t_mini_rt_data *data, t_g_objects object);
+
+float	sd_plane(float *p, float *n, float h, float *camera_pos);
 
 #endif
