@@ -6,7 +6,7 @@
 /*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 10:49:49 by tklimova          #+#    #+#             */
-/*   Updated: 2024/04/02 19:10:14 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2024/04/04 23:51:34 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@
 # define ERR_READ_FILE 3
 # define ERR_PARSE_DATA 4
 # define ERR_ALLOC_ERR 5
+
+# define STEP 0.5
+# define RAY_MAX_LENGHT 100.0
 
 # define AMBIENT_LIGHTNING_TOKEN "A"
 # define CAMERA_TOKEN "C"
@@ -213,10 +216,12 @@ void	normalize_vector(float *origin, float *vector);
 
 void	copy_f_vector(float *src, float *dest);
 
-// SDF functions
+void	scale_vector(float *vector, float scalar, float *result);
+
+// SD functions
 
 float	sd_selector(float *curr_pt, t_mini_rt_data *data, t_g_objects object);
 
-float	sd_plane(float *p, float *n, float h, float *camera_pos);
+void	trace_ray(t_mini_rt_data *data, float *vp_coords);
 
 #endif
