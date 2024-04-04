@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 19:17:49 by jmigoya-          #+#    #+#             */
-/*   Updated: 2024/04/01 15:24:46 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2024/04/04 15:12:45 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 // Get length of vector given two components in type float coordinates[x, y, z]
 // It can also be thinked as the distance between two points in 3D space
+// TODO: add error handling for null pointers and other edge cases
 float	get_vector_length(float *position1, float *position2)
 {
 	float	x_diff;
