@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 15:57:16 by jmigoya-          #+#    #+#             */
-/*   Updated: 2024/04/04 20:28:57 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2024/04/04 23:56:35 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,6 @@ int	apply_sdf_to_objects(t_mini_rt_data *data, float *current_point)
 		curr_obj = curr_obj->next;
 	}
 	return (result);
-}
-
-void	print_f_vec(float *vec)
-{
-	printf("x: %f, y: %f, z: %f", vec[0], vec[1], vec[2]);
 }
 
 // Traces one ray from camera_pos towards vp_coords (viewport coordinates)
