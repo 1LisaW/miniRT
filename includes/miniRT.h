@@ -6,7 +6,7 @@
 /*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 10:49:49 by tklimova          #+#    #+#             */
-/*   Updated: 2024/04/04 23:51:34 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2024/04/05 16:55:55 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -222,6 +222,10 @@ void	scale_vector(float *vector, float scalar, float *result);
 
 float	sd_selector(float *curr_pt, t_mini_rt_data *data, t_g_objects object);
 
+// ray tracing functions
+
 void	trace_ray(t_mini_rt_data *data, float *vp_coords);
+
+int		apply_sdf_to_objects(t_mini_rt_data *data, float *current_point);
 
 #endif
