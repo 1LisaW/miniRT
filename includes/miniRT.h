@@ -6,7 +6,7 @@
 /*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 10:49:49 by tklimova          #+#    #+#             */
-/*   Updated: 2024/04/01 15:23:53 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2024/04/05 16:55:55 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@
 # define ERR_READ_FILE 3
 # define ERR_PARSE_DATA 4
 # define ERR_ALLOC_ERR 5
+
+# define STEP 0.5
+# define RAY_MAX_LENGHT 100.0
 
 # define AMBIENT_LIGHTNING_TOKEN "A"
 # define CAMERA_TOKEN "C"
@@ -33,6 +36,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <math.h>
+# include <float.h>
 # include <limits.h>
 # include "../libft/libft.h"
 # include "../minilibx-linux/mlx.h"
@@ -194,11 +198,9 @@ int	win_destroy(t_vars *vars);
 
 // vector_ops
 
-void	vector_add(float *origin, float *vector1, float *vector2, \
-	float *result);
+void	vector_add(float *origin, float *direction,	float *result);
 
-void	vector_subtract(float *origin, float *vector1, float *vector2, \
-	float *result);
+void	vector_subtract(float *origin, float *direction, float *result);
 
 void	vector_multiply(float *origin, float *vector1, float *vector2, \
 	float *result);
@@ -211,5 +213,19 @@ void	vector_divide(float *origin, float *vector1, float *vector2, \
 float	get_vector_length(float *position1, float *position2);
 
 void	normalize_vector(float *origin, float *vector);
+
+void	copy_f_vector(float *src, float *dest);
+
+void	scale_vector(float *vector, float scalar, float *result);
+
+// SD functions
+
+float	sd_selector(float *curr_pt, t_mini_rt_data *data, t_g_objects object);
+
+// ray tracing functions
+
+void	trace_ray(t_mini_rt_data *data, float *vp_coords);
+
+int		apply_sdf_to_objects(t_mini_rt_data *data, float *current_point);
 
 #endif
