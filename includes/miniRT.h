@@ -6,7 +6,7 @@
 /*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 10:49:49 by tklimova          #+#    #+#             */
-/*   Updated: 2024/04/05 16:55:55 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2024/04/10 15:42:53 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,57 +38,9 @@
 # include <math.h>
 # include <float.h>
 # include <limits.h>
+# include "structs.h"
 # include "../libft/libft.h"
 # include "../minilibx-linux/mlx.h"
-
-
-typedef struct s_ambient_light
-{
-	float	ratio;
-	int		*rgb;	// int[3]
-}				t_ambient_light;
-
-typedef struct s_camera
-{
-	float	*coords; // float [3]
-	float	*v_3d_orient;	//float[3]
-	int		fov;
-}				t_camera;
-
-typedef struct s_light
-{
-	float	*coords; // float [3]
-	float	l_brightness;
-	int		*rgb;	// int[3]
-}				t_light;
-
-enum	e_obj_ids
-{
-	pl,
-	sp,
-	cy,
-};
-
-typedef struct s_g_objects
-{
-	enum e_obj_ids		id;
-	float				*coords; // float [3]
-	float				diam;
-	float				*v_3d_normal;	//float[3]
-	float				height;
-	int					*rgb;	// int[3]
-	struct s_g_objects	*next;
-}				t_g_objects;
-
-typedef struct s_mini_rt_data
-{
-	int				err_code;
-	int				fd;
-	t_ambient_light	*a_l;
-	t_camera		*cam;
-	t_light			*l;
-	t_g_objects		*objs;
-}			t_mini_rt_data;
 
 int			is_valid_extension(char *str, char *extantion,
 				t_mini_rt_data *data);
@@ -155,34 +107,6 @@ void		ft_free_4_str(char *str1, char *str2, char *str3,
 				char *str4);
 
 void		ft_print_data(t_mini_rt_data *data);
-
-typedef struct s_data
-{
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-}			t_data;
-
-typedef struct s_img_data
-{
-	int		**colors_data;
-	int		is_guide;
-	int		w_width;
-	int		w_height;
-	int		y_coord_nb;
-	int		x_coord_nb;
-	int		z;
-	int		img_step;
-}				t_img_data;
-
-typedef struct s_vars
-{
-	void		*mlx;
-	void		*win;
-	t_img_data	*img_data;
-}				t_vars;
 
 void	init_img_data(t_img_data	**img_data);
 
