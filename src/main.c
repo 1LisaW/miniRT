@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: tklimova <tklimova@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 10:38:52 by tklimova          #+#    #+#             */
-/*   Updated: 2024/04/05 14:47:07 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2024/04/10 16:33:49 by tklimova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ int	main(int argc, char **argv)
 	vars = (t_vars *) malloc(sizeof(t_vars));
 	if (!data || !vars)
 		exit(1);
+	data->vars = vars;
 	init_mini_rt_data(data);
 	parse_scene(argc, argv, data);
 	err_code = data->err_code;
