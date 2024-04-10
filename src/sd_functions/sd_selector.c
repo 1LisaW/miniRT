@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 17:10:21 by jmigoya-          #+#    #+#             */
-/*   Updated: 2024/04/04 20:28:25 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2024/04/10 15:44:57 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@
 float	sd_selector(float *curr_pt, t_mini_rt_data *data, t_g_objects object)
 {
 	float	cam_pos[3];
+	float	vector_to_plane[3];
 
 	copy_f_vector(data->cam->coords, cam_pos);
-	float vector_to_plane[3];
 	vector_subtract(object.coords, curr_pt, vector_to_plane);
 	if (object.id == pl)
 	{
-        return get_dot_product(vector_to_plane, data->objs->v_3d_normal);
+		return (get_dot_product(vector_to_plane, data->objs->v_3d_normal));
 	}
 	return (FLT_MAX);
 }
