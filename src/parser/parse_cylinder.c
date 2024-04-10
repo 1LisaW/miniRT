@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   parse_cylinder.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: tklimova <tklimova@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 12:36:33 by tklimova          #+#    #+#             */
-/*   Updated: 2024/03/27 21:52:53 by tklimova         ###   ########.fr       */
+/*   Updated: 2024/04/10 16:22:20 by tklimova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/miniRT.h"
 
-void	convert_cylinder(t_mini_rt_data *data, t_g_objects *obj, char *v_3d_norm, char **d_h_and_tmp)
+void	convert_cylinder(t_mini_rt_data *data, t_g_objects *obj,
+			char *v_3d_norm, char **d_h_and_tmp)
 {
 	if (data->err_code)
 	{
@@ -22,14 +23,24 @@ void	convert_cylinder(t_mini_rt_data *data, t_g_objects *obj, char *v_3d_norm, c
 	obj->v_3d_normal = get_coords_with_range(v_3d_norm, data, -1, 1);
 	obj->diam = ft_atof(d_h_and_tmp[0]);
 	free(d_h_and_tmp[0]);
-	if (!data->err_code && !is_float_in_range(obj->diam, 0, INT_MAX))
-		handle_error(ERR_PARSE_DATA, "Plane: diam is out of range [0, INT_MAX]", data);
+	if (!data->err_code && !is_float_in_range(obj->diam, 0, (float)INT_MAX))
+		handle_error(ERR_PARSE_DATA,
+			"Plane: diam is out of range [0, INT_MAX]", data);
 	obj->height = ft_atof(d_h_and_tmp[1]);
 	free(d_h_and_tmp[1]);
 	if (!data->err_code)
 		push_to_data_obj(data, obj);
 	else
 		delete_obj(obj);
+}
+
+void	init_cy_tmps(char **coords_c, char **v_3d_norm, char **rgb,
+			char **d_h_and_tmp)
+{
+	*coords_c = NULL;
+	*v_3d_norm = NULL;
+	*rgb = NULL;
+	(d_h_and_tmp)[2] = NULL;
 }
 
 void	ft_parse_cylinder(t_mini_rt_data *data, int *eol, char *token)
@@ -40,7 +51,7 @@ void	ft_parse_cylinder(t_mini_rt_data *data, int *eol, char *token)
 	char		*rgb;
 	t_g_objects	*new_obj;
 
-	d_h_and_tmp[2] = NULL;
+	init_cy_tmps(&coords_c, &v_3d_norm, &rgb, d_h_and_tmp);
 	if (data->err_code)
 		return ;
 	if (ft_read_token(&coords_c, data, eol, "Cylinder: coord_c")

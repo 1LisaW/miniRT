@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_sphere.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: tklimova <tklimova@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 11:14:43 by tklimova          #+#    #+#             */
-/*   Updated: 2024/03/27 21:51:13 by tklimova         ###   ########.fr       */
+/*   Updated: 2024/04/10 16:22:29 by tklimova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,26 @@ void	convert_sphere(t_mini_rt_data *data, t_g_objects *obj, char *diam)
 		return (delete_obj(obj));
 	}
 	if (!is_float(diam))
-		handle_error(ERR_PARSE_DATA, "Sphere: diam's format is not correct", data);
+		handle_error(ERR_PARSE_DATA,
+			"Sphere: diam's format is not correct", data);
 	obj->diam = ft_atof(diam);
 	free(diam);
-	if (!data->err_code && !is_float_in_range(obj->diam, 0, INT_MAX))
-		handle_error(ERR_PARSE_DATA, "Sphere: diam is out of range [0, INT_MAX]", data);
+	if (!data->err_code && !is_float_in_range(obj->diam, 0, (float)INT_MAX))
+		handle_error(ERR_PARSE_DATA,
+			"Sphere: diam is out of range [0, INT_MAX]", data);
 	if (!data->err_code)
 		push_to_data_obj(data, obj);
 	else
 		delete_obj(obj);
+}
+
+void	init_sp_tmps(char **coords_c, char **diam, char **rgb,
+			char **tmp)
+{
+	*coords_c = NULL;
+	*diam = NULL;
+	*rgb = NULL;
+	*tmp = NULL;
 }
 
 void	ft_parse_sphere(t_mini_rt_data *data, int *eol, char *token)
@@ -39,7 +50,7 @@ void	ft_parse_sphere(t_mini_rt_data *data, int *eol, char *token)
 	char		*tmp;
 	t_g_objects	*new_obj;
 
-	tmp = NULL;
+	init_sp_tmps(&coords_c, &diam, &rgb, &tmp);
 	new_obj = NULL;
 	if (data->err_code)
 		return ;

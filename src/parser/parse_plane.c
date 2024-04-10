@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_plane.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: tklimova <tklimova@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 12:23:48 by tklimova          #+#    #+#             */
-/*   Updated: 2024/03/27 22:11:21 by tklimova         ###   ########.fr       */
+/*   Updated: 2024/04/10 16:06:36 by tklimova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,9 @@ void	ft_parse_plane(t_mini_rt_data *data, int *eol, char *token)
 	char		*tmp;
 	t_g_objects	*new_obj;
 
+	coords_p = NULL;
+	v_3d_norm = NULL;
+	rgb = NULL;
 	tmp = NULL;
 	new_obj = NULL;
 	if (data->err_code)
