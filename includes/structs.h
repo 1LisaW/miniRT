@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 15:41:36 by jmigoya-          #+#    #+#             */
-/*   Updated: 2024/04/10 15:42:29 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2024/04/11 20:00:21 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,4 +84,5 @@ typedef struct s_mini_rt_data
 	t_camera		*cam;
 	t_light			*l;
 	t_g_objects		*objs;
+	t_img_data		*img_data;
 }			t_mini_rt_data;
