@@ -6,7 +6,7 @@
 /*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 10:44:38 by tklimova          #+#    #+#             */
-/*   Updated: 2024/03/27 21:57:50 by tklimova         ###   ########.fr       */
+/*   Updated: 2024/04/15 19:30:50 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	handle_error(int err_no, char *text, t_mini_rt_data *data)
 		return ;
 	printf("Error\n");
 	if (err_no == ERR_WRONG_ARG)
-		printf("%s %s", "⚠️   Programm requares exact one argument in a format",
+		printf("%s %s", "⚠️   Programm requires exact one argument in a format",
 			" <scene>.rt\n");
 	else if (err_no == ERR_WRONG_FILE_EXT)
 		printf("⚠️   Programm could accept scenes only in format <scene>.rt\n");
