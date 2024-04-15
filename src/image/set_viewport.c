@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 15:48:25 by jmigoya-          #+#    #+#             */
-/*   Updated: 2024/04/11 20:37:19 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2024/04/15 19:23:41 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@ float	get_dist_to_vp(t_mini_rt_data *data)
 // height, this function calculates the upper left coordinates of the viewport.
 //                        B 
 //                      --- 
-//                 ------ │ 
-//              ----      │ 
-//           ----         │ <- half viewport 
-//       ----             │ 
+//                 ---    │ 
+//              ---       │ 
+//           ---          │ <- half viewport 
+//       ---              │ 
 //    ---                 │ 
 // A -────────────────────-C
 void	set_viewport(t_mini_rt_data *data)
