@@ -6,7 +6,7 @@
 /*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 10:49:49 by tklimova          #+#    #+#             */
-/*   Updated: 2024/04/16 16:55:50 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2024/04/16 19:28:43 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,15 +128,15 @@ void	set_viewport(t_mini_rt_data *data);
 
 void	vector_add(float *origin, float *direction,	float *result);
 
-void	vector_subtract(float *origin, float *direction, float *result);
+void	vector_subtract(float *vec_1, float *vec_2, float *result);
 
-void	vector_multiply(float *vector1, float *vector2,	float *result);
+void	vector_multiply(float *vec_1, float *vec_2,	float *result);
 
 void	get_cross_product(float *vec_1, float *vec_2, float *cross_P);
 
-float	get_dot_product(float *vector_1, float *vector_2);
+float	get_dot_product(float *vec_1, float *vec_2);
 
-void	vector_divide(float *vector1, float *vector2, float *result);
+void	vector_divide(float *vec_1, float divider, float *result);
 
 float	get_coord_dist(float *position1, float *position2);
 

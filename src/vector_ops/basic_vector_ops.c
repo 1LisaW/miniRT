@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 15:19:16 by jmigoya-          #+#    #+#             */
-/*   Updated: 2024/04/16 16:55:46 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2024/04/16 19:28:29 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,12 @@ float	get_dot_product(float *vec_1, float *vec_2)
 		+ (vec_1[2] * vec_2[2]));
 }
 
-// Divide two vectors element-wise given their starting points and coordinates
+// Divides a vector
 // IMPORTANT:
 // - this function performs element-wise division
-void	vector_divide(float *vec_1, float *vec_2, float *result)
+void	vector_divide(float *vec_1, float divider, float *result)
 {
-	result[0] = (vec_1[0]) / (vec_2[0]);
-	result[1] = (vec_1[1]) / (vec_2[1]);
-	result[2] = (vec_1[2]) / (vec_2[2]);
+	result[0] = (vec_1[0]) / divider;
+	result[1] = (vec_1[1]) / divider;
+	result[2] = (vec_1[2]) / divider;
 }
