@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 15:41:36 by jmigoya-          #+#    #+#             */
-/*   Updated: 2024/04/11 20:00:21 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2024/04/15 19:58:42 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ typedef struct s_data
 typedef struct s_img_data
 {
 	int		**colors_data;
+	float	vp_upper_left[3];
 	int		is_guide;
 	int		w_width;
 	int		w_height;
@@ -35,7 +36,7 @@ typedef struct s_vars
 {
 	void		*mlx;
 	void		*win;
-	t_img_data	*img_data;
+	t_img_data	*img_data; // check users and remove
 }				t_vars;
 
 typedef struct s_ambient_light

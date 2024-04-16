@@ -4,7 +4,7 @@ CC          = cc
 CFLAGS      = -Wall -Wextra -Werror -g
 TESTING_FLAGS = -g
 RM          = rm -rf
-FILES       = main log_error miniRT_data
+FILES       = main log_error miniRT_data debugging
 
 PARSER_FILES =	parse_scene validation_scene parse_helpers validate_helpers \
                 get_rgb get_coords shape parse_shape\

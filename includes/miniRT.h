@@ -6,7 +6,7 @@
 /*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 10:49:49 by tklimova          #+#    #+#             */
-/*   Updated: 2024/04/10 15:42:53 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2024/04/15 19:35:27 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,8 @@ void		ft_free_4_str(char *str1, char *str2, char *str3,
 
 void		ft_print_data(t_mini_rt_data *data);
 
+// image functions
+
 void	init_img_data(t_img_data	**img_data);
 
 void	set_start_img_colors(t_data *img, t_vars *vars);
@@ -119,6 +121,8 @@ void	create_win(t_vars *vars);
 int	win_close(int keycode, t_vars *vars);
 
 int	win_destroy(t_vars *vars);
+
+void	set_viewport(t_mini_rt_data *data);
 
 // vector_ops
 
@@ -151,5 +155,9 @@ float	sd_selector(float *curr_pt, t_mini_rt_data *data, t_g_objects object);
 void	trace_ray(t_mini_rt_data *data, float *vp_coords);
 
 int		apply_sdf_to_objects(t_mini_rt_data *data, float *current_point);
+
+// debug functions
+
+void	print_vector(float *vector);
 
 #endif

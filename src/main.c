@@ -6,7 +6,7 @@
 /*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 10:38:52 by tklimova          #+#    #+#             */
-/*   Updated: 2024/04/05 14:47:07 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2024/04/15 19:59:29 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,9 @@ int	main(int argc, char **argv)
 	init_mini_rt_data(data);
 	parse_scene(argc, argv, data);
 	err_code = data->err_code;
-	float coords[3] = {0.0, 0.0, 1.0}; // sample viewport coordinates
-	trace_ray(data, coords);
+	init_img_data(&data->img_data);
+	set_viewport(data);
+	print_vector(data->img_data->vp_upper_left);
 	create_win(vars);
 	delete_mini_rt_data(data);
 	data = NULL;

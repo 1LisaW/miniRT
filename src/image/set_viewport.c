@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 15:48:25 by jmigoya-          #+#    #+#             */
-/*   Updated: 2024/04/15 19:23:41 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2024/04/15 20:54:03 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,17 +36,16 @@ void	set_viewport(t_mini_rt_data *data)
 {
 	float	vp_dist;
 	float	vp_center[3];
-	float	vp_upper_left[3];
 
 	vp_dist = sqrt(((float)data->img_data->w_width / 2)
 			- (get_dist_to_vp(data)));
 	vp_center[0] = data->cam->coords[0] + (vp_dist * data->cam->v_3d_orient[0]);
 	vp_center[1] = data->cam->coords[1] + (vp_dist * data->cam->v_3d_orient[1]);
 	vp_center[2] = data->cam->coords[2] + (vp_dist * data->cam->v_3d_orient[2]);
-	vp_upper_left[0] = vp_center[0]
-		- (((float)data->img_data->w_width / 2) * data->cam->v_3d_orient[0]);
-	vp_upper_left[1] = vp_center[1]
-		- (((float)data->img_data->w_width / 2) * data->cam->v_3d_orient[1]);
-	vp_upper_left[2] = vp_center[2]
-		- (((float)data->img_data->w_width / 2) * data->cam->v_3d_orient[2]);
+	printf("vp_center: %f %f %f\n", vp_center[0], vp_center[1], vp_center[2]);
+	data->img_data->vp_upper_left[0] = vp_center[0]
+		- (((float)data->img_data->w_width / 2));
+	data->img_data->vp_upper_left[1] = vp_center[1]
+		+ (((float)data->img_data->w_width / 2));
+	data->img_data->vp_upper_left[2] = vp_center[2];
 }
