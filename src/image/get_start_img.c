@@ -6,7 +6,7 @@
 /*   By: tklimova <tklimova@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 15:19:02 by tklimova          #+#    #+#             */
-/*   Updated: 2024/04/10 16:28:37 by tklimova         ###   ########.fr       */
+/*   Updated: 2024/04/16 15:58:55 by tklimova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,11 @@ void	custom_mlx_pixel_put(t_data *data, int x, int y, int color)
 
 void	fill_color(t_data *img, t_img_data *img_data, int x, int y)
 {
-	img_data->colors_data[y][x] = 0x87ceeb;
+	// img_data->colors_data[y][x] = 0x87ceeb;
+	img_data->colors_data[y][x] = rgb_to_hex((int)((256 * x)/img_data->w_width), (int)((256 * y)/img_data->w_height), 0);
+
 	custom_mlx_pixel_put(img, x, y,
-		0x87ceeb);
+		img_data->colors_data[y][x]);
 }
 
 void	free_coords(t_img_data *img_data)

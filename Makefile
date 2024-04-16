@@ -13,7 +13,7 @@ PARSER_FILES =	parse_scene validation_scene parse_helpers validate_helpers \
 IMG_FILES = 	create_win win_events init_img_data get_start_img
 VEC_OPS_FILES =	basic_vector_ops get_vec_lenght normalize_vector copy_vector scale_vector
 SDF_FILES =		sd_selector
-RAY_TRACE_FILES = trace_ray
+RAY_TRACE_FILES = trace_ray trace_ray_copy
 
 SRC_DIR     	= src
 PARSER_DIR  	= parser

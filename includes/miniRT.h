@@ -6,7 +6,7 @@
 /*   By: tklimova <tklimova@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 10:49:49 by tklimova          #+#    #+#             */
-/*   Updated: 2024/04/10 16:34:28 by tklimova         ###   ########.fr       */
+/*   Updated: 2024/04/16 17:46:38 by tklimova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,7 +190,11 @@ void	set_start_img_colors(t_data *img, t_vars *vars);
 
 void	free_coords(t_img_data *img_data);
 
-void	create_win(t_vars *vars);
+void	create_win(t_mini_rt_data *data, t_data *img);
+
+void	custom_mlx_pixel_put(t_data *data, int x, int y, int color);
+
+void	destroy_win(t_vars *vars, t_data *img);
 
 int	win_close(int keycode, t_vars *vars);
 
@@ -227,5 +231,9 @@ float	sd_selector(float *curr_pt, t_mini_rt_data *data, t_g_objects object);
 void	trace_ray(t_mini_rt_data *data, float *vp_coords);
 
 int		apply_sdf_to_objects(t_mini_rt_data *data, float *current_point);
+
+void	draw(t_mini_rt_data *data, t_data *img);
+
+int		rgb_to_hex(int r, int g, int b);
 
 #endif

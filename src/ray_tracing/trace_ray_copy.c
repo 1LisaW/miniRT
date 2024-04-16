@@ -1,62 +1,59 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   trace_ray.c                                        :+:      :+:    :+:   */
+/*   trace_ray_copy.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: tklimova <tklimova@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 16:53:56 by jmigoya-          #+#    #+#             */
-/*   Updated: 2024/04/05 16:54:52 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2024/04/16 16:01:44 by tklimova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/miniRT.h"
 
-// Applies SD function to all objects from current point. If match,
-// returns 1
-int	apply_sdf_to_objects(t_mini_rt_data *data, float *current_point)
-{
-	t_g_objects	*curr_obj;
-	float		signed_distance;
-	int			result;
+// void	trace_ray(t_mini_rt_data *data, float *vp_coords)
+// {
+// }
 
-	result = 0;
-	curr_obj = data->objs;
-	while (curr_obj)
-	{
-		signed_distance = sd_selector(current_point, data, *curr_obj);
-		printf("sd at point %f %f %f is: %f\n",current_point[0], current_point[1], current_point[2], signed_distance);
-		if (fabs(signed_distance) < 0.01) // TODO: remove magic number
-		{
-			// recover color
-			printf("Intersection detected at (%f, %f, %f)\n", current_point[0], current_point[1], current_point[2]);
-			result = 1;
-		}
-		curr_obj = curr_obj->next;
-	}
-	return (result);
+int	rgb_to_hex(int r, int g, int b)
+{
+	return (((r & 0xff) << 16) + ((g & 0xff) << 8) + (b & 0xff));
 }
 
-// Traces one ray from camera_pos towards vp_coords (viewport coordinates)
-// starting with magnitude equal to distance between them.
-// TODO: modify to return color
-void	trace_ray(t_mini_rt_data *data, float *vp_coords)
+void	ray_trace_cp(t_data *img, t_img_data *img_data, int x, int y)
 {
-	float	magnitude;
-	float	scaled_vector[3];
-	float	curr_point[3];
+	img_data->colors_data[y][x] = rgb_to_hex((int)((256 * x)/img_data->w_width),
+			(int)((256 * y) / img_data->w_height), 0);
+	custom_mlx_pixel_put(img, x, y,
+		img_data->colors_data[y][x]);
+}
 
-	magnitude = get_vector_length(data->cam->coords, vp_coords);
-	while (magnitude <= RAY_MAX_LENGHT)
+void	draw(t_mini_rt_data *data, t_data *img)
+{
+	int		i;
+	int		j;
+
+	i = 0;
+	j = 0;
+
+	data->vars->img_data->colors_data = malloc((data->vars->img_data->w_height)
+			* sizeof(int *));
+	if (!data->vars->img_data->colors_data)
+		return ;
+	while (j < data->vars->img_data->w_height)
 	{
-		printf("magnitude: %f\n", magnitude);
-		scale_vector(vp_coords, magnitude, scaled_vector);
-		vector_add(data->cam->coords, scaled_vector, curr_point);
-		// iterate over all objects to find matches and manage colors
-		if (apply_sdf_to_objects(data, curr_point))
-			return ;
-		magnitude += RAY_MAX_LENGHT / 100;
+		data->vars->img_data->colors_data[j] = NULL;
+		data->vars->img_data->colors_data[j]
+			= malloc(data->vars->img_data->w_width * sizeof(int));
+		if (!data->vars->img_data->colors_data[j])
+			break ;
+		while (i < data->vars->img_data->w_width)
+		{
+			ray_trace_cp(img, data->vars->img_data, i, j);
+			i++;
+		}
+		j++;
+		i = 0;
 	}
-	printf("ray reached max, no match\n");
-	// no match found, return background color
 }
