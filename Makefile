@@ -11,7 +11,7 @@ PARSER_FILES =	parse_scene validation_scene parse_helpers validate_helpers \
                 parse_ambient_light parse_camera parse_light parse_sphere parse_plane parse_cylinder \
                 log_parsed_data
 IMG_FILES = 	create_win win_events init_img_data get_start_img set_viewport
-VEC_OPS_FILES =	basic_vector_ops get_vec_lenght normalize_vector copy_vector scale_vector
+VEC_OPS_FILES =	basic_vector_ops get_coord_dist get_vector_length normalize_vector copy_vector scale_vector
 SDF_FILES =		sd_selector
 RAY_TRACE_FILES = trace_ray
 

@@ -6,7 +6,7 @@
 /*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 10:49:49 by tklimova          #+#    #+#             */
-/*   Updated: 2024/04/15 19:35:27 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2024/04/16 16:55:50 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,17 +130,19 @@ void	vector_add(float *origin, float *direction,	float *result);
 
 void	vector_subtract(float *origin, float *direction, float *result);
 
-void	vector_multiply(float *origin, float *vector1, float *vector2, \
-	float *result);
+void	vector_multiply(float *vector1, float *vector2,	float *result);
+
+void	get_cross_product(float *vec_1, float *vec_2, float *cross_P);
 
 float	get_dot_product(float *vector_1, float *vector_2);
 
-void	vector_divide(float *origin, float *vector1, float *vector2, \
-	float *result);
+void	vector_divide(float *vector1, float *vector2, float *result);
 
-float	get_vector_length(float *position1, float *position2);
+float	get_coord_dist(float *position1, float *position2);
 
-void	normalize_vector(float *origin, float *vector);
+float	get_vector_length(float *vec);
+
+void	normalize_vector(float *vector);
 
 void	copy_f_vector(float *src, float *dest);
 

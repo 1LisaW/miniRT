@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 15:41:36 by jmigoya-          #+#    #+#             */
-/*   Updated: 2024/04/15 19:58:42 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2024/04/16 17:00:02 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,25 @@ typedef struct s_data
 	int		endian;
 }			t_data;
 
+// vp_u is the normalized vector pointing to camera right,
+// vp_v is the normalized vector pointing to camera up,
+// vp_w points opposite to view direction (using right-hand coords)
+typedef struct s_vp
+{
+	float	vp_center[3];
+	float	vp_u[3];
+	float	vp_v[3];
+	float	vp_w[3];
+	float	vp_up[3];
+	float	vp_horizontal_vec[3];
+	float	vp_vertical_vec[3];
+}	t_vp;
+
 typedef struct s_img_data
 {
 	int		**colors_data;
 	float	vp_upper_left[3];
+	t_vp	vp;
 	int		is_guide;
 	int		w_width;
 	int		w_height;

@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 16:53:56 by jmigoya-          #+#    #+#             */
-/*   Updated: 2024/04/05 16:54:52 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2024/04/16 15:43:39 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	trace_ray(t_mini_rt_data *data, float *vp_coords)
 	float	scaled_vector[3];
 	float	curr_point[3];
 
-	magnitude = get_vector_length(data->cam->coords, vp_coords);
+	magnitude = get_coord_dist(data->cam->coords, vp_coords);
 	while (magnitude <= RAY_MAX_LENGHT)
 	{
 		printf("magnitude: %f\n", magnitude);
