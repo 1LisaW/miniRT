@@ -6,7 +6,7 @@
 /*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 11:14:43 by tklimova          #+#    #+#             */
-/*   Updated: 2024/03/27 21:51:13 by tklimova         ###   ########.fr       */
+/*   Updated: 2024/04/18 17:43:12 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,13 @@ void	convert_sphere(t_mini_rt_data *data, t_g_objects *obj, char *diam)
 		return (delete_obj(obj));
 	}
 	if (!is_float(diam))
-		handle_error(ERR_PARSE_DATA, "Sphere: diam's format is not correct", data);
+		handle_error(ERR_PARSE_DATA,
+			"Sphere: diam's format is not correct", data);
 	obj->diam = ft_atof(diam);
 	free(diam);
 	if (!data->err_code && !is_float_in_range(obj->diam, 0, INT_MAX))
-		handle_error(ERR_PARSE_DATA, "Sphere: diam is out of range [0, INT_MAX]", data);
+		handle_error(ERR_PARSE_DATA,
+			"Sphere: diam is out of range [0, INT_MAX]", data);
 	if (!data->err_code)
 		push_to_data_obj(data, obj);
 	else

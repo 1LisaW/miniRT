@@ -6,13 +6,14 @@
 /*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 12:36:33 by tklimova          #+#    #+#             */
-/*   Updated: 2024/03/27 21:52:53 by tklimova         ###   ########.fr       */
+/*   Updated: 2024/04/18 17:41:30 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/miniRT.h"
 
-void	convert_cylinder(t_mini_rt_data *data, t_g_objects *obj, char *v_3d_norm, char **d_h_and_tmp)
+void	convert_cylinder(t_mini_rt_data *data, t_g_objects *obj,
+			char *v_3d_norm, char **d_h_and_tmp)
 {
 	if (data->err_code)
 	{
@@ -23,7 +24,8 @@ void	convert_cylinder(t_mini_rt_data *data, t_g_objects *obj, char *v_3d_norm, c
 	obj->diam = ft_atof(d_h_and_tmp[0]);
 	free(d_h_and_tmp[0]);
 	if (!data->err_code && !is_float_in_range(obj->diam, 0, INT_MAX))
-		handle_error(ERR_PARSE_DATA, "Plane: diam is out of range [0, INT_MAX]", data);
+		handle_error(ERR_PARSE_DATA,
+			"Plane: diam is out of range [0, INT_MAX]", data);
 	obj->height = ft_atof(d_h_and_tmp[1]);
 	free(d_h_and_tmp[1]);
 	if (!data->err_code)

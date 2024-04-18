@@ -6,7 +6,7 @@
 /*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 15:19:02 by tklimova          #+#    #+#             */
-/*   Updated: 2024/03/31 22:55:12 by tklimova         ###   ########.fr       */
+/*   Updated: 2024/04/18 17:39:23 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,13 +82,15 @@ void	set_start_img_colors(t_data *img, t_vars *vars)
 	int	i;
 
 	i = 0;
-	vars->img_data->colors_data = malloc((vars->img_data->w_height) * sizeof(int *));
+	vars->img_data->colors_data = malloc((vars->img_data->w_height)
+			* sizeof(int *));
 	if (!vars->img_data->colors_data)
 		return ;
 	while (i < vars->img_data->w_height)
 	{
 		vars->img_data->colors_data[i] = NULL;
-		vars->img_data->colors_data[i] = malloc(vars->img_data->w_width * sizeof(int));
+		vars->img_data->colors_data[i] = malloc(vars->img_data->w_width
+				* sizeof(int));
 		if (!vars->img_data->colors_data[i])
 			break ;
 		i++;
