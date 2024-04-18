@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 15:20:35 by jmigoya-          #+#    #+#             */
-/*   Updated: 2024/04/18 12:39:43 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2024/04/18 14:35:39 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@ void	normalize_vector(float *vector)
 	float	length;
 
 	length = get_vector_length(vector);
-	print_vector("vec to normalize", vector);
-	printf("length: %f\n", length);
 	if (length != 0)
 	{
 		vector[0] = vector[0] / length;
