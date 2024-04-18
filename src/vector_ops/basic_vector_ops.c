@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 15:19:16 by jmigoya-          #+#    #+#             */
-/*   Updated: 2024/04/18 11:28:06 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2024/04/18 11:59:09 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,25 @@ void vector_add(float *vec_1, float *vec_2, float *result)
 void vector_subtract(float *vec_1, float *vec_2, float *result)
 {
 	if ((int)vec_2[0] != 0)
+	{
 		result[0] = vec_1[0] - vec_2[0];
+	}
+	else
+	{
+		result[0] = vec_2[0];
+	}
 	if ((int)vec_2[1] != 0)
 		result[1] = vec_1[1] - vec_2[1];
+	else
+	{
+		result[1] = vec_2[1];
+	}
 	if ((int)vec_2[2] != 0)
 		result[2] = vec_1[2] - vec_2[2];
+	else
+	{
+		result[2] = vec_2[2];
+	}
 }
 
 // Multiply two vectors given their starting points and coordinates
