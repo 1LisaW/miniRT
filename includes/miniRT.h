@@ -6,7 +6,7 @@
 /*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 10:49:49 by tklimova          #+#    #+#             */
-/*   Updated: 2024/04/18 13:46:21 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2024/04/18 14:31:15 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,7 @@ void	set_viewport(t_mini_rt_data *data);
 
 // vector_ops
 
-void	vector_add(float *origin, float *direction,	float *result);
+void	vector_add(float *vec_1, float *vec_2,	float *result);
 
 void	vector_subtract(float *vec_1, float *vec_2, float *result);
 

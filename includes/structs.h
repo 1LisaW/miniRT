@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 15:41:36 by jmigoya-          #+#    #+#             */
-/*   Updated: 2024/04/16 19:42:59 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2024/04/18 14:27:23 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ typedef struct s_data
 typedef struct s_vp
 {
 	float	vp_center[3];
+	float	vp_pixel00[3];
 	float	vp_upper_left[3];
 	float	vp_dist;
 	float	vp_u[3];
