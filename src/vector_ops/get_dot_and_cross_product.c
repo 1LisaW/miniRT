@@ -1,38 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   scale_vector.c                                     :+:      :+:    :+:   */
+/*   get_dot_and_cross_product.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/04 16:06:59 by jmigoya-          #+#    #+#             */
-/*   Updated: 2024/04/18 17:37:46 by jmigoya-         ###   ########.fr       */
+/*   Created: 2024/04/18 17:34:58 by jmigoya-          #+#    #+#             */
+/*   Updated: 2024/04/18 17:35:13 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/miniRT.h"
 
-// Scale a vector by a scalar factor
-void	scale_vector(float *vector, float scalar, float *result)
+void	get_cross_product(float *vec_1, float *vec_2, float *cross_P)
 {
-	if ((int)vector[0] != 0)
-	{
-		result[0] = vector[0] * scalar;
-	}
-	else
-	{
-		result[0] = vector[0];
-	}
-	if ((int)vector[1] != 0)
-		result[1] = vector[1] * scalar;
-	else
-	{
-		result[1] = vector[1];
-	}
-	if ((int)vector[2] != 0)
-		result[2] = vector[2] * scalar;
-	else
-	{
-		result[2] = vector[2];
-	}
+	cross_P[0] = vec_1[1] * vec_2[2] - vec_1[2] * vec_2[1];
+	cross_P[1] = vec_1[2] * vec_2[0] - vec_1[0] * vec_2[2];
+	cross_P[2] = vec_1[0] * vec_2[1] - vec_1[1] * vec_2[0];
+}
+
+// Multiply to vectors and get the dot product
+float	get_dot_product(float *vec_1, float *vec_2)
+{
+	return ((vec_1[0] * vec_2[0])
+		+ (vec_1[1] * vec_2[1])
+		+ (vec_1[2] * vec_2[2]));
 }
