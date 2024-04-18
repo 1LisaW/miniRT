@@ -6,7 +6,7 @@
 /*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 10:38:52 by tklimova          #+#    #+#             */
-/*   Updated: 2024/04/16 13:07:21 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2024/04/18 10:50:33 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	main(int argc, char **argv)
 	err_code = data->err_code;
 	init_img_data(&data->img_data);
 	set_viewport(data);
-	print_vector(data->img_data->vp_upper_left);
+	print_vector("vp upper left:", data->img_data->vp.vp_upper_left);
 	return 0;
 	create_win(vars);
 	delete_mini_rt_data(data);

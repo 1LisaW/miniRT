@@ -6,7 +6,7 @@
 /*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 10:49:49 by tklimova          #+#    #+#             */
-/*   Updated: 2024/04/16 19:28:43 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2024/04/18 10:49:58 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,6 +160,6 @@ int		apply_sdf_to_objects(t_mini_rt_data *data, float *current_point);
 
 // debug functions
 
-void	print_vector(float *vector);
+void	print_vector(char *msg, float *vector);
 
 #endif
