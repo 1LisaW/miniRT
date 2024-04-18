@@ -6,7 +6,7 @@
 /*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 10:49:49 by tklimova          #+#    #+#             */
-/*   Updated: 2024/04/18 10:49:58 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2024/04/18 13:46:21 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@
 # include <float.h>
 # include <limits.h>
 # include "structs.h"
+# include <stdbool.h>
 # include "../libft/libft.h"
 # include "../minilibx-linux/mlx.h"
 
@@ -147,6 +148,8 @@ void	normalize_vector(float *vector);
 void	copy_f_vector(float *src, float *dest);
 
 void	scale_vector(float *vector, float scalar, float *result);
+
+bool	vec_are_equal(float *vec_1, float *vec_2);
 
 // SD functions
 

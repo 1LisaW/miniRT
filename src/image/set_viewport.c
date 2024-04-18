@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 15:48:25 by jmigoya-          #+#    #+#             */
-/*   Updated: 2024/04/18 12:37:12 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2024/04/18 13:48:52 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,11 @@ void	set_viewport(t_mini_rt_data *data)
 	vp->vp_up[0] = 0;
 	vp->vp_up[1] = 1;
 	vp->vp_up[2] = 0;
+	if (vec_are_equal(data->cam->v_3d_orient, vp->vp_up) == true)
+	{
+		vp->vp_up[0] = 1;
+		vp->vp_up[1] = 0;
+	}
 	vp->vp_dist = get_dist_to_vp(data);
 	printf("ditance to vp: %f\n", vp->vp_dist);
 	scale_vector(data->cam->v_3d_orient, vp->vp_dist, displacement_vec);
