@@ -6,7 +6,7 @@
 /*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 19:10:56 by tklimova          #+#    #+#             */
-/*   Updated: 2024/04/16 13:09:34 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2024/04/19 13:43:37 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ void	init_img_data(t_img_data **img_data_l)
 	img_data = malloc(sizeof(t_img_data));
 	if (!img_data)
 		return ;
-	img_data->colors_data = NULL;
 	img_data->x_coord_nb = 0;
 	img_data->y_coord_nb = 0;
 	img_data->w_width = 800;

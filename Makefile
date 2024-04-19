@@ -14,7 +14,7 @@ IMG_FILES = 	create_win win_events init_img_data get_start_img set_viewport
 VEC_OPS_FILES =	basic_vector_ops get_coord_dist get_vector_length normalize_vector\
 				copy_vector scale_vector compare_vectors get_dot_and_cross_product
 SDF_FILES =		sd_selector
-RAY_TRACE_FILES = trace_ray
+RAY_TRACE_FILES = trace_ray viewport_renderer
 
 SRC_DIR     	= src
 PARSER_DIR  	= parser

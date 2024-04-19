@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 15:41:36 by jmigoya-          #+#    #+#             */
-/*   Updated: 2024/04/18 14:27:23 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2024/04/19 15:07:56 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct s_vp
 	float	pixel_delta_vertical[3];
 }	t_vp;
 
+// Set viewport to 1920x1800, though not all might be needed
 typedef struct s_img_data
 {
 	int		**colors_data;

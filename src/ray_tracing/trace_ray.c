@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 16:53:56 by jmigoya-          #+#    #+#             */
-/*   Updated: 2024/04/16 15:43:39 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2024/04/19 18:39:03 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,10 @@ int	apply_sdf_to_objects(t_mini_rt_data *data, float *current_point)
 	while (curr_obj)
 	{
 		signed_distance = sd_selector(current_point, data, *curr_obj);
-		printf("sd at point %f %f %f is: %f\n",current_point[0], current_point[1], current_point[2], signed_distance);
 		if (fabs(signed_distance) < 0.01) // TODO: remove magic number
 		{
 			// recover color
-			printf("Intersection detected at (%f, %f, %f)\n", current_point[0], current_point[1], current_point[2]);
+			printf("** Intersection detected at (%f, %f, %f) **\n", current_point[0], current_point[1], current_point[2]);
 			result = 1;
 		}
 		curr_obj = curr_obj->next;
@@ -40,23 +39,22 @@ int	apply_sdf_to_objects(t_mini_rt_data *data, float *current_point)
 // Traces one ray from camera_pos towards vp_coords (viewport coordinates)
 // starting with magnitude equal to distance between them.
 // TODO: modify to return color
+// TODO remove magic numbers
 void	trace_ray(t_mini_rt_data *data, float *vp_coords)
 {
 	float	magnitude;
 	float	scaled_vector[3];
-	float	curr_point[3];
 
-	magnitude = get_coord_dist(data->cam->coords, vp_coords);
+	copy_f_vector(vp_coords, scaled_vector);
+	normalize_vector(scaled_vector);
+	print_vector("original vp coords: ", scaled_vector);
+	//print_vector("normal viewport coords: ", scaled_vector);
+	magnitude = 0;
 	while (magnitude <= RAY_MAX_LENGHT)
 	{
-		printf("magnitude: %f\n", magnitude);
-		scale_vector(vp_coords, magnitude, scaled_vector);
-		vector_add(data->cam->coords, scaled_vector, curr_point);
-		// iterate over all objects to find matches and manage colors
-		if (apply_sdf_to_objects(data, curr_point))
+		if (apply_sdf_to_objects(data, scaled_vector))
 			return ;
-		magnitude += RAY_MAX_LENGHT / 100;
+		magnitude += 0.5;
+		scale_vector(vp_coords, magnitude, scaled_vector);
 	}
-	printf("ray reached max, no match\n");
-	// no match found, return background color
 }

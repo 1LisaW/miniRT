@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 15:48:25 by jmigoya-          #+#    #+#             */
-/*   Updated: 2024/04/18 14:46:41 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2024/04/19 14:41:52 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,15 @@ void	set_vp_up(t_mini_rt_data *data)
 	}
 }
 
+// Sets the upper left pixel to be an inset from upper left corner
 void	set_pixel00(t_vp *vp)
 {
+	print_vector("pixel_delta_horizontal", vp->pixel_delta_horizontal);
+	print_vector("pixel_delta_vertical", vp->pixel_delta_vertical);
 	vector_add(vp->pixel_delta_horizontal, vp->pixel_delta_vertical,
 		vp->vp_pixel00);
-	scale_vector(vp->vp_pixel00, 0.5, vp->vp_pixel00);
+	print_vector("added up:", vp->vp_pixel00);
+	scale_vector(vp->vp_pixel00, 0.5, vp->vp_pixel00); // TODO: remove magic number
 	vector_add(vp->vp_upper_left, vp->vp_pixel00, vp->vp_pixel00);
 	print_vector("pixel 00 coordinates", vp->vp_pixel00);
 }

@@ -6,7 +6,7 @@
 /*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 10:49:49 by tklimova          #+#    #+#             */
-/*   Updated: 2024/04/18 14:31:15 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2024/04/19 18:08:59 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,6 +160,8 @@ float	sd_selector(float *curr_pt, t_mini_rt_data *data, t_g_objects object);
 void	trace_ray(t_mini_rt_data *data, float *vp_coords);
 
 int		apply_sdf_to_objects(t_mini_rt_data *data, float *current_point);
+
+void	render_viewport(t_mini_rt_data *data);
 
 // debug functions
 
