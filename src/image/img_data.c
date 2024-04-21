@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_img_data.c                                    :+:      :+:    :+:   */
+/*   img_data.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 19:10:56 by tklimova          #+#    #+#             */
-/*   Updated: 2024/03/31 22:52:19 by tklimova         ###   ########.fr       */
+/*   Updated: 2024/04/21 23:45:20 by tklimova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,4 +28,24 @@ void	init_img_data(t_img_data **img_data_l)
 	img_data->img_step = 0;
 	img_data->z = 100;
 	*img_data_l = img_data;
+}
+
+void	free_coords(t_img_data *img_data)
+{
+	int	i;
+
+	i = 0;
+	if (!img_data)
+		return ;
+	if (img_data->colors_data)
+	{
+		while (img_data->colors_data && i < img_data->w_height
+			&& img_data->colors_data[i])
+		{
+			free(img_data->colors_data[i]);
+			i++;
+		}
+		free(img_data->colors_data);
+	}
+	free(img_data);
 }
