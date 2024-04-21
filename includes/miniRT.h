@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tklimova <tklimova@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 10:49:49 by tklimova          #+#    #+#             */
-/*   Updated: 2024/04/16 17:46:38 by tklimova         ###   ########.fr       */
+/*   Updated: 2024/04/21 23:30:48 by tklimova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,9 @@
 # define CYLINDER_TOKEN "cy"
 
 # define SEPARATOR ','
+
+# define M_PI 3.14159265358979323846
+# define EPSILON 0.0001
 
 # include <stdio.h>
 # include <fcntl.h>
@@ -56,6 +59,9 @@ typedef struct s_img_data
 	int		is_guide;
 	int		w_width;
 	int		w_height;
+	float	vp_width;
+	float	vp_height;
+	float	aspect_ratio;
 	int		y_coord_nb;
 	int		x_coord_nb;
 	int		z;
@@ -67,6 +73,7 @@ typedef struct s_vars
 	void		*mlx;
 	void		*win;
 	t_img_data	*img_data;
+	t_data		*img;
 }				t_vars;
 
 typedef struct s_ambient_light
@@ -75,11 +82,18 @@ typedef struct s_ambient_light
 	int		*rgb;	// int[3]
 }				t_ambient_light;
 
+// typedef struct s_mtx
+// {
+// 	float	rotate[16];
+// }				t_mtx;
+
+
 typedef struct s_camera
 {
 	float	*coords; // float [3]
 	float	*v_3d_orient;	//float[3]
 	int		fov;
+	float	*mtx;
 }				t_camera;
 
 typedef struct s_light
@@ -117,6 +131,37 @@ typedef struct s_mini_rt_data
 	t_g_objects		*objs;
 	t_vars			*vars;
 }			t_mini_rt_data;
+
+typedef struct s_vect
+{
+	float	x;
+	float	y;
+	float	z;
+}			t_vect;
+
+typedef struct s_ray
+{
+	float	position[3];
+	float	diraction[3];
+}			t_ray;
+
+typedef struct s_sphere_eq
+{
+	float	oc[3];
+	float	a;
+	float	b;
+	float	c;
+	float	discr;
+	float	root[2];
+}			t_sphere_eq;
+
+
+typedef struct s_closest_obj
+{
+	float		dist;
+	t_g_objects	*obj;
+}				t_closest_obj;
+
 
 int			is_valid_extension(char *str, char *extantion,
 				t_mini_rt_data *data);
@@ -186,19 +231,17 @@ void		ft_print_data(t_mini_rt_data *data);
 
 void	init_img_data(t_img_data	**img_data);
 
-void	set_start_img_colors(t_data *img, t_vars *vars);
-
 void	free_coords(t_img_data *img_data);
 
-void	create_win(t_mini_rt_data *data, t_data *img);
+void	create_win(t_mini_rt_data *data);
 
-void	custom_mlx_pixel_put(t_data *data, int x, int y, int color);
-
-void	destroy_win(t_vars *vars, t_data *img);
+void	destroy_win(t_mini_rt_data *data);
 
 int	win_close(int keycode, t_vars *vars);
 
 int	win_destroy(t_vars *vars);
+
+int	win_resize(t_vars *vars);
 
 // vector_ops
 
@@ -222,6 +265,12 @@ void	copy_f_vector(float *src, float *dest);
 
 void	scale_vector(float *vector, float scalar, float *result);
 
+t_vect 	cross_product(t_vect vect_a, t_vect vect_b);
+
+float	*vector_mtx_multy(float *vect, float *mtx, float *mult_vect);
+
+void	made_precalc(t_mini_rt_data *data);
+
 // SD functions
 
 float	sd_selector(float *curr_pt, t_mini_rt_data *data, t_g_objects object);
@@ -232,8 +281,14 @@ void	trace_ray(t_mini_rt_data *data, float *vp_coords);
 
 int		apply_sdf_to_objects(t_mini_rt_data *data, float *current_point);
 
-void	draw(t_mini_rt_data *data, t_data *img);
+void	draw(t_mini_rt_data *data);
 
 int		rgb_to_hex(int r, int g, int b);
+
+t_closest_obj	get_closest_obj(t_mini_rt_data *data, t_ray ray);
+
+t_vect	fill_vector(float x, float y, float z);
+
+int	rgb_to_hex(int r, int g, int b);
 
 #endif

@@ -3,40 +3,85 @@
 /*                                                        :::      ::::::::   */
 /*   trace_ray_copy.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tklimova <tklimova@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 16:53:56 by jmigoya-          #+#    #+#             */
-/*   Updated: 2024/04/16 16:01:44 by tklimova         ###   ########.fr       */
+/*   Updated: 2024/04/21 23:45:53 by tklimova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/miniRT.h"
 
-// void	trace_ray(t_mini_rt_data *data, float *vp_coords)
-// {
-// }
-
-int	rgb_to_hex(int r, int g, int b)
+void	custom_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
-	return (((r & 0xff) << 16) + ((g & 0xff) << 8) + (b & 0xff));
+	char	*dst;
+
+	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
+	*(unsigned int *)dst = color;
 }
 
-void	ray_trace_cp(t_data *img, t_img_data *img_data, int x, int y)
+void	normalize_vect(float *vector)
 {
-	img_data->colors_data[y][x] = rgb_to_hex((int)((256 * x)/img_data->w_width),
-			(int)((256 * y) / img_data->w_height), 0);
-	custom_mlx_pixel_put(img, x, y,
+	float	len;
+	float	inverted_len;
+
+	len = sqrt(pow(vector[0], 2) + pow(vector[1], 2) + pow(vector[2], 2));
+	if (len > 0)
+	{
+		inverted_len = 1.0 / len;
+		vector[0] *= inverted_len;
+		vector[1] *= inverted_len;
+		vector[2] *= inverted_len;
+	}
+}
+
+t_ray	calc_ray(t_mini_rt_data *data, int x, int y)
+{
+	t_ray	ray;
+	float	tmp[3];
+
+	tmp[0] = 0;
+	tmp[1] = 0;
+	tmp[2] = 0;
+	copy_f_vector(data->cam->coords, ray.position);
+	ray.diraction[0] = (2 * ((x + 0.5) / data->vars->img_data->w_width) - 1)
+		* ((float)data->vars->img_data->w_width
+			/ data->vars->img_data->w_height)
+		* (tan((data->cam->fov / 2) * (M_PI / 180)));
+	ray.diraction[1] = (1 - 2 * ((y + 0.5) / data->vars->img_data->w_height))
+		* (tan((data->cam->fov / 2) * (M_PI / 180)));
+	ray.diraction[2] = 1;
+	vector_mtx_multy(ray.diraction, data->cam->mtx, tmp);
+	copy_f_vector(tmp, ray.diraction);
+	normalize_vect(ray.diraction);
+	return (ray);
+}
+
+void	ray_trace_cp(t_mini_rt_data *data, t_img_data *img_data, int x, int y)
+{
+	t_ray			ray;
+	t_closest_obj	cl_obj;
+
+	ray = calc_ray(data, x, y);
+	cl_obj = get_closest_obj(data, ray);
+	if (cl_obj.dist < INT_MAX)
+	{
+		img_data->colors_data[y][x] = rgb_to_hex(cl_obj.obj->rgb[0],
+				cl_obj.obj->rgb[1], cl_obj.obj->rgb[2]);
+	}
+	else
+		img_data->colors_data[y][x] = 0x87CEEB;
+	custom_mlx_pixel_put(data->vars->img, x, y,
 		img_data->colors_data[y][x]);
 }
 
-void	draw(t_mini_rt_data *data, t_data *img)
+void	draw(t_mini_rt_data *data)
 {
 	int		i;
 	int		j;
 
 	i = 0;
 	j = 0;
-
 	data->vars->img_data->colors_data = malloc((data->vars->img_data->w_height)
 			* sizeof(int *));
 	if (!data->vars->img_data->colors_data)
@@ -50,7 +95,7 @@ void	draw(t_mini_rt_data *data, t_data *img)
 			break ;
 		while (i < data->vars->img_data->w_width)
 		{
-			ray_trace_cp(img, data->vars->img_data, i, j);
+			ray_trace_cp(data, data->vars->img_data, i, j);
 			i++;
 		}
 		j++;

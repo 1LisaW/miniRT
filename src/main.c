@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tklimova <tklimova@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 10:38:52 by tklimova          #+#    #+#             */
-/*   Updated: 2024/04/16 15:51:51 by tklimova         ###   ########.fr       */
+/*   Updated: 2024/04/20 22:15:31 by tklimova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,23 +34,25 @@ int	main(int argc, char **argv)
 {
 	t_mini_rt_data	*data;
 	int				err_code;
-	t_vars			*vars;
-	t_data			img;
+	// t_vars			*vars;
+	// t_data			img;
 
-	vars = NULL;
+	// vars = NULL;
+	data = NULL;
 	data = (t_mini_rt_data *) malloc(sizeof(t_mini_rt_data));
-	vars = (t_vars *) malloc(sizeof(t_vars));
-	if (!data || !vars)
+	// vars = (t_vars *) malloc(sizeof(t_vars));
+	if (!data)
 		exit(1);
-	data->vars = vars;
+	// data->vars = vars;
 	init_mini_rt_data(data);
 	parse_scene(argc, argv, data);
 	err_code = data->err_code;
 	// float coords[3] = {0.0, 0.0, 1.0}; // sample viewport coordinates
 	// trace_ray(data, coords);
-	create_win(data, &img);
-	draw(data, &img);
-	destroy_win(vars, &img);
+	made_precalc(data);
+	create_win(data);
+	draw(data);
+	destroy_win(data);
 	delete_mini_rt_data(data);
 	data = NULL;
 	return (err_code);
