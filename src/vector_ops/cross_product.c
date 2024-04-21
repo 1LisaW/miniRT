@@ -1,0 +1,31 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cross_product.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/04/20 19:45:38 by tklimova          #+#    #+#             */
+/*   Updated: 2024/04/21 23:11:29 by tklimova         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../../includes/miniRT.h"
+
+t_vect	cross_product(t_vect vect_a, t_vect vect_b)
+{
+	t_vect	cross_prod;
+
+	cross_prod.x = vect_a.y * vect_b.z - vect_a.z * vect_b.y;
+	cross_prod.y = vect_a.z * vect_b.x - vect_a.x * vect_b.z;
+	cross_prod.z = vect_a.x * vect_b.y - vect_a.y * vect_b.x;
+	return (cross_prod);
+}
+
+float	*vector_mtx_multy(float *vect, float *mtx, float *mult_vect)
+{
+	mult_vect[0] = vect[0] * mtx[0] + vect[1] * mtx[4] + vect[2] * mtx[8];
+	mult_vect[1] = vect[0] * mtx[1] + vect[1] * mtx[5] + vect[2] * mtx[9];
+	mult_vect[2] = vect[0] * mtx[2] + vect[1] * mtx[6] + vect[2] * mtx[10];
+	return (mult_vect);
+}
