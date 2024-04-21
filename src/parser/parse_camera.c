@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_camera.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tklimova <tklimova@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 13:50:20 by tklimova          #+#    #+#             */
-/*   Updated: 2024/04/10 16:26:07 by tklimova         ###   ########.fr       */
+/*   Updated: 2024/04/21 01:41:42 by tklimova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	convert_camera(t_mini_rt_data *data, char *coords_vp,
 	if (!data->err_code && !is_float_in_range(data->cam->fov, 0, 180))
 		handle_error(ERR_PARSE_DATA,
 			"Camera: fov is out of range [0, 180]", data);
+	data->cam->mtx = NULL;
 }
 
 void	ft_parse_camera(t_mini_rt_data *data, int *eol)
