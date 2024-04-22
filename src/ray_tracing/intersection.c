@@ -6,7 +6,7 @@
 /*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/20 22:48:37 by tklimova          #+#    #+#             */
-/*   Updated: 2024/04/21 23:10:56 by tklimova         ###   ########.fr       */
+/*   Updated: 2024/04/22 13:58:26 by tklimova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	intersect_plane(t_g_objects *obj, t_ray ray, t_closest_obj *cl_obj)
 	float	vect[3];
 
 	denominator = get_dot_product(obj->v_3d_normal, ray.diraction);
-	if (denominator < -1e-6)
+	if (denominator < -1e-6 || denominator > 1e-6)
 	{
 		vector_subtract(obj->coords, ray.position, vect);
 		root = get_dot_product(vect, obj->v_3d_normal) / denominator;
