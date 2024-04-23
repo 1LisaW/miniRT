@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 16:53:56 by jmigoya-          #+#    #+#             */
-/*   Updated: 2024/04/19 18:39:03 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2024/04/23 11:09:59 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,6 @@ void	trace_ray(t_mini_rt_data *data, float *vp_coords)
 
 	copy_f_vector(vp_coords, scaled_vector);
 	normalize_vector(scaled_vector);
-	print_vector("original vp coords: ", scaled_vector);
-	//print_vector("normal viewport coords: ", scaled_vector);
 	magnitude = 0;
 	while (magnitude <= RAY_MAX_LENGHT)
 	{

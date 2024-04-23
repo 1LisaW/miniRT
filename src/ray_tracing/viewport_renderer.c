@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 13:50:51 by jmigoya-          #+#    #+#             */
-/*   Updated: 2024/04/19 19:03:23 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2024/04/23 11:09:10 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 // Function used to move the pointed at pixel in the viewport and get the new
 // coordinates. Pass 'v' for vertical movement and 'h' for horizontal
-void	move_pixel(t_vp *vp, float *pix, char d, float step)
+void	move_pixel(t_vp *vp, float *pix, char d)
 {
 	float	new[3];
 
@@ -54,11 +54,11 @@ void	render_viewport(t_mini_rt_data *data)
 	while (y < data->img_data->w_height - 1)
 	{
 		x = 0;
-		move_pixel(&data->img_data->vp, curr, 'v', y);
+		move_pixel(&data->img_data->vp, curr, 'v');
 		while (x < data->img_data->w_width)
 		{
 			trace_ray(data, curr);
-			move_pixel(&data->img_data->vp, curr, 'h', x);
+			move_pixel(&data->img_data->vp, curr, 'h');
 			x++;
 		}
 		reset_horizontal(&data->img_data->vp, curr, x);
