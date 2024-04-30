@@ -6,7 +6,7 @@
 /*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/20 22:48:37 by tklimova          #+#    #+#             */
-/*   Updated: 2024/04/22 13:58:26 by tklimova         ###   ########.fr       */
+/*   Updated: 2024/04/30 14:57:04 by tklimova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,25 @@ void	intersect_plane(t_g_objects *obj, t_ray ray, t_closest_obj *cl_obj)
 	}
 }
 
+// bool	intersect_cy_cap(t_g_objects *obj, t_ray cy_ray, t_closest_obj *cl_obj)
+// {
+// 	float	denominator;
+
+
+// }
+
+// void	intersect_cylinder(t_g_objects *obj, t_ray ray, t_closest_obj *cl_obj)
+// {
+// 	t_ray	cy_ray;
+
+// 	vector_mtx_multy(ray.position, obj->mtxs->inv_mtx, cy_ray.position);
+// 	vector_mtx_multy(ray.diraction, obj->mtxs->inv_mtx, cy_ray.diraction);
+// 	cy_ray.position[0] += obj->mtxs->inv_mtx[12];
+// 	cy_ray.position[1] += obj->mtxs->inv_mtx[13];
+// 	cy_ray.position[2] += obj->mtxs->inv_mtx[14];
+// 	normalize_vect(cy_ray.position);
+// }
+
 t_closest_obj	get_closest_obj(t_mini_rt_data *data, t_ray ray)
 {
 	t_closest_obj	closest_obj;
@@ -61,7 +80,9 @@ t_closest_obj	get_closest_obj(t_mini_rt_data *data, t_ray ray)
 
 	closest_obj.dist = INT_MAX;
 	closest_obj.obj = NULL;
-	curr_obj = data->objs;
+	curr_obj = NULL;
+	if (data)
+		curr_obj = data->objs;
 	while (curr_obj)
 	{
 		if (curr_obj->id == sp)

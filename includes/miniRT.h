@@ -6,7 +6,7 @@
 /*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 10:49:49 by tklimova          #+#    #+#             */
-/*   Updated: 2024/04/22 00:44:13 by tklimova         ###   ########.fr       */
+/*   Updated: 2024/04/30 14:55:16 by tklimova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ typedef struct s_camera
 	float	*v_3d_orient;	//float[3]
 	int		fov;
 	float	*mtx;
+	double	tan_half_fov;
 }				t_camera;
 
 typedef struct s_light
@@ -104,6 +105,20 @@ enum	e_obj_ids
 	cy,
 };
 
+typedef struct s_ray
+{
+	float	position[3];
+	float	diraction[3];
+}			t_ray;
+
+typedef struct s_mtxs
+{
+	float	*dir_mtx;
+	float	*inv_mtx;
+	t_ray	top_cap;
+	t_ray	bot_cap;
+}				t_mtxs;
+
 typedef struct s_g_objects
 {
 	enum e_obj_ids		id;
@@ -112,6 +127,7 @@ typedef struct s_g_objects
 	float				*v_3d_normal;	//float[3]
 	float				height;
 	int					*rgb;	// int[3]
+	t_mtxs				*mtxs;
 	struct s_g_objects	*next;
 }				t_g_objects;
 
@@ -133,12 +149,6 @@ typedef struct s_vect
 	float	z;
 }			t_vect;
 
-typedef struct s_ray
-{
-	float	position[3];
-	float	diraction[3];
-}			t_ray;
-
 typedef struct s_sphere_eq
 {
 	float	oc[3];
@@ -152,8 +162,31 @@ typedef struct s_sphere_eq
 typedef struct s_closest_obj
 {
 	float		dist;
+	float		point[3];
 	t_g_objects	*obj;
 }				t_closest_obj;
+
+typedef struct s_cross_determ
+{
+	float	d8_13;
+	float	d8_14;
+	float	d8_15;
+	float	d9_14;
+	float	d9_15;
+	float	d10_15;
+	float	d4_13;
+	float	d4_14;
+	float	d4_15;
+	float	d5_14;
+	float	d5_15;
+	float	d6_15;
+	float	d4_9;
+	float	d4_10;
+	float	d4_11;
+	float	d5_10;
+	float	d5_11;
+	float	d6_11;
+}			t_cross_determ;
 
 int				is_valid_extension(char *str, char *extantion,
 					t_mini_rt_data *data);
@@ -261,8 +294,6 @@ t_vect			cross_product(t_vect vect_a, t_vect vect_b);
 
 float			*vector_mtx_multy(float *vect, float *mtx, float *mult_vect);
 
-void			made_precalc(t_mini_rt_data *data);
-
 // SD functions
 
 float			sd_selector(float *curr_pt, t_mini_rt_data *data,
@@ -284,5 +315,15 @@ t_closest_obj	get_closest_obj(t_mini_rt_data *data, t_ray ray);
 t_vect			fill_vector(float x, float y, float z);
 
 int				rgb_to_hex(int r, int g, int b);
+
+void			create_camera_mtx(t_mini_rt_data *data);
+
+void			precompute_data(t_mini_rt_data *data);
+
+float			*mtx_inverse(float *mtx);
+
+void			create_cyl_mtx(t_g_objects *obj);
+
+void			normalize_vect(float *vector);
 
 #endif

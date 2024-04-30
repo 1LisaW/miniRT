@@ -6,7 +6,7 @@
 /*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 13:50:20 by tklimova          #+#    #+#             */
-/*   Updated: 2024/04/21 01:41:42 by tklimova         ###   ########.fr       */
+/*   Updated: 2024/04/23 00:11:32 by tklimova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	convert_camera(t_mini_rt_data *data, char *coords_vp,
 		handle_error(ERR_PARSE_DATA,
 			"Camera: fov is out of range [0, 180]", data);
 	data->cam->mtx = NULL;
+	data->cam->tan_half_fov = 0;
 }
 
 void	ft_parse_camera(t_mini_rt_data *data, int *eol)

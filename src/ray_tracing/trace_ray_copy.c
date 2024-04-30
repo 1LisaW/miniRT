@@ -6,7 +6,7 @@
 /*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 16:53:56 by jmigoya-          #+#    #+#             */
-/*   Updated: 2024/04/21 23:45:53 by tklimova         ###   ########.fr       */
+/*   Updated: 2024/04/30 14:45:58 by tklimova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,9 @@ t_ray	calc_ray(t_mini_rt_data *data, int x, int y)
 	copy_f_vector(data->cam->coords, ray.position);
 	ray.diraction[0] = (2 * ((x + 0.5) / data->vars->img_data->w_width) - 1)
 		* ((float)data->vars->img_data->w_width
-			/ data->vars->img_data->w_height)
-		* (tan((data->cam->fov / 2) * (M_PI / 180)));
+			/ data->vars->img_data->w_height) * data->cam->tan_half_fov;
 	ray.diraction[1] = (1 - 2 * ((y + 0.5) / data->vars->img_data->w_height))
-		* (tan((data->cam->fov / 2) * (M_PI / 180)));
+		* data->cam->tan_half_fov;
 	ray.diraction[2] = 1;
 	vector_mtx_multy(ray.diraction, data->cam->mtx, tmp);
 	copy_f_vector(tmp, ray.diraction);

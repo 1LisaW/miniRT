@@ -6,12 +6,16 @@
 /*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/20 19:45:38 by tklimova          #+#    #+#             */
-/*   Updated: 2024/04/21 23:11:29 by tklimova         ###   ########.fr       */
+/*   Updated: 2024/04/29 13:40:17 by tklimova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/miniRT.h"
 
+// The cross product gives a vector that is perpendicular
+// to the vectors of both arguments.
+// If the vectors of the arguments have opposite diractions,
+// the cross-product vector will have zero magnitude (length).
 t_vect	cross_product(t_vect vect_a, t_vect vect_b)
 {
 	t_vect	cross_prod;
