@@ -6,7 +6,7 @@
 /*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 02:16:31 by tklimova          #+#    #+#             */
-/*   Updated: 2024/04/27 03:12:23 by tklimova         ###   ########.fr       */
+/*   Updated: 2024/05/02 17:54:35 by tklimova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ float	get_determinant(float *inv_mtx, float *mtx, t_cross_determ *cd)
 {
 	float	determinant;
 
+	determinant = 0;
 	inv_mtx[0] = mtx[5] * cd->d10_15 - mtx[6] * cd->d9_15 + mtx[7] * cd->d9_14;
 	inv_mtx[4] = -1 * (mtx[4] * cd->d10_15 - mtx[6] * cd->d8_15
 			+ mtx[7] * cd->d8_14);
@@ -99,6 +100,7 @@ float	*mtx_inverse(float *mtx)
 	t_cross_determ	*cd;
 	float			determinant;
 
+	determinant = 0;
 	inv_mtx = malloc(sizeof(float) * 16);
 	if (!inv_mtx)
 		return (NULL);

@@ -6,7 +6,7 @@
 /*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 10:49:49 by tklimova          #+#    #+#             */
-/*   Updated: 2024/04/30 14:55:16 by tklimova         ###   ########.fr       */
+/*   Updated: 2024/05/02 02:30:02 by tklimova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,15 +108,15 @@ enum	e_obj_ids
 typedef struct s_ray
 {
 	float	position[3];
-	float	diraction[3];
+	float	direction[3];
 }			t_ray;
 
 typedef struct s_mtxs
 {
 	float	*dir_mtx;
 	float	*inv_mtx;
-	t_ray	top_cap;
-	t_ray	bot_cap;
+	t_ray	top_surf;
+	t_ray	bot_surf;
 }				t_mtxs;
 
 typedef struct s_g_objects
@@ -163,6 +163,7 @@ typedef struct s_closest_obj
 {
 	float		dist;
 	float		point[3];
+	bool		in_light;
 	t_g_objects	*obj;
 }				t_closest_obj;
 
@@ -325,5 +326,11 @@ float			*mtx_inverse(float *mtx);
 void			create_cyl_mtx(t_g_objects *obj);
 
 void			normalize_vect(float *vector);
+
+void			get_intersection_point(t_ray *ray, float intersect_dist,
+					float intersect_coords[3]);
+
+void			intersect_cylinder(t_g_objects *obj, t_ray ray,
+					t_closest_obj *cl_obj);
 
 #endif

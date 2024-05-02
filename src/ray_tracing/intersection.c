@@ -6,19 +6,30 @@
 /*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/20 22:48:37 by tklimova          #+#    #+#             */
-/*   Updated: 2024/04/30 14:57:04 by tklimova         ###   ########.fr       */
+/*   Updated: 2024/05/02 18:28:54 by tklimova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/miniRT.h"
+
+// Fill coordinates of the intersection, depending on the ray
+// shot by the camera and the distance calculated beforehand.
+void	get_intersection_point(t_ray *ray, float intersect_dist,
+		float intersect_coords[3])
+{
+	float	vect[3];
+
+	scale_vector(ray->direction, intersect_dist, vect);
+	vector_add(ray->position, vect, intersect_coords);
+}
 
 void	intersect_sphere(t_g_objects *obj, t_ray ray, t_closest_obj *cl_obj)
 {
 	t_sphere_eq	sph_eq;
 
 	vector_subtract(obj->coords, ray.position, sph_eq.oc);
-	sph_eq.a = get_dot_product(ray.diraction, ray.diraction);
-	sph_eq.b = get_dot_product(ray.diraction, sph_eq.oc) * -2;
+	sph_eq.a = get_dot_product(ray.direction, ray.direction);
+	sph_eq.b = get_dot_product(ray.direction, sph_eq.oc) * -2;
 	sph_eq.c = get_dot_product(sph_eq.oc, sph_eq.oc) - 0.25
 		* (obj->diam * obj->diam);
 	sph_eq.discr = sph_eq.b * sph_eq.b - 4 * sph_eq.a * sph_eq.c;
@@ -33,6 +44,8 @@ void	intersect_sphere(t_g_objects *obj, t_ray ray, t_closest_obj *cl_obj)
 		cl_obj->dist = sph_eq.root[0];
 	else if (sph_eq.root[1] > 0 && cl_obj->dist > sph_eq.root[1])
 		cl_obj->dist = sph_eq.root[1];
+	if (cl_obj->obj == obj)
+		get_intersection_point(&ray, cl_obj->dist, cl_obj->point);
 }
 
 void	intersect_plane(t_g_objects *obj, t_ray ray, t_closest_obj *cl_obj)
@@ -41,7 +54,7 @@ void	intersect_plane(t_g_objects *obj, t_ray ray, t_closest_obj *cl_obj)
 	float	root;
 	float	vect[3];
 
-	denominator = get_dot_product(obj->v_3d_normal, ray.diraction);
+	denominator = get_dot_product(obj->v_3d_normal, ray.direction);
 	if (denominator < -1e-6 || denominator > 1e-6)
 	{
 		vector_subtract(obj->coords, ray.position, vect);
@@ -50,28 +63,10 @@ void	intersect_plane(t_g_objects *obj, t_ray ray, t_closest_obj *cl_obj)
 		{
 			cl_obj->obj = obj;
 			cl_obj->dist = root;
+			get_intersection_point(&ray, cl_obj->dist, cl_obj->point);
 		}
 	}
 }
-
-// bool	intersect_cy_cap(t_g_objects *obj, t_ray cy_ray, t_closest_obj *cl_obj)
-// {
-// 	float	denominator;
-
-
-// }
-
-// void	intersect_cylinder(t_g_objects *obj, t_ray ray, t_closest_obj *cl_obj)
-// {
-// 	t_ray	cy_ray;
-
-// 	vector_mtx_multy(ray.position, obj->mtxs->inv_mtx, cy_ray.position);
-// 	vector_mtx_multy(ray.diraction, obj->mtxs->inv_mtx, cy_ray.diraction);
-// 	cy_ray.position[0] += obj->mtxs->inv_mtx[12];
-// 	cy_ray.position[1] += obj->mtxs->inv_mtx[13];
-// 	cy_ray.position[2] += obj->mtxs->inv_mtx[14];
-// 	normalize_vect(cy_ray.position);
-// }
 
 t_closest_obj	get_closest_obj(t_mini_rt_data *data, t_ray ray)
 {
@@ -87,8 +82,10 @@ t_closest_obj	get_closest_obj(t_mini_rt_data *data, t_ray ray)
 	{
 		if (curr_obj->id == sp)
 			intersect_sphere(curr_obj, ray, &closest_obj);
-		if (curr_obj->id == pl)
+		else if (curr_obj->id == pl)
 			intersect_plane(curr_obj, ray, &closest_obj);
+		else if (curr_obj->id == cy)
+			intersect_cylinder(curr_obj, ray, &closest_obj);
 		curr_obj = curr_obj->next;
 	}
 	return (closest_obj);
