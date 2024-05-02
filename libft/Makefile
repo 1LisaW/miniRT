@@ -9,7 +9,7 @@ AR	=	ar -rcs
 RM	=	rm -rf
 
 FILES	=	ft_strlen ft_isspace ft_reallocate ft_strcmp ft_atof ft_issign ft_isdigit \
-			ft_atoi ft_substr ft_split
+			ft_atoi ft_substr ft_split ft_abs_f
 
 SRC	=	$(addsuffix .c, $(FILES))
 

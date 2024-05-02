@@ -6,7 +6,7 @@
 /*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 23:32:08 by tklimova          #+#    #+#             */
-/*   Updated: 2024/03/27 21:29:39 by tklimova         ###   ########.fr       */
+/*   Updated: 2024/04/27 03:05:37 by tklimova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ t_g_objects	*create_obj(t_mini_rt_data *data, char *token)
 	new_obj->rgb = NULL;
 	new_obj->v_3d_normal = NULL;
 	new_obj->next = 0;
+	new_obj->mtxs = NULL;
 	return (new_obj);
 }
 

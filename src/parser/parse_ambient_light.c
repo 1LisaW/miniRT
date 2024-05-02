@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_ambient_light.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: tklimova <tklimova@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 12:25:39 by tklimova          #+#    #+#             */
-/*   Updated: 2024/03/27 21:49:17 by tklimova         ###   ########.fr       */
+/*   Updated: 2024/04/10 16:23:37 by tklimova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,15 @@ void	convert_ambient_light(t_mini_rt_data *data, char *a_l_r, char *rgb)
 	if (!data->a_l)
 		handle_error(ERR_ALLOC_ERR, NULL, data);
 	if (!is_float(a_l_r))
-		handle_error(ERR_PARSE_DATA, "Ambient light: ratio's format is not correct", data);
+		handle_error(ERR_PARSE_DATA,
+			"Ambient light: ratio's format is not correct", data);
 	if (data->err_code)
 		return ;
 	data->a_l->ratio = ft_atof(a_l_r);
 	free(a_l_r);
 	if (!is_float_in_range(data->a_l->ratio, 0, 1.0))
-		handle_error(ERR_PARSE_DATA, "Ambient light: ratio is out of range [0.0, 1.0]", data);
+		handle_error(ERR_PARSE_DATA,
+			"Ambient light: ratio is out of range [0.0, 1.0]", data);
 	if (data->err_code)
 		return ;
 	data->a_l->rgb = get_rgb_data(data, rgb);

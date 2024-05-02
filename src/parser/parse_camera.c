@@ -6,13 +6,14 @@
 /*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 13:50:20 by tklimova          #+#    #+#             */
-/*   Updated: 2024/03/27 22:12:01 by tklimova         ###   ########.fr       */
+/*   Updated: 2024/04/23 00:11:32 by tklimova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/miniRT.h"
 
-void	convert_camera(t_mini_rt_data *data, char *coords_vp, char *v_3d_norm, char *fov)
+void	convert_camera(t_mini_rt_data *data, char *coords_vp,
+			char *v_3d_norm, char *fov)
 {
 	data->cam = malloc(sizeof(t_camera));
 	if (!data->cam)
@@ -20,11 +21,15 @@ void	convert_camera(t_mini_rt_data *data, char *coords_vp, char *v_3d_norm, char
 	data->cam->coords = get_coords(coords_vp, data);
 	data->cam->v_3d_orient = get_coords_with_range(v_3d_norm, data, -1, 1);
 	if (!is_float(fov))
-		handle_error(ERR_PARSE_DATA, "Camera: fov's format is not correct", data);
+		handle_error(ERR_PARSE_DATA,
+			"Camera: fov's format is not correct", data);
 	data->cam->fov = ft_atof(fov);
 	free(fov);
 	if (!data->err_code && !is_float_in_range(data->cam->fov, 0, 180))
-		handle_error(ERR_PARSE_DATA, "Camera: fov is out of range [0, 180]", data);
+		handle_error(ERR_PARSE_DATA,
+			"Camera: fov is out of range [0, 180]", data);
+	data->cam->mtx = NULL;
+	data->cam->tan_half_fov = 0;
 }
 
 void	ft_parse_camera(t_mini_rt_data *data, int *eol)

@@ -1,21 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   scale_vector.c                                     :+:      :+:    :+:   */
+/*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/04 16:06:59 by jmigoya-          #+#    #+#             */
-/*   Updated: 2024/04/21 23:11:14 by tklimova         ###   ########.fr       */
+/*   Created: 2024/04/21 23:17:24 by tklimova          #+#    #+#             */
+/*   Updated: 2024/04/21 23:17:49 by tklimova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/miniRT.h"
 
-// Scale a vector by a scalar factor
-void	scale_vector(float *vector, float scalar, float *result)
+int	rgb_to_hex(int r, int g, int b)
 {
-	result[0] = vector[0] * scalar;
-	result[1] = vector[1] * scalar;
-	result[2] = vector[2] * scalar;
+	return (((r & 0xff) << 16) + ((g & 0xff) << 8) + (b & 0xff));
 }

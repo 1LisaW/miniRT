@@ -6,7 +6,7 @@
 /*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 18:10:22 by tklimova          #+#    #+#             */
-/*   Updated: 2024/03/31 22:51:39 by tklimova         ###   ########.fr       */
+/*   Updated: 2024/04/21 23:14:04 by tklimova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int	win_close(int keycode, t_vars *vars)
 {
+	printf("\nKEY: %i\n", keycode);
 	if (keycode == 65307)
 	{
 		mlx_destroy_window(vars->mlx, vars->win);
@@ -35,4 +36,21 @@ int	win_destroy(t_vars *vars)
 	vars->mlx = NULL;
 	free_coords(vars->img_data);
 	exit(0);
+}
+
+int	win_resize(t_vars *vars)
+{
+	int	w;
+	int	h;
+
+	mlx_get_screen_size(vars->mlx, &w, &h);
+	if (w > 0)
+		vars->img_data->w_width = w;
+	else
+		vars->img_data->w_width = 1;
+	if (h > 0)
+		vars->img_data->w_height = h;
+	else
+		vars->img_data->w_height = 1;
+	return (0);
 }
