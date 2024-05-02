@@ -6,7 +6,7 @@
 /*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/20 17:06:05 by tklimova          #+#    #+#             */
-/*   Updated: 2024/04/21 23:07:44 by tklimova         ###   ########.fr       */
+/*   Updated: 2024/05/02 18:25:00 by tklimova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,27 @@ void	create_camera_mtx(t_mini_rt_data *data)
 	printf("\nMTX forward: %f, %f, %f, %f\n", mtx[8], mtx[9], mtx[10], mtx[11]);
 }
 
-void	made_precalc(t_mini_rt_data *data)
+void	create_cyl_mtx(t_g_objects *obj)
 {
-	create_camera_mtx(data);
+	float	*mtx;
+	t_vect	forward;
+	t_vect	left;
+
+	obj->mtxs->dir_mtx = (float *) malloc(sizeof(float) * 16);
+	if (!obj->mtxs->dir_mtx)
+		return ;
+	mtx = obj->mtxs->dir_mtx;
+	mtx[3] = 0;
+	mtx[7] = 0;
+	mtx[11] = 0;
+	mtx[15] = 1;
+	forward = compute_forward(mtx, obj->v_3d_normal);
+	left = compute_right_left(mtx, forward);
+	compute_up_down(mtx, forward, left);
+	mtx[12] = obj->coords[0];
+	mtx[13] = obj->coords[1];
+	mtx[14] = obj->coords[2];
+	// printf("\nMTX left: %f, %f, %f, %f\n", mtx[0], mtx[1], mtx[2], mtx[3]);
+	// printf("\nMTX up: %f, %f, %f, %f\n", mtx[4], mtx[5], mtx[6], mtx[7]);
+	// printf("\nMTX forward: %f, %f, %f, %f\n", mtx[8], mtx[9], mtx[10], mtx[11]);
 }

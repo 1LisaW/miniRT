@@ -6,7 +6,7 @@
 /*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 16:53:56 by jmigoya-          #+#    #+#             */
-/*   Updated: 2024/04/21 23:45:53 by tklimova         ###   ########.fr       */
+/*   Updated: 2024/05/02 00:58:50 by tklimova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,16 +44,15 @@ t_ray	calc_ray(t_mini_rt_data *data, int x, int y)
 	tmp[1] = 0;
 	tmp[2] = 0;
 	copy_f_vector(data->cam->coords, ray.position);
-	ray.diraction[0] = (2 * ((x + 0.5) / data->vars->img_data->w_width) - 1)
+	ray.direction[0] = (2 * ((x + 0.5) / data->vars->img_data->w_width) - 1)
 		* ((float)data->vars->img_data->w_width
-			/ data->vars->img_data->w_height)
-		* (tan((data->cam->fov / 2) * (M_PI / 180)));
-	ray.diraction[1] = (1 - 2 * ((y + 0.5) / data->vars->img_data->w_height))
-		* (tan((data->cam->fov / 2) * (M_PI / 180)));
-	ray.diraction[2] = 1;
-	vector_mtx_multy(ray.diraction, data->cam->mtx, tmp);
-	copy_f_vector(tmp, ray.diraction);
-	normalize_vect(ray.diraction);
+			/ data->vars->img_data->w_height) * data->cam->tan_half_fov;
+	ray.direction[1] = (1 - 2 * ((y + 0.5) / data->vars->img_data->w_height))
+		* data->cam->tan_half_fov;
+	ray.direction[2] = 1;
+	vector_mtx_multy(ray.direction, data->cam->mtx, tmp);
+	copy_f_vector(tmp, ray.direction);
+	normalize_vect(ray.direction);
 	return (ray);
 }
 

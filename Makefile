@@ -12,9 +12,10 @@ PARSER_FILES =	parse_scene validation_scene parse_helpers validate_helpers \
                 log_parsed_data
 IMG_FILES = 	create_win win_events img_data
 VEC_OPS_FILES =	basic_vector_ops get_vec_lenght normalize_vector copy_vector scale_vector \
-				cross_product
+				cross_product inverse_matrix
 SDF_FILES =		sd_selector
-RAY_TRACE_FILES = trace_ray trace_ray_copy matrix intersection color
+RAY_TRACE_FILES = trace_ray trace_ray_copy matrix intersection color \
+				precompute_data cylinder_intersection
 
 SRC_DIR     	= src
 PARSER_DIR  	= parser
