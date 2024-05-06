@@ -6,7 +6,7 @@
 /*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/20 22:48:37 by tklimova          #+#    #+#             */
-/*   Updated: 2024/05/02 18:28:54 by tklimova         ###   ########.fr       */
+/*   Updated: 2024/05/06 13:54:15 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,12 +68,14 @@ void	intersect_plane(t_g_objects *obj, t_ray ray, t_closest_obj *cl_obj)
 	}
 }
 
+// Gets closes object given a ray. The returned structure will have .dist
+// equal to FLT_MAX if there is no match.
 t_closest_obj	get_closest_obj(t_mini_rt_data *data, t_ray ray)
 {
 	t_closest_obj	closest_obj;
 	t_g_objects		*curr_obj;
 
-	closest_obj.dist = INT_MAX;
+	closest_obj.dist = FLT_MAX;
 	closest_obj.obj = NULL;
 	curr_obj = NULL;
 	if (data)
@@ -89,4 +91,25 @@ t_closest_obj	get_closest_obj(t_mini_rt_data *data, t_ray ray)
 		curr_obj = curr_obj->next;
 	}
 	return (closest_obj);
+}
+
+// "Shoots" a ray with source light coords towards closes object intersection
+// point. Returns true if the object is in light.
+bool	check_if_in_light(t_mini_rt_data *data, t_closest_obj obj)
+{
+	t_closest_obj	closest_obj;
+	t_ray			ray;
+	float			diff;
+
+	copy_f_vector(data->l->coords, ray.position);
+	copy_f_vector(obj.point, ray.direction);
+	normalize_vector(ray.position, ray.direction);
+	closest_obj = get_closest_obj(data, ray);
+	diff = get_vector_length(ray.position, closest_obj.point)
+		- get_vector_length(ray.position, obj.point);
+	if (ft_abs_f(diff) > EPSILON)
+	{
+		return (false);
+	}
+	return (true);
 }

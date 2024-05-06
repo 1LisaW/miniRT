@@ -6,7 +6,7 @@
 /*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 10:49:49 by tklimova          #+#    #+#             */
-/*   Updated: 2024/05/02 02:30:02 by tklimova         ###   ########.fr       */
+/*   Updated: 2024/05/06 13:54:46 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -312,6 +312,8 @@ void			draw(t_mini_rt_data *data);
 int				rgb_to_hex(int r, int g, int b);
 
 t_closest_obj	get_closest_obj(t_mini_rt_data *data, t_ray ray);
+
+bool			check_if_in_light(t_mini_rt_data *data, t_closest_obj obj);
 
 t_vect			fill_vector(float x, float y, float z);
 
