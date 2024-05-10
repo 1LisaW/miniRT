@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   matrix.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: tklimova <tklimova@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/20 17:06:05 by tklimova          #+#    #+#             */
-/*   Updated: 2024/05/02 18:25:00 by tklimova         ###   ########.fr       */
+/*   Updated: 2024/05/10 18:41:33 by tklimova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,4 @@ void	create_cyl_mtx(t_g_objects *obj)
 	mtx[12] = obj->coords[0];
 	mtx[13] = obj->coords[1];
 	mtx[14] = obj->coords[2];
-	// printf("\nMTX left: %f, %f, %f, %f\n", mtx[0], mtx[1], mtx[2], mtx[3]);
-	// printf("\nMTX up: %f, %f, %f, %f\n", mtx[4], mtx[5], mtx[6], mtx[7]);
-	// printf("\nMTX forward: %f, %f, %f, %f\n", mtx[8], mtx[9], mtx[10], mtx[11]);
 }

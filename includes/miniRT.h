@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: tklimova <tklimova@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 10:49:49 by tklimova          #+#    #+#             */
-/*   Updated: 2024/05/10 15:26:34 by tklimova         ###   ########.fr       */
+/*   Updated: 2024/05/10 18:49:10 by tklimova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,6 +170,7 @@ typedef struct s_closest_obj
 	t_ray		light_ray;
 	float		normal[3];
 	int			surf_cy;
+	float		cyl_z;
 }				t_closest_obj;
 
 typedef struct s_cross_determ

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: tklimova <tklimova@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 23:17:24 by tklimova          #+#    #+#             */
-/*   Updated: 2024/05/10 16:20:00 by tklimova         ###   ########.fr       */
+/*   Updated: 2024/05/10 18:40:43 by tklimova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@ int	rgb_to_hex(int r, int g, int b)
 {
 	return (((r & 0xff) << 16) + ((g & 0xff) << 8) + (b & 0xff));
 }
-
-
 
 void	compute_color(int *hex_color, t_closest_obj *cl_obj)
 {

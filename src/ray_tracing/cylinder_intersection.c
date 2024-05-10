@@ -3,15 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   cylinder_intersection.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: tklimova <tklimova@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 23:45:49 by tklimova          #+#    #+#             */
-/*   Updated: 2024/05/10 15:31:48 by tklimova         ###   ########.fr       */
+/*   Updated: 2024/05/10 18:50:52 by tklimova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/miniRT.h"
 
+bool	fill_cl_obj(t_closest_obj *cl_obj, t_g_objects *obj, float root,
+			float intersect_point[3])
+{
+	cl_obj->obj = obj;
+	cl_obj->dist = root;
+	copy_f_vector(intersect_point, cl_obj->point);
+	return (true);
+}
 
 bool	intersect_cy_surf(t_g_objects *obj, t_ray *cy_ray,
 			t_closest_obj *cl_obj, t_ray *cy_surf)
@@ -33,12 +41,7 @@ bool	intersect_cy_surf(t_g_objects *obj, t_ray *cy_ray,
 			vector_subtract(intersect_point, cy_surf->position, surf_ray);
 			denominator = get_dot_product(surf_ray, surf_ray);
 			if (get_dot_product(surf_ray, surf_ray) < (pow(obj->diam, 2) / 4))
-			{
-				cl_obj->obj = obj;
-				cl_obj->dist = root;
-				copy_f_vector(intersect_point, cl_obj->point);
-				return (true);
-			}
+				return (fill_cl_obj(cl_obj, obj, root, intersect_point));
 		}
 	}
 	return (false);
@@ -70,10 +73,7 @@ bool	intersect_cy_side(t_g_objects *obj, t_ray *cy_ray,
 	if (!(intersect_coords[2] >= obj->height / -2
 			&& intersect_coords[2] <= obj->height / 2))
 		return (false);
-	cl_obj->dist = sph_eq.root[0];
-	cl_obj->obj = obj;
-	copy_f_vector(intersect_coords, cl_obj->point);
-	return (true);
+	return (fill_cl_obj(cl_obj, obj, sph_eq.root[0], intersect_coords));
 }
 
 void	intersect_cylinder(t_g_objects *obj, t_ray ray, t_closest_obj *cl_obj)
@@ -91,7 +91,10 @@ void	intersect_cylinder(t_g_objects *obj, t_ray ray, t_closest_obj *cl_obj)
 	if (intersect_cy_surf(obj, &cy_ray, cl_obj, &(obj->mtxs->bot_surf)))
 		cl_obj->surf_cy = -1;
 	if (intersect_cy_side(obj, &cy_ray, cl_obj))
+	{
 		cl_obj->surf_cy = 0;
+		cl_obj->cyl_z = cl_obj->point[2];
+	}
 	if (cl_obj->obj == obj)
 	{
 		vector_mtx_multy(cl_obj->point, obj->mtxs->dir_mtx, cl_obj->point);

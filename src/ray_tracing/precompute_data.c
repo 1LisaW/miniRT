@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   precompute_data.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: tklimova <tklimova@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 23:57:31 by tklimova          #+#    #+#             */
-/*   Updated: 2024/05/09 23:35:01 by tklimova         ###   ########.fr       */
+/*   Updated: 2024/05/10 17:27:04 by tklimova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	precalc_rgb(t_g_objects *obj, int amb_int[3])
 	obj->mtxs->amb_rgb[0] = obj->rgb[0] * amb_int[0];
 	obj->mtxs->amb_rgb[1] = obj->rgb[1] * amb_int[1];
 	obj->mtxs->amb_rgb[2] = obj->rgb[2] * amb_int[2];
-	scale_rgb_vector(obj->rgb, 0.5, obj->mtxs->shadow_rgb);
+	scale_rgb_vector(obj->rgb, 0.7, obj->mtxs->shadow_rgb);
 	obj->mtxs->shadow_rgb[0] = (obj->mtxs->shadow_rgb[0]
 			+ obj->mtxs->amb_rgb[0]) % 256;
 	obj->mtxs->shadow_rgb[1] = (obj->mtxs->shadow_rgb[1]
