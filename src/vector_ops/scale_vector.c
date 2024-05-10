@@ -6,7 +6,7 @@
 /*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 16:06:59 by jmigoya-          #+#    #+#             */
-/*   Updated: 2024/04/21 23:11:14 by tklimova         ###   ########.fr       */
+/*   Updated: 2024/05/09 22:38:48 by tklimova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,4 +18,11 @@ void	scale_vector(float *vector, float scalar, float *result)
 	result[0] = vector[0] * scalar;
 	result[1] = vector[1] * scalar;
 	result[2] = vector[2] * scalar;
+}
+
+void	scale_rgb_vector(int *vector, float scalar, int *result)
+{
+	result[0] = (int) (vector[0] * scalar);
+	result[1] = (int) (vector[1] * scalar);
+	result[2] = (int) (vector[2] * scalar);
 }

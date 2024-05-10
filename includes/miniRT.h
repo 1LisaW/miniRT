@@ -6,7 +6,7 @@
 /*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 10:49:49 by tklimova          #+#    #+#             */
-/*   Updated: 2024/05/02 02:30:02 by tklimova         ###   ########.fr       */
+/*   Updated: 2024/05/10 15:26:34 by tklimova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,8 @@ typedef struct s_mtxs
 	float	*inv_mtx;
 	t_ray	top_surf;
 	t_ray	bot_surf;
+	int		amb_rgb[3];
+	int		shadow_rgb[3];
 }				t_mtxs;
 
 typedef struct s_g_objects
@@ -165,6 +167,9 @@ typedef struct s_closest_obj
 	float		point[3];
 	bool		in_light;
 	t_g_objects	*obj;
+	t_ray		light_ray;
+	float		normal[3];
+	int			surf_cy;
 }				t_closest_obj;
 
 typedef struct s_cross_determ
@@ -289,6 +294,8 @@ void			normalize_vector(float *origin, float *vector);
 
 void			copy_f_vector(float *src, float *dest);
 
+void			copy_i_vector(int *src, int *dest);
+
 void			scale_vector(float *vector, float scalar, float *result);
 
 t_vect			cross_product(t_vect vect_a, t_vect vect_b);
@@ -317,6 +324,8 @@ t_vect			fill_vector(float x, float y, float z);
 
 int				rgb_to_hex(int r, int g, int b);
 
+void			compute_color(int *hex_color, t_closest_obj *cl_obj);
+
 void			create_camera_mtx(t_mini_rt_data *data);
 
 void			precompute_data(t_mini_rt_data *data);
@@ -332,5 +341,7 @@ void			get_intersection_point(t_ray *ray, float intersect_dist,
 
 void			intersect_cylinder(t_g_objects *obj, t_ray ray,
 					t_closest_obj *cl_obj);
+
+void			scale_rgb_vector(int *vector, float scalar, int *result);
 
 #endif

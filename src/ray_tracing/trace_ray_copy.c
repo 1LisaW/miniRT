@@ -6,7 +6,7 @@
 /*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 16:53:56 by jmigoya-          #+#    #+#             */
-/*   Updated: 2024/05/02 00:58:50 by tklimova         ###   ########.fr       */
+/*   Updated: 2024/05/10 16:13:20 by tklimova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,18 +56,73 @@ t_ray	calc_ray(t_mini_rt_data *data, int x, int y)
 	return (ray);
 }
 
+void	is_closest_obj_in_light(t_closest_obj *cl_obj,
+			t_closest_obj *cl_obj_to_light)
+{
+	if (!cl_obj->obj || cl_obj->obj != cl_obj_to_light->obj)
+		return ;
+	if ((cl_obj->point[0] - EPSILON <= cl_obj_to_light->point[0]
+			&& cl_obj->point[0] + EPSILON >= cl_obj_to_light->point[0])
+		&& (cl_obj->point[1] - EPSILON <= cl_obj_to_light->point[1]
+			&& cl_obj->point[1] + EPSILON >= cl_obj_to_light->point[1])
+		&& (cl_obj->point[2] - EPSILON <= cl_obj_to_light->point[2]
+			&& cl_obj->point[2] + EPSILON >= cl_obj_to_light->point[2]))
+		cl_obj->in_light = 1;
+}
+
+void	precompute_cylinder_normal(t_closest_obj *cl_obj)
+{
+	float	cy_tmp[3];
+	float	cy_projection[3];
+
+	cy_tmp[0] = 0;
+	cy_tmp[1] = 0;
+	cy_tmp[2] = cl_obj->point[3];
+	vector_mtx_multy(cy_tmp, cl_obj->obj->mtxs->dir_mtx, cy_projection);
+	cy_projection[0] += cl_obj->obj->mtxs->dir_mtx[12];
+	cy_projection[1] += cl_obj->obj->mtxs->dir_mtx[13];
+	cy_projection[2] += cl_obj->obj->mtxs->dir_mtx[14];
+	vector_subtract(cl_obj->point, cy_projection, cl_obj->normal);
+	normalize_vect(cl_obj->normal);
+}
+
+void	precompute_normal(t_closest_obj	*cl_obj)
+{
+	if (cl_obj->dist >= INT_MAX || !cl_obj->in_light)
+		return ;
+	if (cl_obj->obj->id == pl)
+		copy_f_vector(cl_obj->obj->v_3d_normal, cl_obj->normal);
+	else if (cl_obj->obj->id == sp)
+	{
+		vector_subtract(cl_obj->point, cl_obj->obj->coords, cl_obj->normal);
+		if (cl_obj->obj->diam / 2 > sqrtf(get_vector_length(cl_obj->point,
+					cl_obj->obj->coords)))
+			scale_vector(cl_obj->normal, -1, cl_obj->normal);
+	}
+	else if (cl_obj->obj->id == cy && cl_obj->surf_cy == 1)
+		copy_f_vector(cl_obj->obj->v_3d_normal, cl_obj->normal);
+	else if (cl_obj->obj->id == cy && cl_obj->surf_cy == -1)
+		scale_vector(cl_obj->obj->v_3d_normal, -1, cl_obj->normal);
+	else if (cl_obj->obj->id == cy)
+		precompute_cylinder_normal(cl_obj);
+}
+
 void	ray_trace_cp(t_mini_rt_data *data, t_img_data *img_data, int x, int y)
 {
 	t_ray			ray;
 	t_closest_obj	cl_obj;
+	t_closest_obj	cl_obj_to_l;
 
 	ray = calc_ray(data, x, y);
 	cl_obj = get_closest_obj(data, ray);
+	copy_f_vector(data->l->coords, cl_obj.light_ray.position);
+	vector_subtract(cl_obj.point, data->l->coords, cl_obj.light_ray.direction);
+	normalize_vect(cl_obj.light_ray.direction);
+	cl_obj_to_l = get_closest_obj(data, cl_obj.light_ray);
+	is_closest_obj_in_light(&cl_obj, &cl_obj_to_l);
+	precompute_normal(&cl_obj);
 	if (cl_obj.dist < INT_MAX)
-	{
-		img_data->colors_data[y][x] = rgb_to_hex(cl_obj.obj->rgb[0],
-				cl_obj.obj->rgb[1], cl_obj.obj->rgb[2]);
-	}
+		compute_color(&(img_data->colors_data[y][x]), &cl_obj);
 	else
 		img_data->colors_data[y][x] = 0x87CEEB;
 	custom_mlx_pixel_put(data->vars->img, x, y,
