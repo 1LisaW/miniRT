@@ -6,7 +6,7 @@
 /*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 16:53:56 by jmigoya-          #+#    #+#             */
-/*   Updated: 2024/05/02 00:58:50 by tklimova         ###   ########.fr       */
+/*   Updated: 2024/05/06 12:34:34 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,18 @@ void	ray_trace_cp(t_mini_rt_data *data, t_img_data *img_data, int x, int y)
 
 	ray = calc_ray(data, x, y);
 	cl_obj = get_closest_obj(data, ray);
-	if (cl_obj.dist < INT_MAX)
+	if (cl_obj.dist < FLT_MAX)
 	{
-		img_data->colors_data[y][x] = rgb_to_hex(cl_obj.obj->rgb[0],
-				cl_obj.obj->rgb[1], cl_obj.obj->rgb[2]);
+		cl_obj.in_light = check_if_in_light(data, cl_obj);
+		if (cl_obj.in_light == false)
+		{
+			img_data->colors_data[y][x] = 0x000000;
+		}
+		else
+		{
+			img_data->colors_data[y][x] = rgb_to_hex(cl_obj.obj->rgb[0],
+					cl_obj.obj->rgb[1], cl_obj.obj->rgb[2]);
+		}
 	}
 	else
 		img_data->colors_data[y][x] = 0x87CEEB;
