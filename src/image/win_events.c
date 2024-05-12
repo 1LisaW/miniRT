@@ -6,7 +6,7 @@
 /*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 18:10:22 by tklimova          #+#    #+#             */
-/*   Updated: 2024/04/21 23:14:04 by tklimova         ###   ########.fr       */
+/*   Updated: 2024/05/12 00:47:27 by tklimova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int	win_close(int keycode, t_vars *vars)
 	printf("\nKEY: %i\n", keycode);
 	if (keycode == 65307)
 	{
+		destroy_win(vars);
 		mlx_destroy_window(vars->mlx, vars->win);
 		mlx_destroy_display(vars->mlx);
 		if (vars->mlx)
@@ -30,6 +31,7 @@ int	win_close(int keycode, t_vars *vars)
 
 int	win_destroy(t_vars *vars)
 {
+	destroy_win(vars);
 	mlx_destroy_window(vars->mlx, vars->win);
 	if (vars->mlx)
 		free(vars->mlx);

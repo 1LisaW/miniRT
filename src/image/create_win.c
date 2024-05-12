@@ -6,7 +6,7 @@
 /*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 18:06:32 by tklimova          #+#    #+#             */
-/*   Updated: 2024/04/21 23:19:04 by tklimova         ###   ########.fr       */
+/*   Updated: 2024/05/13 00:48:28 by tklimova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,14 +46,27 @@ int	draw_loop(t_mini_rt_data *data)
 	return (0);
 }
 
-void	destroy_win(t_mini_rt_data *data)
+void	destroy_win(t_vars	*vars)
 {
-	t_vars	*vars;
+	// t_vars	*vars;
 
-	vars = data->vars;
-	mlx_put_image_to_window(vars->mlx, vars->win, vars->img->img, 0, 0);
-	mlx_hook(data->vars->win, 17, 0L, win_destroy, data->vars);
-	mlx_key_hook(data->vars->win, win_close, data->vars);
-	mlx_loop(vars->mlx);
+	// vars = data->vars;
+
 	mlx_destroy_image(vars->mlx, vars->img->img);
+}
+
+
+int	redraw(t_vars	*vars)
+{
+	mlx_put_image_to_window(vars->mlx, vars->win, vars->img->img, 0, 0);
+	return (0);
+}
+
+void	apply_img_to_win(t_vars	*vars)
+{
+	mlx_put_image_to_window(vars->mlx, vars->win, vars->img->img, 0, 0);
+	mlx_hook(vars->win, 17, 0L, win_destroy, vars);
+	mlx_key_hook(vars->win, win_close, vars);
+	mlx_loop_hook(vars->mlx, &redraw, vars);
+	mlx_loop(vars->mlx);
 }

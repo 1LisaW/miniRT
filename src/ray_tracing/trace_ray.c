@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   trace_ray.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tklimova <tklimova@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 16:53:56 by jmigoya-          #+#    #+#             */
-/*   Updated: 2024/05/10 18:51:31 by tklimova         ###   ########.fr       */
+/*   Updated: 2024/05/13 00:15:42 by tklimova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,7 @@ void	ray_trace(t_mini_rt_data *data, t_img_data *img_data, int x, int y)
 	is_closest_obj_in_light(&cl_obj, &cl_obj_to_l);
 	precompute_normal(&cl_obj);
 	if (cl_obj.dist < (float) INT_MAX)
-		compute_color(&(img_data->colors_data[y][x]), &cl_obj);
+		compute_color(&(img_data->colors_data[y][x]), &cl_obj, data);
 	else
 		img_data->colors_data[y][x] = 0x87CEEB;
 	custom_mlx_pixel_put(data->vars->img, x, y,
@@ -155,4 +155,5 @@ void	draw(t_mini_rt_data *data)
 		j++;
 		i = 0;
 	}
+	apply_img_to_win(data->vars);
 }

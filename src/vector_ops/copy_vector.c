@@ -6,7 +6,7 @@
 /*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 14:56:16 by jmigoya-          #+#    #+#             */
-/*   Updated: 2024/05/03 15:27:08 by tklimova         ###   ########.fr       */
+/*   Updated: 2024/05/11 23:18:39 by tklimova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,19 @@ void	copy_i_vector(int *src, int *dest)
 	while (i < 3)
 	{
 		dest[i] = src[i];
+		i++;
+	}
+}
+
+// Initiate vector with 0
+void	init_f_vector(float vector[3])
+{
+	int	i;
+
+	i = 0;
+	while (i < 3)
+	{
+		vector[i] = 0;
 		i++;
 	}
 }

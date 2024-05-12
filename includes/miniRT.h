@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tklimova <tklimova@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 10:49:49 by tklimova          #+#    #+#             */
-/*   Updated: 2024/05/10 18:49:10 by tklimova         ###   ########.fr       */
+/*   Updated: 2024/05/13 00:15:35 by tklimova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -267,7 +267,7 @@ void			free_coords(t_img_data *img_data);
 
 void			create_win(t_mini_rt_data *data);
 
-void			destroy_win(t_mini_rt_data *data);
+void			destroy_win(t_vars *vars);
 
 int				win_close(int keycode, t_vars *vars);
 
@@ -325,7 +325,7 @@ t_vect			fill_vector(float x, float y, float z);
 
 int				rgb_to_hex(int r, int g, int b);
 
-void			compute_color(int *hex_color, t_closest_obj *cl_obj);
+void			compute_color(int *hex_color, t_closest_obj *cl_obj, t_mini_rt_data *data);
 
 void			create_camera_mtx(t_mini_rt_data *data);
 
@@ -344,5 +344,9 @@ void			intersect_cylinder(t_g_objects *obj, t_ray ray,
 					t_closest_obj *cl_obj);
 
 void			scale_rgb_vector(int *vector, float scalar, int *result);
+
+void			init_f_vector(float vector[3]);
+
+void			apply_img_to_win(t_vars	*vars);
 
 #endif
