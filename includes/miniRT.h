@@ -5,11 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: tklimova <tklimova@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/13 15:37:07 by tklimova          #+#    #+#             */
-/*   Updated: 2024/05/13 15:39:38 by tklimova         ###   ########.fr       */
+/*   Created: 2024/03/25 10:49:49 by tklimova          #+#    #+#             */
+/*   Updated: 2024/05/13 15:43:05 by tklimova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef MINIRT_H
 # define MINIRT_H
 
 # define ERR_WRONG_ARG 1
