@@ -6,7 +6,7 @@
 /*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 10:49:49 by tklimova          #+#    #+#             */
-/*   Updated: 2024/05/13 14:03:21 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2024/05/13 14:14:18 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # define ERR_ALLOC_ERR 5
 
 # define STEP 0.5
-# define RAY_MAX_LENGHT 100.0
+# define RAY_MAX_LENGTH 100.0
 
 # define AMBIENT_LIGHTNING_TOKEN "A"
 # define CAMERA_TOKEN "C"
