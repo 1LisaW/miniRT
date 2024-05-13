@@ -6,7 +6,7 @@
 /*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/20 22:48:37 by tklimova          #+#    #+#             */
-/*   Updated: 2024/05/13 15:15:03 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2024/05/13 15:17:38 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,5 +111,8 @@ bool	check_if_in_light(t_mini_rt_data *data, t_closest_obj obj)
 	{
 		return (false);
 	}
-	return (true);
+	else
+	{
+		return (true);
+	}
 }
