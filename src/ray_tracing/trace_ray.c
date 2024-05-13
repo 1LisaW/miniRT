@@ -6,7 +6,7 @@
 /*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 16:53:56 by jmigoya-          #+#    #+#             */
-/*   Updated: 2024/05/13 00:15:42 by tklimova         ###   ########.fr       */
+/*   Updated: 2024/05/13 03:14:54 by tklimova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,21 +18,6 @@ void	custom_mlx_pixel_put(t_data *data, int x, int y, int color)
 
 	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
 	*(unsigned int *)dst = color;
-}
-
-void	normalize_vect(float *vector)
-{
-	float	len;
-	float	inverted_len;
-
-	len = sqrt(pow(vector[0], 2) + pow(vector[1], 2) + pow(vector[2], 2));
-	if (len > 0)
-	{
-		inverted_len = 1.0 / len;
-		vector[0] *= inverted_len;
-		vector[1] *= inverted_len;
-		vector[2] *= inverted_len;
-	}
 }
 
 t_ray	calc_ray(t_mini_rt_data *data, int x, int y)
@@ -68,43 +53,6 @@ void	is_closest_obj_in_light(t_closest_obj *cl_obj,
 		&& (cl_obj->point[2] - EPSILON <= cl_obj_to_light->point[2]
 			&& cl_obj->point[2] + EPSILON >= cl_obj_to_light->point[2]))
 		cl_obj->in_light = 1;
-}
-
-void	precompute_cylinder_normal(t_closest_obj *cl_obj)
-{
-	float	cy_tmp[3];
-	float	cy_projection[3];
-
-	cy_tmp[0] = 0;
-	cy_tmp[1] = 0;
-	cy_tmp[2] = cl_obj->cyl_z;
-	vector_mtx_multy(cy_tmp, cl_obj->obj->mtxs->dir_mtx, cy_projection);
-	cy_projection[0] += cl_obj->obj->mtxs->dir_mtx[12];
-	cy_projection[1] += cl_obj->obj->mtxs->dir_mtx[13];
-	cy_projection[2] += cl_obj->obj->mtxs->dir_mtx[14];
-	vector_subtract(cl_obj->point, cy_projection, cl_obj->normal);
-	normalize_vect(cl_obj->normal);
-}
-
-void	precompute_normal(t_closest_obj	*cl_obj)
-{
-	if (cl_obj->dist >= (float) INT_MAX || !cl_obj->in_light)
-		return ;
-	if (cl_obj->obj->id == pl)
-		copy_f_vector(cl_obj->obj->v_3d_normal, cl_obj->normal);
-	else if (cl_obj->obj->id == sp)
-	{
-		vector_subtract(cl_obj->point, cl_obj->obj->coords, cl_obj->normal);
-		if (cl_obj->obj->diam / 2 > sqrtf(get_vector_length(cl_obj->point,
-					cl_obj->obj->coords)))
-			scale_vector(cl_obj->normal, -1, cl_obj->normal);
-	}
-	else if (cl_obj->obj->id == cy && cl_obj->surf_cy == 1)
-		copy_f_vector(cl_obj->obj->v_3d_normal, cl_obj->normal);
-	else if (cl_obj->obj->id == cy && cl_obj->surf_cy == -1)
-		scale_vector(cl_obj->obj->v_3d_normal, -1, cl_obj->normal);
-	else if (cl_obj->obj->id == cy)
-		precompute_cylinder_normal(cl_obj);
 }
 
 void	ray_trace(t_mini_rt_data *data, t_img_data *img_data, int x, int y)
@@ -155,5 +103,5 @@ void	draw(t_mini_rt_data *data)
 		j++;
 		i = 0;
 	}
-	apply_img_to_win(data->vars);
+	apply_img_to_win(data);
 }

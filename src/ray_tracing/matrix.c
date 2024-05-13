@@ -6,21 +6,11 @@
 /*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/20 17:06:05 by tklimova          #+#    #+#             */
-/*   Updated: 2024/05/12 02:01:37 by tklimova         ###   ########.fr       */
+/*   Updated: 2024/05/13 03:11:21 by tklimova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/miniRT.h"
-
-t_vect	fill_vector(float x, float y, float z)
-{
-	t_vect	vector;
-
-	vector.x = x;
-	vector.y = y;
-	vector.z = z;
-	return (vector);
-}
 
 t_vect	compute_forward(float *mtx, float *vector)
 {

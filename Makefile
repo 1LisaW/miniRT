@@ -15,7 +15,7 @@ VEC_OPS_FILES =	basic_vector_ops get_vec_lenght normalize_vector copy_vector sca
 				cross_product inverse_matrix
 SDF_FILES =		sd_selector
 RAY_TRACE_FILES = trace_ray matrix intersection color \
-				precompute_data cylinder_intersection
+				precompute_data cylinder_intersection normal
 
 SRC_DIR     	= src
 PARSER_DIR  	= parser

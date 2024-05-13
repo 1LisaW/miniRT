@@ -6,7 +6,7 @@
 /*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 23:32:08 by tklimova          #+#    #+#             */
-/*   Updated: 2024/04/27 03:05:37 by tklimova         ###   ########.fr       */
+/*   Updated: 2024/05/13 02:33:28 by tklimova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ void	delete_obj(t_g_objects *obj)
 		free(obj->rgb);
 	if (obj->v_3d_normal)
 		free(obj->v_3d_normal);
+	if (obj->mtxs)
+		free(obj->mtxs);
 	obj->coords = NULL;
 	obj->diam = 0;
 	obj->height = 0;

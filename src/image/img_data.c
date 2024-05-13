@@ -6,7 +6,7 @@
 /*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 19:10:56 by tklimova          #+#    #+#             */
-/*   Updated: 2024/05/13 00:45:26 by tklimova         ###   ########.fr       */
+/*   Updated: 2024/05/13 02:18:40 by tklimova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,10 @@ void	free_coords(t_img_data *img_data)
 			&& img_data->colors_data[i])
 		{
 			free(img_data->colors_data[i]);
+			img_data->colors_data[i] = NULL;
 			i++;
 		}
 		free(img_data->colors_data);
+		img_data->colors_data = NULL;
 	}
-	free(img_data);
 }

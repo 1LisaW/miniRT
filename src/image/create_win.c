@@ -6,7 +6,7 @@
 /*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 18:06:32 by tklimova          #+#    #+#             */
-/*   Updated: 2024/05/13 00:48:28 by tklimova         ###   ########.fr       */
+/*   Updated: 2024/05/13 03:09:36 by tklimova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,8 @@ int	draw_loop(t_mini_rt_data *data)
 
 void	destroy_win(t_vars	*vars)
 {
-	// t_vars	*vars;
-
-	// vars = data->vars;
-
 	mlx_destroy_image(vars->mlx, vars->img->img);
 }
-
 
 int	redraw(t_vars	*vars)
 {
@@ -62,11 +57,14 @@ int	redraw(t_vars	*vars)
 	return (0);
 }
 
-void	apply_img_to_win(t_vars	*vars)
+void	apply_img_to_win(t_mini_rt_data	*data)
 {
+	t_vars	*vars;
+
+	vars = data->vars;
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->img->img, 0, 0);
 	mlx_hook(vars->win, 17, 0L, win_destroy, vars);
-	mlx_key_hook(vars->win, win_close, vars);
+	mlx_key_hook(vars->win, on_key_handler, data);
 	mlx_loop_hook(vars->mlx, &redraw, vars);
 	mlx_loop(vars->mlx);
 }

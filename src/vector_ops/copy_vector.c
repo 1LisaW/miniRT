@@ -6,7 +6,7 @@
 /*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 14:56:16 by jmigoya-          #+#    #+#             */
-/*   Updated: 2024/05/11 23:18:39 by tklimova         ###   ########.fr       */
+/*   Updated: 2024/05/13 03:11:29 by tklimova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,14 @@ void	init_f_vector(float vector[3])
 		vector[i] = 0;
 		i++;
 	}
+}
+
+t_vect	fill_vector(float x, float y, float z)
+{
+	t_vect	vector;
+
+	vector.x = x;
+	vector.y = y;
+	vector.z = z;
+	return (vector);
 }

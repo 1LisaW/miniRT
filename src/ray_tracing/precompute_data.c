@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   precompute_data.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tklimova <tklimova@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 23:57:31 by tklimova          #+#    #+#             */
-/*   Updated: 2024/05/10 17:27:04 by tklimova         ###   ########.fr       */
+/*   Updated: 2024/05/13 02:54:40 by tklimova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,13 @@ void	precalc_rgb(t_g_objects *obj, int amb_int[3])
 			+ obj->mtxs->amb_rgb[2]) % 256;
 }
 
+void	precompute_cyl_data(t_g_objects	*cyl)
+{
+	create_cyl_mtx(cyl);
+	cyl->mtxs->inv_mtx = mtx_inverse(cyl->mtxs->dir_mtx);
+	fill_cy_caps_coords(cyl);
+}
+
 void	precompute_data(t_mini_rt_data *data)
 {
 	t_g_objects	*cyl;
@@ -59,9 +66,7 @@ void	precompute_data(t_mini_rt_data *data)
 		cyl->mtxs = malloc(sizeof(t_mtxs));
 		if (cyl->id == cy)
 		{
-			create_cyl_mtx(cyl);
-			cyl->mtxs->inv_mtx = mtx_inverse(cyl->mtxs->dir_mtx);
-			fill_cy_caps_coords(cyl);
+			precompute_cyl_data(cyl);
 		}
 		precalc_rgb(cyl, amb_int);
 		cyl = cyl->next;

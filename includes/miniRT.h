@@ -6,7 +6,7 @@
 /*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 10:49:49 by tklimova          #+#    #+#             */
-/*   Updated: 2024/05/13 00:15:35 by tklimova         ###   ########.fr       */
+/*   Updated: 2024/05/13 03:17:19 by tklimova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,19 +53,26 @@ typedef struct s_data
 	int		endian;
 }			t_data;
 
+enum e_obj_active
+{
+	camera,
+	light,
+	objects,
+};
+
 typedef struct s_img_data
 {
-	int		**colors_data;
-	int		is_guide;
-	int		w_width;
-	int		w_height;
-	float	vp_width;
-	float	vp_height;
-	float	aspect_ratio;
-	int		y_coord_nb;
-	int		x_coord_nb;
-	int		z;
-	int		img_step;
+	int					**colors_data;
+	int					is_guide;
+	int					w_width;
+	int					w_height;
+	float				vp_width;
+	float				vp_height;
+	float				aspect_ratio;
+	int					y_coord_nb;
+	int					x_coord_nb;
+	int					z;
+	int					img_step;
 }				t_img_data;
 
 typedef struct s_vars
@@ -135,13 +142,15 @@ typedef struct s_g_objects
 
 typedef struct s_mini_rt_data
 {
-	int				err_code;
-	int				fd;
-	t_ambient_light	*a_l;
-	t_camera		*cam;
-	t_light			*l;
-	t_g_objects		*objs;
-	t_vars			*vars;
+	int					err_code;
+	int					fd;
+	t_ambient_light		*a_l;
+	t_camera			*cam;
+	t_light				*l;
+	t_g_objects			*objs;
+	t_vars				*vars;
+	enum e_obj_active	active_obj;
+	int					active_axis_idx;
 }			t_mini_rt_data;
 
 typedef struct s_vect
@@ -269,11 +278,9 @@ void			create_win(t_mini_rt_data *data);
 
 void			destroy_win(t_vars *vars);
 
-int				win_close(int keycode, t_vars *vars);
+int				win_close(int keycode, t_mini_rt_data *data);
 
-int				win_destroy(t_vars *vars);
-
-int				win_resize(t_vars *vars);
+int				win_destroy(t_mini_rt_data *data);
 
 // vector_ops
 
@@ -325,7 +332,8 @@ t_vect			fill_vector(float x, float y, float z);
 
 int				rgb_to_hex(int r, int g, int b);
 
-void			compute_color(int *hex_color, t_closest_obj *cl_obj, t_mini_rt_data *data);
+void			compute_color(int *hex_color, t_closest_obj *cl_obj,
+					t_mini_rt_data *data);
 
 void			create_camera_mtx(t_mini_rt_data *data);
 
@@ -347,6 +355,14 @@ void			scale_rgb_vector(int *vector, float scalar, int *result);
 
 void			init_f_vector(float vector[3]);
 
-void			apply_img_to_win(t_vars	*vars);
+void			apply_img_to_win(t_mini_rt_data	*data);
+
+int				on_key_handler(int keycode, t_mini_rt_data *data);
+
+void			precompute_cyl_data(t_g_objects	*cyl);
+
+t_vect			fill_vector(float x, float y, float z);
+
+void			precompute_normal(t_closest_obj	*cl_obj);
 
 #endif

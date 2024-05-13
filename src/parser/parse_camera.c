@@ -6,7 +6,7 @@
 /*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 13:50:20 by tklimova          #+#    #+#             */
-/*   Updated: 2024/04/23 00:11:32 by tklimova         ###   ########.fr       */
+/*   Updated: 2024/05/13 02:29:42 by tklimova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,9 @@ void	delete_camera(t_mini_rt_data *data)
 		data->cam->coords = NULL;
 		data->cam->v_3d_orient = NULL;
 		data->cam->fov = 0;
+		if (data->cam->mtx)
+			free(data->cam->mtx);
+		data->cam->mtx = NULL;
 		free(data->cam);
 		data->cam = NULL;
 	}
