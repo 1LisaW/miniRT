@@ -6,7 +6,7 @@
 /*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/20 22:48:37 by tklimova          #+#    #+#             */
-/*   Updated: 2024/05/02 18:28:54 by tklimova         ###   ########.fr       */
+/*   Updated: 2024/05/13 14:39:41 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ t_closest_obj	get_closest_obj(t_mini_rt_data *data, t_ray ray)
 	t_closest_obj	closest_obj;
 	t_g_objects		*curr_obj;
 
-	closest_obj.dist = INT_MAX;
+	closest_obj.dist = FLT_MAX;
 	closest_obj.obj = NULL;
 	curr_obj = NULL;
 	if (data)

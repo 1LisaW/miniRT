@@ -1,31 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_vec_lenght.c                                   :+:      :+:    :+:   */
+/*   get_vec_length.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 19:17:49 by jmigoya-          #+#    #+#             */
-/*   Updated: 2024/04/04 15:12:45 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2024/05/13 14:23:31 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/miniRT.h"
 
-// Get length of vector given two components in type float coordinates[x, y, z]
-// It can also be thinked as the distance between two points in 3D space
-// TODO: add error handling for null pointers and other edge cases
-float	get_vector_length(float *position1, float *position2)
+// Get length of vector
+float	get_vector_length(float *vec)
 {
-	float	x_diff;
-	float	y_diff;
-	float	z_diff;
+	float	len;
 
-	x_diff = position2[0] - position1[0];
-	y_diff = position2[1] - position1[1];
-	z_diff = position2[2] - position1[2];
-	return (sqrt(x_diff * x_diff + y_diff * y_diff + z_diff * z_diff));
+	len = sqrt(pow(vec[0], 2) + pow(vec[1], 2) + pow(vec[2], 2));
+	return (len);
 }
+
 //
 // // TESTING FUNCTION
 // void	print_vector_f(float *vector)

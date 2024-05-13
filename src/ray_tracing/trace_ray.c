@@ -3,60 +3,86 @@
 /*                                                        :::      ::::::::   */
 /*   trace_ray.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 16:53:56 by jmigoya-          #+#    #+#             */
-/*   Updated: 2024/04/05 16:54:52 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2024/05/13 14:38:59 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/miniRT.h"
 
-// Applies SD function to all objects from current point. If match,
-// returns 1
-int	apply_sdf_to_objects(t_mini_rt_data *data, float *current_point)
+void	custom_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
-	t_g_objects	*curr_obj;
-	float		signed_distance;
-	int			result;
+	char	*dst;
 
-	result = 0;
-	curr_obj = data->objs;
-	while (curr_obj)
-	{
-		signed_distance = sd_selector(current_point, data, *curr_obj);
-		printf("sd at point %f %f %f is: %f\n",current_point[0], current_point[1], current_point[2], signed_distance);
-		if (fabs(signed_distance) < 0.01) // TODO: remove magic number
-		{
-			// recover color
-			printf("Intersection detected at (%f, %f, %f)\n", current_point[0], current_point[1], current_point[2]);
-			result = 1;
-		}
-		curr_obj = curr_obj->next;
-	}
-	return (result);
+	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
+	*(unsigned int *)dst = color;
 }
 
-// Traces one ray from camera_pos towards vp_coords (viewport coordinates)
-// starting with magnitude equal to distance between them.
-// TODO: modify to return color
-void	trace_ray(t_mini_rt_data *data, float *vp_coords)
+t_ray	calc_ray(t_mini_rt_data *data, int x, int y)
 {
-	float	magnitude;
-	float	scaled_vector[3];
-	float	curr_point[3];
+	t_ray	ray;
+	float	tmp[3];
 
-	magnitude = get_vector_length(data->cam->coords, vp_coords);
-	while (magnitude <= RAY_MAX_LENGHT)
+	tmp[0] = 0;
+	tmp[1] = 0;
+	tmp[2] = 0;
+	copy_f_vector(data->cam->coords, ray.position);
+	ray.direction[0] = (2 * ((x + 0.5) / data->vars->img_data->w_width) - 1)
+		* ((float)data->vars->img_data->w_width
+			/ data->vars->img_data->w_height) * data->cam->tan_half_fov;
+	ray.direction[1] = (1 - 2 * ((y + 0.5) / data->vars->img_data->w_height))
+		* data->cam->tan_half_fov;
+	ray.direction[2] = 1;
+	vector_mtx_multy(ray.direction, data->cam->mtx, tmp);
+	copy_f_vector(tmp, ray.direction);
+	normalize_vect(ray.direction);
+	return (ray);
+}
+
+void	ray_trace_cp(t_mini_rt_data *data, t_img_data *img_data, int x, int y)
+{
+	t_ray			ray;
+	t_closest_obj	cl_obj;
+
+	ray = calc_ray(data, x, y);
+	cl_obj = get_closest_obj(data, ray);
+	if (cl_obj.dist < FLT_MAX)
 	{
-		printf("magnitude: %f\n", magnitude);
-		scale_vector(vp_coords, magnitude, scaled_vector);
-		vector_add(data->cam->coords, scaled_vector, curr_point);
-		// iterate over all objects to find matches and manage colors
-		if (apply_sdf_to_objects(data, curr_point))
-			return ;
-		magnitude += RAY_MAX_LENGHT / 100;
+		img_data->colors_data[y][x] = rgb_to_hex(cl_obj.obj->rgb[0],
+				cl_obj.obj->rgb[1], cl_obj.obj->rgb[2]);
 	}
-	printf("ray reached max, no match\n");
-	// no match found, return background color
+	else
+		img_data->colors_data[y][x] = 0x87CEEB;
+	custom_mlx_pixel_put(data->vars->img, x, y,
+		img_data->colors_data[y][x]);
+}
+
+void	draw(t_mini_rt_data *data)
+{
+	int		i;
+	int		j;
+
+	i = 0;
+	j = 0;
+	data->vars->img_data->colors_data = malloc((data->vars->img_data->w_height)
+			* sizeof(int *));
+	if (!data->vars->img_data->colors_data)
+		return ;
+	while (j < data->vars->img_data->w_height)
+	{
+		data->vars->img_data->colors_data[j] = NULL;
+		data->vars->img_data->colors_data[j]
+			= malloc(data->vars->img_data->w_width * sizeof(int));
+		if (!data->vars->img_data->colors_data[j])
+			break ;
+		while (i < data->vars->img_data->w_width)
+		{
+			ray_trace_cp(data, data->vars->img_data, i, j);
+			i++;
+		}
+		j++;
+		i = 0;
+	}
 }

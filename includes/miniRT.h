@@ -6,7 +6,7 @@
 /*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 10:49:49 by tklimova          #+#    #+#             */
-/*   Updated: 2024/05/13 14:14:18 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2024/05/13 14:37:20 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -202,6 +202,8 @@ char			*ft_read_substr(t_mini_rt_data *data, int *eol);
 
 void			ft_parse_ambient_light(t_mini_rt_data *data, int *eol);
 
+bool			check_norm_vectors(t_mini_rt_data *data);
+
 void			ft_parse_camera(t_mini_rt_data *data, int *eol);
 
 bool			is_float(char *str);
@@ -283,9 +285,9 @@ float			get_dot_product(float *vector_1, float *vector_2);
 void			vector_divide(float *origin, float *vector1, float *vector2, \
 	float *result);
 
-float			get_vector_length(float *position1, float *position2);
+float			get_vector_length(float *vec);
 
-void			normalize_vector(float *origin, float *vector);
+void			normalize_vect(float *vector);
 
 void			copy_f_vector(float *src, float *dest);
 
@@ -324,8 +326,6 @@ void			precompute_data(t_mini_rt_data *data);
 float			*mtx_inverse(float *mtx);
 
 void			create_cyl_mtx(t_g_objects *obj);
-
-void			normalize_vect(float *vector);
 
 void			get_intersection_point(t_ray *ray, float intersect_dist,
 					float intersect_coords[3]);
