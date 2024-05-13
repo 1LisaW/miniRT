@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   trace_ray.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: tklimova <tklimova@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 16:53:56 by jmigoya-          #+#    #+#             */
-/*   Updated: 2024/05/13 03:14:54 by tklimova         ###   ########.fr       */
+/*   Updated: 2024/05/13 15:42:15 by tklimova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	ray_trace(t_mini_rt_data *data, t_img_data *img_data, int x, int y)
 	cl_obj_to_l = get_closest_obj(data, cl_obj.light_ray);
 	is_closest_obj_in_light(&cl_obj, &cl_obj_to_l);
 	precompute_normal(&cl_obj);
-	if (cl_obj.dist < (float) INT_MAX)
+	if (cl_obj.dist < FLT_MAX)
 		compute_color(&(img_data->colors_data[y][x]), &cl_obj, data);
 	else
 		img_data->colors_data[y][x] = 0x87CEEB;

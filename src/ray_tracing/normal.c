@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   normal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: tklimova <tklimova@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 03:14:33 by tklimova          #+#    #+#             */
-/*   Updated: 2024/05/13 03:15:18 by tklimova         ###   ########.fr       */
+/*   Updated: 2024/05/13 15:42:17 by tklimova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	precompute_cylinder_normal(t_closest_obj *cl_obj)
 
 void	precompute_normal(t_closest_obj	*cl_obj)
 {
-	if (cl_obj->dist >= (float) INT_MAX || !cl_obj->in_light)
+	if (cl_obj->dist >= FLT_MAX || !cl_obj->in_light)
 		return ;
 	if (cl_obj->obj->id == pl)
 		copy_f_vector(cl_obj->obj->v_3d_normal, cl_obj->normal);

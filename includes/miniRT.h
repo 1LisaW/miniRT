@@ -5,12 +5,11 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: tklimova <tklimova@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/25 10:49:49 by tklimova          #+#    #+#             */
-/*   Updated: 2024/05/13 15:25:18 by tklimova         ###   ########.fr       */
+/*   Created: 2024/05/13 15:37:07 by tklimova          #+#    #+#             */
+/*   Updated: 2024/05/13 15:39:38 by tklimova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINIRT_H
 # define MINIRT_H
 
 # define ERR_WRONG_ARG 1
@@ -327,6 +326,8 @@ void			draw(t_mini_rt_data *data);
 int				rgb_to_hex(int r, int g, int b);
 
 t_closest_obj	get_closest_obj(t_mini_rt_data *data, t_ray ray);
+
+bool			check_if_in_light(t_mini_rt_data *data, t_closest_obj obj);
 
 t_vect			fill_vector(float x, float y, float z);
 
