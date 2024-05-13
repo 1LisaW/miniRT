@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   normalize_vector.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 15:20:35 by jmigoya-          #+#    #+#             */
-/*   Updated: 2024/04/04 15:15:18 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2024/05/13 03:12:13 by tklimova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,20 @@ void	normalize_vector(float *origin, float *vector)
 		vector[0] = 0.0;
 		vector[1] = 0.0;
 		vector[2] = 0.0;
+	}
+}
+
+void	normalize_vect(float *vector)
+{
+	float	len;
+	float	inverted_len;
+
+	len = sqrt(pow(vector[0], 2) + pow(vector[1], 2) + pow(vector[2], 2));
+	if (len > 0)
+	{
+		inverted_len = 1.0 / len;
+		vector[0] *= inverted_len;
+		vector[1] *= inverted_len;
+		vector[2] *= inverted_len;
 	}
 }

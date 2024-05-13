@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: tklimova <tklimova@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 10:49:49 by tklimova          #+#    #+#             */
-/*   Updated: 2024/05/06 13:54:46 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2024/05/13 15:43:05 by tklimova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,19 +53,26 @@ typedef struct s_data
 	int		endian;
 }			t_data;
 
+enum e_obj_active
+{
+	camera,
+	light,
+	objects,
+};
+
 typedef struct s_img_data
 {
-	int		**colors_data;
-	int		is_guide;
-	int		w_width;
-	int		w_height;
-	float	vp_width;
-	float	vp_height;
-	float	aspect_ratio;
-	int		y_coord_nb;
-	int		x_coord_nb;
-	int		z;
-	int		img_step;
+	int					**colors_data;
+	int					is_guide;
+	int					w_width;
+	int					w_height;
+	float				vp_width;
+	float				vp_height;
+	float				aspect_ratio;
+	int					y_coord_nb;
+	int					x_coord_nb;
+	int					z;
+	int					img_step;
 }				t_img_data;
 
 typedef struct s_vars
@@ -117,6 +124,8 @@ typedef struct s_mtxs
 	float	*inv_mtx;
 	t_ray	top_surf;
 	t_ray	bot_surf;
+	int		amb_rgb[3];
+	int		shadow_rgb[3];
 }				t_mtxs;
 
 typedef struct s_g_objects
@@ -133,13 +142,15 @@ typedef struct s_g_objects
 
 typedef struct s_mini_rt_data
 {
-	int				err_code;
-	int				fd;
-	t_ambient_light	*a_l;
-	t_camera		*cam;
-	t_light			*l;
-	t_g_objects		*objs;
-	t_vars			*vars;
+	int					err_code;
+	int					fd;
+	t_ambient_light		*a_l;
+	t_camera			*cam;
+	t_light				*l;
+	t_g_objects			*objs;
+	t_vars				*vars;
+	enum e_obj_active	active_obj;
+	int					active_axis_idx;
 }			t_mini_rt_data;
 
 typedef struct s_vect
@@ -165,6 +176,10 @@ typedef struct s_closest_obj
 	float		point[3];
 	bool		in_light;
 	t_g_objects	*obj;
+	t_ray		light_ray;
+	float		normal[3];
+	int			surf_cy;
+	float		cyl_z;
 }				t_closest_obj;
 
 typedef struct s_cross_determ
@@ -261,13 +276,11 @@ void			free_coords(t_img_data *img_data);
 
 void			create_win(t_mini_rt_data *data);
 
-void			destroy_win(t_mini_rt_data *data);
+void			destroy_win(t_vars *vars);
 
-int				win_close(int keycode, t_vars *vars);
+int				win_close(int keycode, t_mini_rt_data *data);
 
-int				win_destroy(t_vars *vars);
-
-int				win_resize(t_vars *vars);
+int				win_destroy(t_mini_rt_data *data);
 
 // vector_ops
 
@@ -288,6 +301,8 @@ float			get_vector_length(float *position1, float *position2);
 void			normalize_vector(float *origin, float *vector);
 
 void			copy_f_vector(float *src, float *dest);
+
+void			copy_i_vector(int *src, int *dest);
 
 void			scale_vector(float *vector, float scalar, float *result);
 
@@ -319,6 +334,9 @@ t_vect			fill_vector(float x, float y, float z);
 
 int				rgb_to_hex(int r, int g, int b);
 
+void			compute_color(int *hex_color, t_closest_obj *cl_obj,
+					t_mini_rt_data *data);
+
 void			create_camera_mtx(t_mini_rt_data *data);
 
 void			precompute_data(t_mini_rt_data *data);
@@ -334,5 +352,21 @@ void			get_intersection_point(t_ray *ray, float intersect_dist,
 
 void			intersect_cylinder(t_g_objects *obj, t_ray ray,
 					t_closest_obj *cl_obj);
+
+void			scale_rgb_vector(int *vector, float scalar, int *result);
+
+void			init_f_vector(float vector[3]);
+
+void			apply_img_to_win(t_mini_rt_data	*data);
+
+int				on_key_handler(int keycode, t_mini_rt_data *data);
+
+void			precompute_cyl_data(t_g_objects	*cyl);
+
+t_vect			fill_vector(float x, float y, float z);
+
+void			precompute_normal(t_closest_obj	*cl_obj);
+
+void			translation(int keycode, t_mini_rt_data *data);
 
 #endif

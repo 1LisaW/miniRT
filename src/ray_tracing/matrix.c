@@ -6,21 +6,11 @@
 /*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/20 17:06:05 by tklimova          #+#    #+#             */
-/*   Updated: 2024/05/02 18:25:00 by tklimova         ###   ########.fr       */
+/*   Updated: 2024/05/13 03:11:21 by tklimova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/miniRT.h"
-
-t_vect	fill_vector(float x, float y, float z)
-{
-	t_vect	vector;
-
-	vector.x = x;
-	vector.y = y;
-	vector.z = z;
-	return (vector);
-}
 
 t_vect	compute_forward(float *mtx, float *vector)
 {
@@ -33,7 +23,7 @@ t_vect	compute_forward(float *mtx, float *vector)
 	return (forward_v);
 }
 
-t_vect	compute_right_left(float *mtx, t_vect forward)
+t_vect	compute_right_left(float *mtx, t_vect forward, bool is_cy)
 {
 	t_vect	up;
 	t_vect	left;
@@ -47,6 +37,13 @@ t_vect	compute_right_left(float *mtx, t_vect forward)
 	}
 	else
 		up = fill_vector(0, 1, 0);
+	if (is_cy && fabs(forward.y) >= 0.707)
+	{
+		up.x = 1;
+		if (forward.y < 0)
+			up.x = -1;
+		up.y = 0;
+	}
 	left = cross_product(up, forward);
 	mtx[0] = left.x;
 	mtx[1] = left.y;
@@ -83,7 +80,7 @@ void	create_camera_mtx(t_mini_rt_data *data)
 	mtx[11] = 0;
 	mtx[15] = 1;
 	forward = compute_forward(mtx, data->cam->v_3d_orient);
-	left = compute_right_left(mtx, forward);
+	left = compute_right_left(mtx, forward, 0);
 	compute_up_down(mtx, forward, left);
 	mtx[12] = data->cam->coords[0];
 	mtx[13] = data->cam->coords[1];
@@ -108,12 +105,9 @@ void	create_cyl_mtx(t_g_objects *obj)
 	mtx[11] = 0;
 	mtx[15] = 1;
 	forward = compute_forward(mtx, obj->v_3d_normal);
-	left = compute_right_left(mtx, forward);
+	left = compute_right_left(mtx, forward, 1);
 	compute_up_down(mtx, forward, left);
 	mtx[12] = obj->coords[0];
 	mtx[13] = obj->coords[1];
 	mtx[14] = obj->coords[2];
-	// printf("\nMTX left: %f, %f, %f, %f\n", mtx[0], mtx[1], mtx[2], mtx[3]);
-	// printf("\nMTX up: %f, %f, %f, %f\n", mtx[4], mtx[5], mtx[6], mtx[7]);
-	// printf("\nMTX forward: %f, %f, %f, %f\n", mtx[8], mtx[9], mtx[10], mtx[11]);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   inverse_matrix.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: tklimova <tklimova@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 02:16:31 by tklimova          #+#    #+#             */
-/*   Updated: 2024/05/02 17:54:35 by tklimova         ###   ########.fr       */
+/*   Updated: 2024/05/10 18:33:31 by tklimova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void	fill_mtx_inverse_rest(float *i_mx, float *mx, t_cross_determ *cd,
 	i_mx[14] = -1 * (mx[0] * cd->d5_14 - mx[1] * cd->d4_14
 			+ mx[2] * cd->d4_13) / d;
 	i_mx[3] = -1 * (mx[1] * cd->d6_11 - mx[2] * cd->d5_11
-			+ mx[3] *cd->d5_10) / d;
+			+ mx[3] * cd->d5_10) / d;
 	i_mx[7] = (mx[0] * cd->d6_11 - mx[2] * cd->d4_11 + mx[3] * cd->d4_10) / d;
 	i_mx[11] = -1 * (mx[0] * cd->d5_11 - mx[1] * cd->d4_11
 			+ mx[3] * cd->d4_9) / d;
@@ -108,7 +108,6 @@ float	*mtx_inverse(float *mtx)
 	if (!cd)
 		return (NULL);
 	fill_2d_determinants(mtx, cd);
-
 	determinant = get_determinant(inv_mtx, mtx, cd);
 	if (determinant == 0)
 	{

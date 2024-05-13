@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersection.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: tklimova <tklimova@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/20 22:48:37 by tklimova          #+#    #+#             */
-/*   Updated: 2024/05/06 14:19:09 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2024/05/13 15:39:13 by tklimova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ void	intersect_sphere(t_g_objects *obj, t_ray ray, t_closest_obj *cl_obj)
 {
 	t_sphere_eq	sph_eq;
 
-	vector_subtract(obj->coords, ray.position, sph_eq.oc);
+	vector_subtract(ray.position, obj->coords, sph_eq.oc);
 	sph_eq.a = get_dot_product(ray.direction, ray.direction);
-	sph_eq.b = get_dot_product(ray.direction, sph_eq.oc) * -2;
+	sph_eq.b = get_dot_product(ray.direction, sph_eq.oc) * 2;
 	sph_eq.c = get_dot_product(sph_eq.oc, sph_eq.oc) - 0.25
 		* (obj->diam * obj->diam);
 	sph_eq.discr = sph_eq.b * sph_eq.b - 4 * sph_eq.a * sph_eq.c;
@@ -77,6 +77,11 @@ t_closest_obj	get_closest_obj(t_mini_rt_data *data, t_ray ray)
 
 	closest_obj.dist = FLT_MAX;
 	closest_obj.obj = NULL;
+	closest_obj.in_light = 0;
+	init_f_vector(closest_obj.point);
+	init_f_vector(closest_obj.normal);
+	init_f_vector(closest_obj.light_ray.position);
+	init_f_vector(closest_obj.light_ray.direction);
 	curr_obj = NULL;
 	if (data)
 		curr_obj = data->objs;
