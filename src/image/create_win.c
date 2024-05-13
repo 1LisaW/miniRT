@@ -6,7 +6,7 @@
 /*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 18:06:32 by tklimova          #+#    #+#             */
-/*   Updated: 2024/05/13 03:09:36 by tklimova         ###   ########.fr       */
+/*   Updated: 2024/05/13 12:02:04 by tklimova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,12 @@ void	create_win(t_mini_rt_data *data)
 	data->vars = vars;
 }
 
-int	draw_loop(t_mini_rt_data *data)
-{
-	draw(data);
-	printf("\nDRAW_LOOP %i\n", data->vars->img_data->w_width);
-	return (0);
-}
+// int	draw_loop(t_mini_rt_data *data)
+// {
+// 	draw(data);
+// 	printf("\nDRAW_LOOP %i\n", data->vars->img_data->w_width);
+// 	return (0);
+// }
 
 void	destroy_win(t_vars	*vars)
 {
