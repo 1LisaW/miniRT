@@ -6,7 +6,7 @@
 /*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 18:10:22 by tklimova          #+#    #+#             */
-/*   Updated: 2024/05/13 14:29:51 by tklimova         ###   ########.fr       */
+/*   Updated: 2024/05/13 14:39:48 by tklimova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ void	rotate_normal(float *normal, int sign, int active_axis_idx)
 	float	cos_10;
 	float	new_norm[3];
 
-	sin_10 = sin( sign * 10 * M_PI / 180);
-	cos_10 = sin( sign * 10 * M_PI / 180);
+	sin_10 = sin( sign * 5 * M_PI / 180);
+	cos_10 = cos( sign * 5 * M_PI / 180);
 	copy_f_vector(normal, new_norm);
 	if (active_axis_idx == 0)
 	{
