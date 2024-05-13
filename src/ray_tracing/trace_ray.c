@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   trace_ray_copy.c                                   :+:      :+:    :+:   */
+/*   trace_ray.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 16:53:56 by jmigoya-          #+#    #+#             */
-/*   Updated: 2024/05/06 12:34:34 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2024/05/13 15:28:47 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,21 +18,6 @@ void	custom_mlx_pixel_put(t_data *data, int x, int y, int color)
 
 	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
 	*(unsigned int *)dst = color;
-}
-
-void	normalize_vect(float *vector)
-{
-	float	len;
-	float	inverted_len;
-
-	len = sqrt(pow(vector[0], 2) + pow(vector[1], 2) + pow(vector[2], 2));
-	if (len > 0)
-	{
-		inverted_len = 1.0 / len;
-		vector[0] *= inverted_len;
-		vector[1] *= inverted_len;
-		vector[2] *= inverted_len;
-	}
 }
 
 t_ray	calc_ray(t_mini_rt_data *data, int x, int y)

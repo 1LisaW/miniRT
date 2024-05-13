@@ -6,7 +6,7 @@
 /*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 19:52:47 by tklimova          #+#    #+#             */
-/*   Updated: 2024/05/13 14:53:29 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2024/05/13 15:26:45 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,14 +50,14 @@ bool	check_norm_vectors(t_mini_rt_data *data)
 	float		length;
 
 	tmp = data->objs;
-	length = get_vector_length(data->cam->v_3d_orient);
+	length = get_vector_length(NULL, data->cam->v_3d_orient);
 	if (1 - length > EPSILON * 10) // TODO: check valid value
 		return (false);
 	while (tmp)
 	{
 		if (tmp->id == pl || tmp->id == cy)
 		{
-			length = get_vector_length(tmp->v_3d_normal);
+			length = get_vector_length(NULL, tmp->v_3d_normal);
 			if (1 - length > EPSILON * 10) // TODO: check valid value
 				return (false);
 		}

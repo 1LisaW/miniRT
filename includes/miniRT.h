@@ -6,7 +6,7 @@
 /*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 10:49:49 by tklimova          #+#    #+#             */
-/*   Updated: 2024/05/13 15:14:37 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2024/05/13 15:26:13 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -285,7 +285,7 @@ float			get_dot_product(float *vector_1, float *vector_2);
 void			vector_divide(float *origin, float *vector1, float *vector2, \
 	float *result);
 
-float			get_vector_length(float *vec);
+float			get_vector_length(float *position1, float *position2);
 
 void			normalize_vect(float *vector);
 

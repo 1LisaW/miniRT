@@ -6,7 +6,7 @@
 /*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/20 22:48:37 by tklimova          #+#    #+#             */
-/*   Updated: 2024/05/13 15:17:38 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2024/05/13 15:27:58 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ bool	check_if_in_light(t_mini_rt_data *data, t_closest_obj obj)
 
 	copy_f_vector(data->l->coords, ray.position);
 	copy_f_vector(obj.point, ray.direction);
-	normalize_vector(ray.position, ray.direction);
+	normalize_vect(ray.direction);
 	closest_obj = get_closest_obj(data, ray);
 	diff = get_vector_length(ray.position, closest_obj.point)
 		- get_vector_length(ray.position, obj.point);
