@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   trace_ray.c                                        :+:      :+:    :+:   */
+/*   trace_ray_copy.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 16:53:56 by jmigoya-          #+#    #+#             */
-/*   Updated: 2024/05/13 14:38:59 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2024/05/06 12:34:34 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,21 @@ void	custom_mlx_pixel_put(t_data *data, int x, int y, int color)
 
 	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
 	*(unsigned int *)dst = color;
+}
+
+void	normalize_vect(float *vector)
+{
+	float	len;
+	float	inverted_len;
+
+	len = sqrt(pow(vector[0], 2) + pow(vector[1], 2) + pow(vector[2], 2));
+	if (len > 0)
+	{
+		inverted_len = 1.0 / len;
+		vector[0] *= inverted_len;
+		vector[1] *= inverted_len;
+		vector[2] *= inverted_len;
+	}
 }
 
 t_ray	calc_ray(t_mini_rt_data *data, int x, int y)
@@ -50,8 +65,16 @@ void	ray_trace_cp(t_mini_rt_data *data, t_img_data *img_data, int x, int y)
 	cl_obj = get_closest_obj(data, ray);
 	if (cl_obj.dist < FLT_MAX)
 	{
-		img_data->colors_data[y][x] = rgb_to_hex(cl_obj.obj->rgb[0],
-				cl_obj.obj->rgb[1], cl_obj.obj->rgb[2]);
+		cl_obj.in_light = check_if_in_light(data, cl_obj);
+		if (cl_obj.in_light == false)
+		{
+			img_data->colors_data[y][x] = 0x000000;
+		}
+		else
+		{
+			img_data->colors_data[y][x] = rgb_to_hex(cl_obj.obj->rgb[0],
+					cl_obj.obj->rgb[1], cl_obj.obj->rgb[2]);
+		}
 	}
 	else
 		img_data->colors_data[y][x] = 0x87CEEB;
