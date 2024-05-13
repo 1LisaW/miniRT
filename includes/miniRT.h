@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: tklimova <tklimova@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 10:49:49 by tklimova          #+#    #+#             */
-/*   Updated: 2024/05/13 03:17:19 by tklimova         ###   ########.fr       */
+/*   Updated: 2024/05/13 15:25:18 by tklimova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -364,5 +364,7 @@ void			precompute_cyl_data(t_g_objects	*cyl);
 t_vect			fill_vector(float x, float y, float z);
 
 void			precompute_normal(t_closest_obj	*cl_obj);
+
+void			translation(int keycode, t_mini_rt_data *data);
 
 #endif

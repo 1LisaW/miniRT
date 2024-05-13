@@ -10,7 +10,7 @@ PARSER_FILES =	parse_scene validation_scene parse_helpers validate_helpers \
                 get_rgb get_coords shape parse_shape\
                 parse_ambient_light parse_camera parse_light parse_sphere parse_plane parse_cylinder \
                 log_parsed_data
-IMG_FILES = 	create_win win_events img_data
+IMG_FILES = 	create_win win_events img_data translation_events
 VEC_OPS_FILES =	basic_vector_ops get_vec_lenght normalize_vector copy_vector scale_vector \
 				cross_product inverse_matrix
 SDF_FILES =		sd_selector
