@@ -6,7 +6,7 @@
 /*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 19:52:47 by tklimova          #+#    #+#             */
-/*   Updated: 2024/03/26 22:18:57 by tklimova         ###   ########.fr       */
+/*   Updated: 2024/05/14 11:40:12 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,26 @@ bool	is_float_in_range(float nb, float min, float max)
 	if (nb >= min && nb <= max)
 		return (true);
 	return (false);
+}
+
+bool	check_norm_vectors(t_mini_rt_data *data)
+{
+	t_g_objects	*tmp;
+	float		length;
+
+	tmp = data->objs;
+	length = get_vector_length(NULL, data->cam->v_3d_orient);
+	if (1 - length > EPSILON * 10) // TODO: check valid value
+		return (false);
+	while (tmp)
+	{
+		if (tmp->id == pl || tmp->id == cy)
+		{
+			length = get_vector_length(NULL, tmp->v_3d_normal);
+			if (1 - length > EPSILON * 10) // TODO: check valid value
+				return (false);
+		}
+		tmp = tmp->next;
+	}
+	return (true);
 }
