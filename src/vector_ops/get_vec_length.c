@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 19:17:49 by jmigoya-          #+#    #+#             */
-/*   Updated: 2024/04/04 15:12:45 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2024/05/14 11:38:04 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,13 @@ float	get_vector_length(float *position1, float *position2)
 	float	y_diff;
 	float	z_diff;
 
+	if (!position1)
+	{
+		return (sqrt(
+				pow(position2[0], 2)
+				+ pow(position2[1], 2)
+				+ pow(position2[2], 2)));
+	}
 	x_diff = position2[0] - position1[0];
 	y_diff = position2[1] - position1[1];
 	z_diff = position2[2] - position1[2];

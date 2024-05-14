@@ -6,7 +6,7 @@
 /*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 10:38:52 by tklimova          #+#    #+#             */
-/*   Updated: 2024/05/13 03:09:51 by tklimova         ###   ########.fr       */
+/*   Updated: 2024/05/14 11:42:18 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,11 @@ int	main(int argc, char **argv)
 	init_mini_rt_data(data);
 	parse_scene(argc, argv, data);
 	err_code = data->err_code;
+	if (err_code != 0)
+	{
+		delete_mini_rt_data(data);
+		return (err_code);
+	}
 	precompute_data(data);
 	create_win(data);
 	draw(data);

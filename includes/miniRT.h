@@ -6,7 +6,7 @@
 /*   By: tklimova <tklimova@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 10:49:49 by tklimova          #+#    #+#             */
-/*   Updated: 2024/05/13 15:43:05 by tklimova         ###   ########.fr       */
+/*   Updated: 2024/05/14 11:40:28 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -218,6 +218,8 @@ char			*ft_read_substr(t_mini_rt_data *data, int *eol);
 void			ft_parse_ambient_light(t_mini_rt_data *data, int *eol);
 
 void			ft_parse_camera(t_mini_rt_data *data, int *eol);
+
+bool			check_norm_vectors(t_mini_rt_data *data);
 
 bool			is_float(char *str);
 
