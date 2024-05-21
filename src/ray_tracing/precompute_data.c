@@ -6,7 +6,7 @@
 /*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 23:57:31 by tklimova          #+#    #+#             */
-/*   Updated: 2024/05/13 02:54:40 by tklimova         ###   ########.fr       */
+/*   Updated: 2024/05/21 12:48:02 by tklimova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ void	precompute_data(t_mini_rt_data *data)
 	while (cyl)
 	{
 		cyl->mtxs = malloc(sizeof(t_mtxs));
+		cyl->mtxs->inv_mtx = NULL;
+		cyl->mtxs->dir_mtx = NULL;
 		if (cyl->id == cy)
 		{
 			precompute_cyl_data(cyl);
