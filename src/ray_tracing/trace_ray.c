@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   trace_ray.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tklimova <tklimova@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 16:53:56 by jmigoya-          #+#    #+#             */
-/*   Updated: 2024/05/13 15:42:15 by tklimova         ###   ########.fr       */
+/*   Updated: 2024/05/22 00:56:22 by tklimova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,12 +63,17 @@ void	ray_trace(t_mini_rt_data *data, t_img_data *img_data, int x, int y)
 
 	ray = calc_ray(data, x, y);
 	cl_obj = get_closest_obj(data, ray);
-	copy_f_vector(data->l->coords, cl_obj.light_ray.position);
-	vector_subtract(cl_obj.point, data->l->coords, cl_obj.light_ray.direction);
-	normalize_vect(cl_obj.light_ray.direction);
-	cl_obj_to_l = get_closest_obj(data, cl_obj.light_ray);
-	is_closest_obj_in_light(&cl_obj, &cl_obj_to_l);
-	precompute_normal(&cl_obj);
+	if (data->l)
+	{
+		copy_f_vector(data->l->coords, cl_obj.light_ray.position);
+		vector_subtract(cl_obj.point, data->l->coords, cl_obj.light_ray.direction);
+		normalize_vect(cl_obj.light_ray.direction);
+		cl_obj_to_l = get_closest_obj(data, cl_obj.light_ray);
+		is_closest_obj_in_light(&cl_obj, &cl_obj_to_l);
+		precompute_normal(&cl_obj);
+	}
+	else
+		cl_obj.in_light = false;
 	if (cl_obj.dist < FLT_MAX)
 		compute_color(&(img_data->colors_data[y][x]), &cl_obj, data);
 	else
@@ -97,7 +102,11 @@ void	draw(t_mini_rt_data *data)
 			break ;
 		while (i < data->vars->img_data->w_width)
 		{
-			ray_trace(data, data->vars->img_data, i, j);
+			if (!data->cam)
+				custom_mlx_pixel_put(data->vars->img, i, j,
+					0x000000);
+			else
+				ray_trace(data, data->vars->img_data, i, j);
 			i++;
 		}
 		j++;

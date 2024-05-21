@@ -6,7 +6,7 @@
 /*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 23:57:31 by tklimova          #+#    #+#             */
-/*   Updated: 2024/05/21 12:48:02 by tklimova         ###   ########.fr       */
+/*   Updated: 2024/05/22 00:59:31 by tklimova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,43 @@ void	precompute_cyl_data(t_g_objects	*cyl)
 	fill_cy_caps_coords(cyl);
 }
 
+void	check_light_in(t_mini_rt_data *data)
+{
+	float		vec[3];
+	t_g_objects	*obj;
+
+	obj = data->objs;
+	if (data->l)
+		data->light_on = true;
+	while(obj)
+	{
+		if (data->light_on == false)
+			break ;
+		if (obj->id == sp && get_vector_length(obj->coords, data->l->coords) < obj->diam / 2)
+			data->light_on = false;
+		if (obj->id == cy)
+		{
+			vector_mtx_multy(data->l->coords, obj->mtxs->inv_mtx,vec);
+			if(pow(vec[0] - obj->coords[0], 2) + pow(vec[1] - obj->coords[1], 2)
+				< pow(obj->diam / 2, 2) && vec[2] > obj->height * -0.5
+				&& pow(obj->diam / 2, 2) && vec[2] < obj->height * 0.5)
+				data->light_on = false;
+		}
+		obj = obj->next;
+	}
+}
+
 void	precompute_data(t_mini_rt_data *data)
 {
 	t_g_objects	*cyl;
 	int			amb_int[3];
 
-	scale_rgb_vector(data->a_l->rgb, (data->a_l->ratio / 255), amb_int);
+	if (!data->cam)
+		return ;
+	if (data->a_l)
+		scale_rgb_vector(data->a_l->rgb, (data->a_l->ratio / 255), amb_int);
+	else
+		init_i_vector(amb_int);
 	cyl = data->objs;
 	create_camera_mtx(data);
 	data->cam->tan_half_fov = tan((data->cam->fov / 2) * (M_PI / 180));
@@ -73,4 +104,5 @@ void	precompute_data(t_mini_rt_data *data)
 		precalc_rgb(cyl, amb_int);
 		cyl = cyl->next;
 	}
+	check_light_in(data);
 }

@@ -6,7 +6,7 @@
 /*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 10:41:19 by tklimova          #+#    #+#             */
-/*   Updated: 2024/05/21 02:16:55 by tklimova         ###   ########.fr       */
+/*   Updated: 2024/05/21 18:06:19 by tklimova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,11 @@ void	init_mini_rt_data(t_mini_rt_data *data)
 	data->l = NULL;
 	data->objs = NULL;
 	data->vars = NULL;
+	data->light_on = false;
+	if (data->l)
+		data->light_on = true;
+	data->active_obj = camera;
+	data->active_axis_idx = 0;
 }
 
 void	delete_mini_rt_data(t_mini_rt_data *data)

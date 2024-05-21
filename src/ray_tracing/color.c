@@ -6,7 +6,7 @@
 /*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 23:17:24 by tklimova          #+#    #+#             */
-/*   Updated: 2024/05/13 03:14:00 by tklimova         ###   ########.fr       */
+/*   Updated: 2024/05/21 15:54:09 by tklimova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,11 @@ void	compute_color(int *hex_color, t_closest_obj *cl_obj,
 	ratio = 0;
 	scale_vector(cl_obj->light_ray.direction, -1, rev_l_vect);
 	copy_i_vector(cl_obj->obj->rgb, rgb);
-	if (!cl_obj->in_light)
+	if (data->light_on == false)
+		*hex_color = rgb_to_hex(fmin(255, cl_obj->obj->mtxs->amb_rgb[0] + cl_obj->obj->rgb[0]),
+			fmin(255, cl_obj->obj->mtxs->amb_rgb[1] + cl_obj->obj->rgb[1]),
+			fmin( 255, cl_obj->obj->mtxs->amb_rgb[2] + cl_obj->obj->rgb[2]));
+	else if (!cl_obj->in_light)
 		*hex_color = rgb_to_hex(0, 0, 0);
 	else
 	{

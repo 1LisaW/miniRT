@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   translation_events.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tklimova <tklimova@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 15:24:15 by tklimova          #+#    #+#             */
-/*   Updated: 2024/05/13 15:26:10 by tklimova         ###   ########.fr       */
+/*   Updated: 2024/05/21 18:12:46 by tklimova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ void	update_render_data_translation(t_mini_rt_data *data, int sign)
 	}
 	else if (data->active_obj == light)
 	{
+		check_light_in(data);
 		data->l->coords[data->active_axis_idx] += sign * 0.2;
 	}
 	else if (data->active_obj == objects && obj)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tklimova <tklimova@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 10:49:49 by tklimova          #+#    #+#             */
-/*   Updated: 2024/05/14 11:40:28 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2024/05/21 19:00:24 by tklimova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,6 +149,7 @@ typedef struct s_mini_rt_data
 	t_light				*l;
 	t_g_objects			*objs;
 	t_vars				*vars;
+	bool				light_on;
 	enum e_obj_active	active_obj;
 	int					active_axis_idx;
 }			t_mini_rt_data;
@@ -359,6 +360,8 @@ void			scale_rgb_vector(int *vector, float scalar, int *result);
 
 void			init_f_vector(float vector[3]);
 
+void			init_i_vector(int vector[3]);
+
 void			apply_img_to_win(t_mini_rt_data	*data);
 
 int				on_key_handler(int keycode, t_mini_rt_data *data);
@@ -370,5 +373,7 @@ t_vect			fill_vector(float x, float y, float z);
 void			precompute_normal(t_closest_obj	*cl_obj);
 
 void			translation(int keycode, t_mini_rt_data *data);
+
+void			check_light_in(t_mini_rt_data *data);
 
 #endif
