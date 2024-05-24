@@ -6,7 +6,7 @@
 /*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 10:38:28 by tklimova          #+#    #+#             */
-/*   Updated: 2024/05/21 18:56:45 by tklimova         ###   ########.fr       */
+/*   Updated: 2024/05/23 23:17:14 by tklimova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,6 @@ void	ft_read_file(t_mini_rt_data *data)
 	while (!data->err_code && read(data->fd, NULL, 0) > -1)
 		ft_read_str(data);
 	close(data->fd);
-	// if (!data->a_l || !data->cam || !data->l)
-	// 	handle_error(ERR_PARSE_DATA, "A C and L should be in file", data);
 	if (!data->err_code && check_norm_vectors(data) == false)
 		handle_error(ERR_PARSE_DATA,
 			"All normalized orientation vectors must have length of 1.", data);

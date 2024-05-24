@@ -6,7 +6,7 @@
 /*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 10:49:49 by tklimova          #+#    #+#             */
-/*   Updated: 2024/05/21 19:00:24 by tklimova         ###   ########.fr       */
+/*   Updated: 2024/05/24 00:08:26 by tklimova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ enum e_obj_active
 
 typedef struct s_img_data
 {
-	int					**colors_data;
 	int					is_guide;
 	int					w_width;
 	int					w_height;
@@ -275,8 +274,6 @@ void			ft_print_data(t_mini_rt_data *data);
 
 void			init_img_data(t_img_data	**img_data);
 
-void			free_coords(t_img_data *img_data);
-
 void			create_win(t_mini_rt_data *data);
 
 void			destroy_win(t_vars *vars);
@@ -357,6 +354,8 @@ void			intersect_cylinder(t_g_objects *obj, t_ray ray,
 					t_closest_obj *cl_obj);
 
 void			scale_rgb_vector(int *vector, float scalar, int *result);
+
+void			get_rgb_proportion(int *vector, float scalar, float *result);
 
 void			init_f_vector(float vector[3]);
 

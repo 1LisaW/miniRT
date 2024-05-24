@@ -6,29 +6,11 @@
 /*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 12:31:57 by tklimova          #+#    #+#             */
-/*   Updated: 2024/03/26 22:20:10 by tklimova         ###   ########.fr       */
+/*   Updated: 2024/05/24 00:15:11 by tklimova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/miniRT.h"
-
-// bool	is_float(char *str)
-// {
-// 	int	is_dot;
-
-// 	is_dot = 0;
-// 	while (str && *str && is_dot < 2)
-// 	{
-// 		if (*str == '.')
-// 			is_dot++;
-// 		if (!ft_isdigit(*str) && *str != '.')
-// 			break ;
-// 		str++;
-// 	}
-// 	if (is_dot > 1 || (str && *str))
-// 		return (false);
-// 	return (true);
-// }
 
 char	**get_coords_str_arr(char *coords, t_mini_rt_data *data, int *len)
 {

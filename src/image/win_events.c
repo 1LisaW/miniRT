@@ -6,7 +6,7 @@
 /*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 18:10:22 by tklimova          #+#    #+#             */
-/*   Updated: 2024/05/22 01:01:22 by tklimova         ###   ########.fr       */
+/*   Updated: 2024/05/23 23:27:51 by tklimova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ int	win_close(int keycode, t_mini_rt_data *data)
 		if (vars->img)
 			free(vars->img);
 		vars->img = NULL;
-		free_coords(vars->img_data);
 		delete_mini_rt_data(data);
 		data = NULL;
 		exit(0);
@@ -69,7 +68,6 @@ int	win_destroy(t_mini_rt_data *data)
 	if (vars->img)
 		free(vars->img);
 	vars->img = NULL;
-	free_coords(vars->img_data);
 	delete_mini_rt_data(data);
 	data = NULL;
 	exit(0);

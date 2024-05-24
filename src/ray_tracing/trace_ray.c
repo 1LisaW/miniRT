@@ -6,7 +6,7 @@
 /*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 16:53:56 by jmigoya-          #+#    #+#             */
-/*   Updated: 2024/05/22 00:56:22 by tklimova         ###   ########.fr       */
+/*   Updated: 2024/05/24 14:13:14 by tklimova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ t_ray	calc_ray(t_mini_rt_data *data, int x, int y)
 		* data->cam->tan_half_fov;
 	ray.direction[2] = 1;
 	vector_mtx_multy(ray.direction, data->cam->mtx, tmp);
+	normalize_vect(tmp);
 	copy_f_vector(tmp, ray.direction);
-	normalize_vect(ray.direction);
 	return (ray);
 }
 
@@ -55,18 +55,20 @@ void	is_closest_obj_in_light(t_closest_obj *cl_obj,
 		cl_obj->in_light = 1;
 }
 
-void	ray_trace(t_mini_rt_data *data, t_img_data *img_data, int x, int y)
+void	ray_trace(t_mini_rt_data *data, int x, int y)
 {
 	t_ray			ray;
 	t_closest_obj	cl_obj;
 	t_closest_obj	cl_obj_to_l;
+	int				color;
 
 	ray = calc_ray(data, x, y);
 	cl_obj = get_closest_obj(data, ray);
 	if (data->l)
 	{
 		copy_f_vector(data->l->coords, cl_obj.light_ray.position);
-		vector_subtract(cl_obj.point, data->l->coords, cl_obj.light_ray.direction);
+		vector_subtract(cl_obj.point, data->l->coords,
+			cl_obj.light_ray.direction);
 		normalize_vect(cl_obj.light_ray.direction);
 		cl_obj_to_l = get_closest_obj(data, cl_obj.light_ray);
 		is_closest_obj_in_light(&cl_obj, &cl_obj_to_l);
@@ -75,11 +77,11 @@ void	ray_trace(t_mini_rt_data *data, t_img_data *img_data, int x, int y)
 	else
 		cl_obj.in_light = false;
 	if (cl_obj.dist < FLT_MAX)
-		compute_color(&(img_data->colors_data[y][x]), &cl_obj, data);
+		compute_color(&(color), &cl_obj, data);
 	else
-		img_data->colors_data[y][x] = 0x87CEEB;
+		color = 0x87CEEB;
 	custom_mlx_pixel_put(data->vars->img, x, y,
-		img_data->colors_data[y][x]);
+		color);
 }
 
 void	draw(t_mini_rt_data *data)
@@ -89,24 +91,15 @@ void	draw(t_mini_rt_data *data)
 
 	i = 0;
 	j = 0;
-	data->vars->img_data->colors_data = malloc((data->vars->img_data->w_height)
-			* sizeof(int *));
-	if (!data->vars->img_data->colors_data)
-		return ;
 	while (j < data->vars->img_data->w_height)
 	{
-		data->vars->img_data->colors_data[j] = NULL;
-		data->vars->img_data->colors_data[j]
-			= malloc(data->vars->img_data->w_width * sizeof(int));
-		if (!data->vars->img_data->colors_data[j])
-			break ;
 		while (i < data->vars->img_data->w_width)
 		{
 			if (!data->cam)
 				custom_mlx_pixel_put(data->vars->img, i, j,
 					0x000000);
 			else
-				ray_trace(data, data->vars->img_data, i, j);
+				ray_trace(data, i, j);
 			i++;
 		}
 		j++;
