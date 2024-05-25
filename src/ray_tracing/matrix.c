@@ -6,7 +6,7 @@
 /*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/20 17:06:05 by tklimova          #+#    #+#             */
-/*   Updated: 2024/05/24 22:16:35 by tklimova         ###   ########.fr       */
+/*   Updated: 2024/05/26 00:56:41 by tklimova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,9 +86,6 @@ void	create_camera_mtx(t_mini_rt_data *data)
 	mtx[12] = data->cam->coords[0];
 	mtx[13] = data->cam->coords[1];
 	mtx[14] = data->cam->coords[2];
-	printf("\nMTX left: %f, %f, %f, %f\n", mtx[0], mtx[1], mtx[2], mtx[3]);
-	printf("\nMTX up: %f, %f, %f, %f\n", mtx[4], mtx[5], mtx[6], mtx[7]);
-	printf("\nMTX forward: %f, %f, %f, %f\n", mtx[8], mtx[9], mtx[10], mtx[11]);
 }
 
 void	create_cyl_mtx(t_g_objects *obj)

@@ -6,7 +6,7 @@
 /*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 18:10:22 by tklimova          #+#    #+#             */
-/*   Updated: 2024/05/23 23:27:51 by tklimova         ###   ########.fr       */
+/*   Updated: 2024/05/26 00:56:36 by tklimova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int	on_key_handler(int keycode, t_mini_rt_data *data)
 {
-	printf("\nKEY: %i\n", keycode);
 	if (keycode == 65307)
 		return (win_close(keycode, data));
 	else if (!data->cam)

@@ -6,7 +6,7 @@
 /*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 10:38:28 by tklimova          #+#    #+#             */
-/*   Updated: 2024/05/23 23:17:14 by tklimova         ###   ########.fr       */
+/*   Updated: 2024/05/26 00:59:02 by tklimova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,9 @@ void	ft_read_str(t_mini_rt_data *data)
 	token = NULL;
 }
 
+//For printing parsed data could be used code:
+//	if (!data->err_code)
+//	ft_print_data(data);
 void	ft_read_file(t_mini_rt_data *data)
 {
 	while (!data->err_code && read(data->fd, NULL, 0) > -1)
@@ -54,6 +57,4 @@ void	ft_read_file(t_mini_rt_data *data)
 	if (!data->err_code && check_norm_vectors(data) == false)
 		handle_error(ERR_PARSE_DATA,
 			"All normalized orientation vectors must have length of 1.", data);
-	if (!data->err_code)
-		ft_print_data(data);
 }
