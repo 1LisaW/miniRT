@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cylinder_intersection.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tklimova <tklimova@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 23:45:49 by tklimova          #+#    #+#             */
-/*   Updated: 2024/05/10 18:50:52 by tklimova         ###   ########.fr       */
+/*   Updated: 2024/05/26 00:53:56 by tklimova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ bool	intersect_cy_surf(t_g_objects *obj, t_ray *cy_ray,
 			get_intersection_point(cy_ray, root, intersect_point);
 			vector_subtract(intersect_point, cy_surf->position, surf_ray);
 			denominator = get_dot_product(surf_ray, surf_ray);
-			if (get_dot_product(surf_ray, surf_ray) < (pow(obj->diam, 2) / 4))
+			if (get_dot_product(surf_ray, surf_ray)
+				<= (float)((pow(obj->diam, 2) * 0.25)))
 				return (fill_cl_obj(cl_obj, obj, root, intersect_point));
 		}
 	}
@@ -57,7 +58,7 @@ bool	intersect_cy_side(t_g_objects *obj, t_ray *cy_ray,
 	sph_eq.b = 2 * (cy_ray->position[0] * cy_ray->direction[0]
 			+ cy_ray->position[1] * cy_ray->direction[1]);
 	sph_eq.c = pow(cy_ray->position[0], 2) + pow(cy_ray->position[1], 2)
-		- (pow(obj->diam, 2) / 4);
+		- (pow(obj->diam, 2) * 0.25);
 	sph_eq.discr = sph_eq.b * sph_eq.b - 4 * sph_eq.a * sph_eq.c;
 	if (sph_eq.discr < 0)
 		return (false);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   win_events.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tklimova <tklimova@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 18:10:22 by tklimova          #+#    #+#             */
-/*   Updated: 2024/05/13 15:25:53 by tklimova         ###   ########.fr       */
+/*   Updated: 2024/05/26 00:56:36 by tklimova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,10 @@
 
 int	on_key_handler(int keycode, t_mini_rt_data *data)
 {
-	printf("\nKEY: %i\n", keycode);
 	if (keycode == 65307)
 		return (win_close(keycode, data));
+	else if (!data->cam)
+		return (0);
 	else if (keycode == 99)
 		data->active_obj = camera;
 	else if (keycode == 108)
@@ -46,7 +47,6 @@ int	win_close(int keycode, t_mini_rt_data *data)
 		if (vars->img)
 			free(vars->img);
 		vars->img = NULL;
-		free_coords(vars->img_data);
 		delete_mini_rt_data(data);
 		data = NULL;
 		exit(0);
@@ -67,7 +67,6 @@ int	win_destroy(t_mini_rt_data *data)
 	if (vars->img)
 		free(vars->img);
 	vars->img = NULL;
-	free_coords(vars->img_data);
 	delete_mini_rt_data(data);
 	data = NULL;
 	exit(0);
