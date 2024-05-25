@@ -6,7 +6,7 @@
 /*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 18:06:32 by tklimova          #+#    #+#             */
-/*   Updated: 2024/05/13 12:02:04 by tklimova         ###   ########.fr       */
+/*   Updated: 2024/05/24 23:23:13 by tklimova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	apply_img_to_win(t_mini_rt_data	*data)
 
 	vars = data->vars;
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->img->img, 0, 0);
-	mlx_hook(vars->win, 17, 0L, win_destroy, vars);
+	mlx_hook(vars->win, 17, 0L, win_destroy, data);
 	mlx_key_hook(vars->win, on_key_handler, data);
 	mlx_loop_hook(vars->mlx, &redraw, vars);
 	mlx_loop(vars->mlx);

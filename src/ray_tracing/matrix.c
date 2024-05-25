@@ -6,7 +6,7 @@
 /*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/20 17:06:05 by tklimova          #+#    #+#             */
-/*   Updated: 2024/05/13 03:11:21 by tklimova         ###   ########.fr       */
+/*   Updated: 2024/05/24 22:16:35 by tklimova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_vect	compute_right_left(float *mtx, t_vect forward, bool is_cy)
 	t_vect	up;
 	t_vect	left;
 
-	if (ft_abs_f(forward.x) < EPSILON && ft_abs_f(forward.z) < EPSILON)
+	if (ft_abs_f(forward.x) <= EPSILON && ft_abs_f(forward.z) <= EPSILON)
 	{
 		if (forward.y > 0)
 			up = fill_vector(0, 0, -1);
@@ -37,12 +37,13 @@ t_vect	compute_right_left(float *mtx, t_vect forward, bool is_cy)
 	}
 	else
 		up = fill_vector(0, 1, 0);
-	if (is_cy && fabs(forward.y) >= 0.707)
+	if (is_cy && ft_abs_f(forward.y) >= 0.707)
 	{
 		up.x = 1;
 		if (forward.y < 0)
 			up.x = -1;
 		up.y = 0;
+		up.z = 0;
 	}
 	left = cross_product(up, forward);
 	mtx[0] = left.x;

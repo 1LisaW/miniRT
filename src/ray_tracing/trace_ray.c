@@ -6,7 +6,7 @@
 /*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 16:53:56 by jmigoya-          #+#    #+#             */
-/*   Updated: 2024/05/24 14:13:14 by tklimova         ###   ########.fr       */
+/*   Updated: 2024/05/26 00:40:42 by tklimova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,17 @@ t_ray	calc_ray(t_mini_rt_data *data, int x, int y)
 }
 
 void	is_closest_obj_in_light(t_closest_obj *cl_obj,
-			t_closest_obj *cl_obj_to_light)
+			t_closest_obj *cl_obj_to_light, t_ray *ray)
 {
+	float	ang_1;
+	float	ang_2;
+	float	v_from_l[3];
+	float	v_from_cam[3];
+
+	ang_1 = 0;
+	ang_2 = 0;
+	scale_vector(cl_obj->light_ray.direction, -1, v_from_l);
+	scale_vector(ray->direction, -1, v_from_cam);
 	if (!cl_obj->obj || cl_obj->obj != cl_obj_to_light->obj)
 		return ;
 	if ((cl_obj->point[0] - EPSILON <= cl_obj_to_light->point[0]
@@ -53,6 +62,13 @@ void	is_closest_obj_in_light(t_closest_obj *cl_obj,
 		&& (cl_obj->point[2] - EPSILON <= cl_obj_to_light->point[2]
 			&& cl_obj->point[2] + EPSILON >= cl_obj_to_light->point[2]))
 		cl_obj->in_light = 1;
+	if (cl_obj->obj->id == pl)
+	{
+		ang_1 = get_dot_product(cl_obj->obj->v_3d_normal, v_from_l);
+		ang_2 = get_dot_product(cl_obj->obj->v_3d_normal, v_from_cam);
+		if (ft_abs_f(ang_1 + ang_2) != ft_abs_f(ang_1) + ft_abs_f(ang_2))
+			cl_obj->in_light = 0;
+	}
 }
 
 void	ray_trace(t_mini_rt_data *data, int x, int y)
@@ -71,7 +87,7 @@ void	ray_trace(t_mini_rt_data *data, int x, int y)
 			cl_obj.light_ray.direction);
 		normalize_vect(cl_obj.light_ray.direction);
 		cl_obj_to_l = get_closest_obj(data, cl_obj.light_ray);
-		is_closest_obj_in_light(&cl_obj, &cl_obj_to_l);
+		is_closest_obj_in_light(&cl_obj, &cl_obj_to_l, &ray);
 		precompute_normal(&cl_obj);
 	}
 	else
@@ -95,7 +111,7 @@ void	draw(t_mini_rt_data *data)
 	{
 		while (i < data->vars->img_data->w_width)
 		{
-			if (!data->cam)
+			if (!data->cam || (!data->a_l && !data->l))
 				custom_mlx_pixel_put(data->vars->img, i, j,
 					0x000000);
 			else

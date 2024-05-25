@@ -6,7 +6,7 @@
 /*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 23:57:31 by tklimova          #+#    #+#             */
-/*   Updated: 2024/05/24 13:44:43 by tklimova         ###   ########.fr       */
+/*   Updated: 2024/05/26 00:51:35 by tklimova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,15 +33,15 @@ void	fill_cy_caps_coords(t_g_objects *cy)
 
 void	precalc_rgb(t_g_objects *obj, float amb_int[3])
 {
-	obj->mtxs->amb_rgb[0] = (int) (obj->rgb[0] * amb_int[0]);
-	obj->mtxs->amb_rgb[1] = (int) (obj->rgb[1] * amb_int[1]);
-	obj->mtxs->amb_rgb[2] = (int) (obj->rgb[2] * amb_int[2]);
+	obj->mtxs->amb_rgb[0] = (int)(obj->rgb[0] * amb_int[0]);
+	obj->mtxs->amb_rgb[1] = (int)(obj->rgb[1] * amb_int[1]);
+	obj->mtxs->amb_rgb[2] = (int)(obj->rgb[2] * amb_int[2]);
 	scale_rgb_vector(obj->rgb, 0.7, obj->mtxs->shadow_rgb);
-	obj->mtxs->shadow_rgb[0] = (int) (obj->mtxs->shadow_rgb[0]
+	obj->mtxs->shadow_rgb[0] = (int)(obj->mtxs->shadow_rgb[0]
 			+ obj->mtxs->amb_rgb[0]) % 256;
-	obj->mtxs->shadow_rgb[1] = (int) (obj->mtxs->shadow_rgb[1]
+	obj->mtxs->shadow_rgb[1] = (int)(obj->mtxs->shadow_rgb[1]
 			+ obj->mtxs->amb_rgb[1]) % 256;
-	obj->mtxs->shadow_rgb[2] = (int) (obj->mtxs->shadow_rgb[2]
+	obj->mtxs->shadow_rgb[2] = (int)(obj->mtxs->shadow_rgb[2]
 			+ obj->mtxs->amb_rgb[2]) % 256;
 }
 
@@ -83,7 +83,7 @@ void	check_light_in(t_mini_rt_data *data)
 void	precompute_data(t_mini_rt_data *data)
 {
 	t_g_objects	*cyl;
-	float			amb_int[3];
+	float		amb_int[3];
 
 	if (!data->cam)
 		return ;
