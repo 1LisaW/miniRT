@@ -6,7 +6,7 @@
 /*   By: tklimova <tklimova@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 15:24:15 by tklimova          #+#    #+#             */
-/*   Updated: 2024/05/27 14:26:33 by tklimova         ###   ########.fr       */
+/*   Updated: 2024/05/27 14:40:42 by tklimova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ void	update_render_data_rotation(t_mini_rt_data *data, int sign)
 		create_camera_mtx(data);
 		rotate_normal(data->cam->v_3d_orient, sign, data->active_axis_idx);
 	}
-	free_coords(data->vars->img_data);
 	draw(data);
 }
 
@@ -80,6 +79,7 @@ void	update_render_data_translation(t_mini_rt_data *data, int sign)
 	}
 	else if (data->active_obj == light)
 	{
+		check_light_in(data);
 		data->l->coords[data->active_axis_idx] += sign * 0.2;
 	}
 	else if (data->active_obj == objects && obj)
@@ -94,7 +94,6 @@ void	update_render_data_translation(t_mini_rt_data *data, int sign)
 	}
 	else
 		return ;
-	free_coords(data->vars->img_data);
 	draw(data);
 }
 
@@ -109,3 +108,4 @@ void	translation(int keycode, t_mini_rt_data *data)
 	else if (keycode == 65364)
 		update_render_data_rotation(data, -1);
 }
+

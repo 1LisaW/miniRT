@@ -6,7 +6,7 @@
 /*   By: tklimova <tklimova@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 10:49:49 by tklimova          #+#    #+#             */
-/*   Updated: 2024/05/27 14:28:25 by tklimova         ###   ########.fr       */
+/*   Updated: 2024/05/27 14:41:09 by tklimova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ enum e_obj_active
 
 typedef struct s_img_data
 {
-	int					**colors_data;
 	int					is_guide;
 	int					w_width;
 	int					w_height;
@@ -149,6 +148,7 @@ typedef struct s_mini_rt_data
 	t_light				*l;
 	t_g_objects			*objs;
 	t_vars				*vars;
+	bool				light_on;
 	enum e_obj_active	active_obj;
 	int					active_axis_idx;
 }			t_mini_rt_data;
@@ -274,8 +274,6 @@ void			ft_print_data(t_mini_rt_data *data);
 
 void			init_img_data(t_img_data	**img_data);
 
-void			free_coords(t_img_data *img_data);
-
 void			create_win(t_mini_rt_data *data);
 
 void			destroy_win(t_vars *vars);
@@ -357,7 +355,11 @@ void			intersect_cylinder(t_g_objects *obj, t_ray ray,
 
 void			scale_rgb_vector(int *vector, float scalar, int *result);
 
+void			get_rgb_proportion(int *vector, float scalar, float *result);
+
 void			init_f_vector(float vector[3]);
+
+void			init_i_vector(int vector[3]);
 
 void			apply_img_to_win(t_mini_rt_data	*data);
 
@@ -370,5 +372,7 @@ t_vect			fill_vector(float x, float y, float z);
 void			precompute_normal(t_closest_obj	*cl_obj);
 
 void			translation(int keycode, t_mini_rt_data *data);
+
+void			check_light_in(t_mini_rt_data *data);
 
 #endif
