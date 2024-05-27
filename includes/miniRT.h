@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: tklimova <tklimova@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 10:49:49 by tklimova          #+#    #+#             */
-/*   Updated: 2024/05/27 13:47:17 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2024/05/27 14:41:09 by tklimova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@
 # define SPHERE_TOKEN "sp"
 # define PLANE_TOKEN "pl"
 # define CYLINDER_TOKEN "cy"
+
+# define SEPARATOR ","
 
 # define M_PI 3.14159265358979323846
 # define EPSILON 0.0001
