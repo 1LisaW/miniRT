@@ -6,7 +6,7 @@
 /*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 23:57:31 by tklimova          #+#    #+#             */
-/*   Updated: 2024/05/26 00:51:35 by tklimova         ###   ########.fr       */
+/*   Updated: 2024/05/26 01:30:49 by tklimova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,8 @@ void	precompute_data(t_mini_rt_data *data)
 	data->cam->tan_half_fov = tan(((double) data->cam->fov / 2) * (M_PI / 180));
 	while (cyl)
 	{
+		if (cyl->v_3d_normal)
+			normalize_vect(cyl->v_3d_normal);
 		cyl->mtxs = malloc(sizeof(t_mtxs));
 		cyl->mtxs->inv_mtx = NULL;
 		cyl->mtxs->dir_mtx = NULL;
