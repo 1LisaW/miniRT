@@ -73,7 +73,6 @@ testing: submodule $(NAME)
 
 submodule:
 	@git submodule update --init
-	@cd $(MINILIBX_DIR) && ./configure
 	@$(MAKE) -C $(MINILIBX_DIR) -s
 
 $(LINKED_OBJS)/%.o: $(SRC_DIR)/%.c
@@ -101,7 +100,7 @@ $(LINKED_OBJS)/%.o: $(SRC_DIR)/$(RAY_TRACE_DIR)/%.c
 	@$(CC) -c $(CFLAGS) $< -o $@
 
 $(LIB):
-	@cd libft -s && $(MAKE) all
+	@$(MAKE) -C libft -s
 
 $(NAME): $(ALL_OBJS) $(LIB)
 	@$(CC) $(ALL_OBJS) -I include $(LIB)  -Lminilibx-linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME)
@@ -111,12 +110,12 @@ run:
 
 clean:
 	@$(RM) $(LINKED_OBJS)
-	@$(MAKE) clean -C $(MINILIBX_DIR) -s
 	@$(MAKE) clean -C libft -s
 	@echo $(RED) "Cleaned..." $(EOC)
 
 fclean: clean
 	@$(RM) $(NAME)
+	@$(RM) $(MINILIBX_DIR)
 	@$(MAKE) fclean -C libft -s
 	@echo $(PURPLE) "Full Cleaned...🧹" $(EOC)
 
