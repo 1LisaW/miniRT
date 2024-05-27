@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT_data.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: tklimova <tklimova@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 10:41:19 by tklimova          #+#    #+#             */
-/*   Updated: 2024/05/13 02:22:44 by tklimova         ###   ########.fr       */
+/*   Updated: 2024/05/27 14:35:22 by tklimova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ void	init_mini_rt_data(t_mini_rt_data *data)
 	data->cam = NULL;
 	data->l = NULL;
 	data->objs = NULL;
+	data->active_axis_idx = 0;
+	data->active_obj = camera;
 }
 
 void	delete_mini_rt_data(t_mini_rt_data *data)

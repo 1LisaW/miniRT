@@ -6,7 +6,7 @@
 /*   By: tklimova <tklimova@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 10:49:49 by tklimova          #+#    #+#             */
-/*   Updated: 2024/05/14 11:40:28 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2024/05/27 14:28:25 by tklimova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 # define PLANE_TOKEN "pl"
 # define CYLINDER_TOKEN "cy"
 
-# define SEPARATOR ','
+# define SEPARATOR ","
 
 # define M_PI 3.14159265358979323846
 # define EPSILON 0.0001
@@ -86,13 +86,13 @@ typedef struct s_vars
 typedef struct s_ambient_light
 {
 	float	ratio;
-	int		*rgb;	// int[3]
+	int		*rgb;
 }				t_ambient_light;
 
 typedef struct s_camera
 {
-	float	*coords; // float [3]
-	float	*v_3d_orient;	//float[3]
+	float	*coords;
+	float	*v_3d_orient;
 	int		fov;
 	float	*mtx;
 	double	tan_half_fov;
@@ -100,9 +100,9 @@ typedef struct s_camera
 
 typedef struct s_light
 {
-	float	*coords; // float [3]
+	float	*coords;
 	float	l_brightness;
-	int		*rgb;	// int[3]
+	int		*rgb;
 }				t_light;
 
 enum	e_obj_ids
@@ -131,11 +131,11 @@ typedef struct s_mtxs
 typedef struct s_g_objects
 {
 	enum e_obj_ids		id;
-	float				*coords; // float [3]
+	float				*coords;
 	float				diam;
-	float				*v_3d_normal;	//float[3]
+	float				*v_3d_normal;
 	float				height;
-	int					*rgb;	// int[3]
+	int					*rgb;
 	t_mtxs				*mtxs;
 	struct s_g_objects	*next;
 }				t_g_objects;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_helpers.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: tklimova <tklimova@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 19:52:47 by tklimova          #+#    #+#             */
-/*   Updated: 2024/05/14 11:40:12 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2024/05/27 14:26:49 by tklimova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,14 +51,14 @@ bool	check_norm_vectors(t_mini_rt_data *data)
 
 	tmp = data->objs;
 	length = get_vector_length(NULL, data->cam->v_3d_orient);
-	if (1 - length > EPSILON * 10) // TODO: check valid value
+	if (1 - length > EPSILON * 10)
 		return (false);
 	while (tmp)
 	{
 		if (tmp->id == pl || tmp->id == cy)
 		{
 			length = get_vector_length(NULL, tmp->v_3d_normal);
-			if (1 - length > EPSILON * 10) // TODO: check valid value
+			if (1 - length > EPSILON * 10)
 				return (false);
 		}
 		tmp = tmp->next;
