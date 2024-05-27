@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_rgb.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: tklimova <tklimova@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 21:23:48 by tklimova          #+#    #+#             */
-/*   Updated: 2024/03/26 15:54:38 by tklimova         ###   ########.fr       */
+/*   Updated: 2024/05/27 14:46:13 by tklimova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	**get_rgb_str_arr(t_mini_rt_data *data, char *rgb)
 	int		len;
 
 	len = 0;
-	rgb_arr_str = ft_split(rgb, SEPARATOR);
+	rgb_arr_str = ft_split(rgb, SEPARATOR[0]);
 	if (ft_str_arr_len(rgb_arr_str) != 3)
 		handle_error(ERR_PARSE_DATA, "RGB should include 3 numbers", data);
 	free(rgb);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_coords.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: tklimova <tklimova@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 12:31:57 by tklimova          #+#    #+#             */
-/*   Updated: 2024/05/24 00:15:11 by tklimova         ###   ########.fr       */
+/*   Updated: 2024/05/27 14:45:28 by tklimova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ char	**get_coords_str_arr(char *coords, t_mini_rt_data *data, int *len)
 {
 	char	**arr_coords;
 
-	arr_coords = ft_split(coords, SEPARATOR);
+	arr_coords = ft_split(coords, SEPARATOR[0]);
 	*len = ft_str_arr_len(arr_coords);
 	if (ft_str_arr_len(arr_coords) != 3)
 		handle_error(ERR_PARSE_DATA, "Incorrect number of coordinates", data);
