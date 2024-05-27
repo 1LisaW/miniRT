@@ -59,7 +59,6 @@ WHITE:="\033[1;37m"
 EOC:="\033[0;0m"
 
 %.o : %.c
-	@echo $(CYAN) "Compiling $@...🛠️" $(EOC)
 	@mkdir -p $(LINKED_OBJS)
 	@$(CC) -c $(CFLAGS)  -I/usr/include -Imlx_linux -O3 $< -o $@
 
@@ -76,33 +75,41 @@ submodule:
 	@$(MAKE) -C $(MINILIBX_DIR) -s
 
 $(LINKED_OBJS)/%.o: $(SRC_DIR)/%.c
+	@echo $(CYAN) "Compiling $@...🛠️" $(EOC)
 	@mkdir -p $(LINKED_OBJS)
 	@$(CC) -c $(CFLAGS) $< -o $@
 
 $(LINKED_OBJS)/%.o: $(SRC_DIR)/$(PARSER_DIR)/%.c
+	@echo $(CYAN) "Compiling $@...🛠️" $(EOC)
 	@mkdir -p $(LINKED_OBJS)
 	@$(CC) -c $(CFLAGS) $< -o $@
 
 $(LINKED_OBJS)/%.o: $(SRC_DIR)/$(IMG_DIR)/%.c
+	@echo $(CYAN) "Compiling $@...🛠️" $(EOC)
 	@mkdir -p $(LINKED_OBJS)
 	@$(CC) -c $(CFLAGS) $< -o $@
 
 $(LINKED_OBJS)/%.o: $(SRC_DIR)/$(VEC_OPS_DIR)/%.c
+	@echo $(CYAN) "Compiling $@...🛠️" $(EOC)
 	@mkdir -p $(LINKED_OBJS)
 	@$(CC) -c $(CFLAGS) $< -o $@
 
 $(LINKED_OBJS)/%.o: $(SRC_DIR)/$(SDF_DIR)/%.c
+	@echo $(CYAN) "Compiling $@...🛠️" $(EOC)
 	@mkdir -p $(LINKED_OBJS)
 	@$(CC) -c $(CFLAGS) $< -o $@
 
 $(LINKED_OBJS)/%.o: $(SRC_DIR)/$(RAY_TRACE_DIR)/%.c
+	@echo $(CYAN) "Compiling $@...🛠️" $(EOC)
 	@mkdir -p $(LINKED_OBJS)
 	@$(CC) -c $(CFLAGS) $< -o $@
 
 $(LIB):
+	@echo $(CYAN) "Compiling $@...🛠️" $(EOC)
 	@$(MAKE) -C libft -s
 
 $(NAME): $(ALL_OBJS) $(LIB)
+	@echo $(CYAN) "Compiling $@...🛠️" $(EOC)
 	@$(CC) $(ALL_OBJS) -I include $(LIB)  -Lminilibx-linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME)
 
 run:

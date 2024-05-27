@@ -6,7 +6,7 @@
 /*   By: tklimova <tklimova@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 15:24:15 by tklimova          #+#    #+#             */
-/*   Updated: 2024/05/27 14:40:42 by tklimova         ###   ########.fr       */
+/*   Updated: 2024/05/27 16:19:50 by tklimova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,4 +108,3 @@ void	translation(int keycode, t_mini_rt_data *data)
 	else if (keycode == 65364)
 		update_render_data_rotation(data, -1);
 }
-

@@ -6,7 +6,7 @@
 /*   By: tklimova <tklimova@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 23:57:31 by tklimova          #+#    #+#             */
-/*   Updated: 2024/05/27 15:03:13 by tklimova         ###   ########.fr       */
+/*   Updated: 2024/05/27 16:19:39 by tklimova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,9 +106,7 @@ void	precompute_data(t_mini_rt_data *data)
 		cyl->mtxs->inv_mtx = NULL;
 		cyl->mtxs->dir_mtx = NULL;
 		if (cyl->id == cy)
-		{
 			precompute_cyl_data(cyl);
-		}
 		precalc_rgb(cyl, amb_int);
 		cyl = cyl->next;
 	}
