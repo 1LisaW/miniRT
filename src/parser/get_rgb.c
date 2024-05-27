@@ -6,7 +6,7 @@
 /*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 21:23:48 by tklimova          #+#    #+#             */
-/*   Updated: 2024/03/26 15:54:38 by tklimova         ###   ########.fr       */
+/*   Updated: 2024/05/27 13:46:45 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	**get_rgb_str_arr(t_mini_rt_data *data, char *rgb)
 	int		len;
 
 	len = 0;
-	rgb_arr_str = ft_split(rgb, SEPARATOR);
+	rgb_arr_str = ft_split(rgb, ',');
 	if (ft_str_arr_len(rgb_arr_str) != 3)
 		handle_error(ERR_PARSE_DATA, "RGB should include 3 numbers", data);
 	free(rgb);

@@ -101,7 +101,7 @@ $(LINKED_OBJS)/%.o: $(SRC_DIR)/$(RAY_TRACE_DIR)/%.c
 	@$(CC) -c $(CFLAGS) $< -o $@
 
 $(LIB):
-	@cd libft && $(MAKE) all
+	@cd libft -s && $(MAKE) all
 
 $(NAME): $(ALL_OBJS) $(LIB)
 	@$(CC) $(ALL_OBJS) -I include $(LIB)  -Lminilibx-linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME)
@@ -112,12 +112,12 @@ run:
 clean:
 	@$(RM) $(LINKED_OBJS)
 	@$(MAKE) clean -C $(MINILIBX_DIR) -s
-	@cd libft && $(MAKE) clean
+	@$(MAKE) clean -C libft -s
 	@echo $(RED) "Cleaned..." $(EOC)
 
 fclean: clean
 	@$(RM) $(NAME)
-	@cd libft && $(MAKE) fclean
+	@$(MAKE) fclean -C libft -s
 	@echo $(PURPLE) "Full Cleaned...🧹" $(EOC)
 
 re: fclean all
