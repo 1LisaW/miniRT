@@ -6,7 +6,7 @@
 /*   By: tklimova <tklimova@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 15:24:15 by tklimova          #+#    #+#             */
-/*   Updated: 2024/05/27 16:19:50 by tklimova         ###   ########.fr       */
+/*   Updated: 2024/05/27 17:12:48 by tklimova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,16 +73,16 @@ void	update_render_data_translation(t_mini_rt_data *data, int sign)
 	t_g_objects	*obj;
 
 	obj = data->objs;
-	if (data->active_obj == camera)
+	if (data->cam && data->active_obj == camera)
 	{
 		data->cam->coords[data->active_axis_idx] += sign * 0.2;
 	}
-	else if (data->active_obj == light)
+	else if (data->l && data->active_obj == light)
 	{
 		check_light_in(data);
 		data->l->coords[data->active_axis_idx] += sign * 0.2;
 	}
-	else if (data->active_obj == objects && obj)
+	else if (obj && data->active_obj == objects)
 	{
 		while (obj)
 		{
