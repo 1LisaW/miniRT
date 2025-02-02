@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   precompute_data.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: tklimova <tklimova@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 23:57:31 by tklimova          #+#    #+#             */
-/*   Updated: 2024/05/26 00:51:35 by tklimova         ###   ########.fr       */
+/*   Updated: 2024/05/27 16:19:39 by tklimova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,10 @@ void	precalc_rgb(t_g_objects *obj, float amb_int[3])
 
 void	precompute_cyl_data(t_g_objects	*cyl)
 {
+	if (cyl->mtxs && cyl->mtxs->dir_mtx)
+		free(cyl->mtxs->dir_mtx);
+	if (cyl->mtxs && cyl->mtxs->inv_mtx)
+		free(cyl->mtxs->inv_mtx);
 	create_cyl_mtx(cyl);
 	cyl->mtxs->inv_mtx = mtx_inverse(cyl->mtxs->dir_mtx);
 	fill_cy_caps_coords(cyl);
@@ -96,13 +100,13 @@ void	precompute_data(t_mini_rt_data *data)
 	data->cam->tan_half_fov = tan(((double) data->cam->fov / 2) * (M_PI / 180));
 	while (cyl)
 	{
+		if (cyl->v_3d_normal)
+			normalize_vect(cyl->v_3d_normal);
 		cyl->mtxs = malloc(sizeof(t_mtxs));
 		cyl->mtxs->inv_mtx = NULL;
 		cyl->mtxs->dir_mtx = NULL;
 		if (cyl->id == cy)
-		{
 			precompute_cyl_data(cyl);
-		}
 		precalc_rgb(cyl, amb_int);
 		cyl = cyl->next;
 	}

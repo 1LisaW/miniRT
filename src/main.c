@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: tklimova <tklimova@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 10:38:52 by tklimova          #+#    #+#             */
-/*   Updated: 2024/05/14 11:42:18 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2024/05/27 16:22:09 by tklimova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	parse_scene(int argc, char **argv, t_mini_rt_data *data)
 {
 	validate_args(argc, argv, data);
 	if (data->err_code)
-		exit(data->err_code);
+		return ;
 	ft_read_file(data);
 }
 

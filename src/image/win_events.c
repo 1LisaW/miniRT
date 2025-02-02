@@ -6,7 +6,7 @@
 /*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 18:10:22 by tklimova          #+#    #+#             */
-/*   Updated: 2024/05/26 00:56:36 by tklimova         ###   ########.fr       */
+/*   Updated: 2024/05/27 16:33:15 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ int	win_destroy(t_mini_rt_data *data)
 	vars = data->vars;
 	destroy_win(vars);
 	mlx_destroy_window(vars->mlx, vars->win);
+	mlx_destroy_display(vars->mlx);
 	if (vars->mlx)
 		free(vars->mlx);
 	vars->mlx = NULL;

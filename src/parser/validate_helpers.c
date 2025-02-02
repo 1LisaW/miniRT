@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   validate_helpers.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tklimova <tklimova@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: tklimova <tklimova@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 19:52:47 by tklimova          #+#    #+#             */
-/*   Updated: 2024/05/24 22:09:47 by tklimova         ###   ########.fr       */
+/*   Updated: 2024/05/27 14:43:50 by tklimova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/miniRT.h"
+#include <math.h>
 
 bool	is_float(char *str)
 {
@@ -53,14 +54,14 @@ bool	check_norm_vectors(t_mini_rt_data *data)
 	if (!data->cam)
 		return (true);
 	length = get_vector_length(NULL, data->cam->v_3d_orient);
-	if (1 - length > 0.1)
+	if (1 - length > EPSILON * 10)
 		return (false);
 	while (tmp)
 	{
 		if (tmp->id == pl || tmp->id == cy)
 		{
 			length = get_vector_length(NULL, tmp->v_3d_normal);
-			if (1 - length > 0.1)
+			if (1 - length > EPSILON * 10)
 				return (false);
 		}
 		tmp = tmp->next;

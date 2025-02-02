@@ -59,7 +59,6 @@ WHITE:="\033[1;37m"
 EOC:="\033[0;0m"
 
 %.o : %.c
-	@echo $(CYAN) "Compiling $@...🛠️" $(EOC)
 	@mkdir -p $(LINKED_OBJS)
 	@$(CC) -c $(CFLAGS)  -I/usr/include -Imlx_linux -O3 $< -o $@
 
@@ -73,37 +72,44 @@ testing: submodule $(NAME)
 
 submodule:
 	@git submodule update --init
-	@cd $(MINILIBX_DIR) && ./configure
 	@$(MAKE) -C $(MINILIBX_DIR) -s
 
 $(LINKED_OBJS)/%.o: $(SRC_DIR)/%.c
+	@echo $(CYAN) "Compiling $@...🛠️" $(EOC)
 	@mkdir -p $(LINKED_OBJS)
 	@$(CC) -c $(CFLAGS) $< -o $@
 
 $(LINKED_OBJS)/%.o: $(SRC_DIR)/$(PARSER_DIR)/%.c
+	@echo $(CYAN) "Compiling $@...🛠️" $(EOC)
 	@mkdir -p $(LINKED_OBJS)
 	@$(CC) -c $(CFLAGS) $< -o $@
 
 $(LINKED_OBJS)/%.o: $(SRC_DIR)/$(IMG_DIR)/%.c
+	@echo $(CYAN) "Compiling $@...🛠️" $(EOC)
 	@mkdir -p $(LINKED_OBJS)
 	@$(CC) -c $(CFLAGS) $< -o $@
 
 $(LINKED_OBJS)/%.o: $(SRC_DIR)/$(VEC_OPS_DIR)/%.c
+	@echo $(CYAN) "Compiling $@...🛠️" $(EOC)
 	@mkdir -p $(LINKED_OBJS)
 	@$(CC) -c $(CFLAGS) $< -o $@
 
 $(LINKED_OBJS)/%.o: $(SRC_DIR)/$(SDF_DIR)/%.c
+	@echo $(CYAN) "Compiling $@...🛠️" $(EOC)
 	@mkdir -p $(LINKED_OBJS)
 	@$(CC) -c $(CFLAGS) $< -o $@
 
 $(LINKED_OBJS)/%.o: $(SRC_DIR)/$(RAY_TRACE_DIR)/%.c
+	@echo $(CYAN) "Compiling $@...🛠️" $(EOC)
 	@mkdir -p $(LINKED_OBJS)
 	@$(CC) -c $(CFLAGS) $< -o $@
 
 $(LIB):
-	@cd libft && $(MAKE) all
+	@echo $(CYAN) "Compiling $@...🛠️" $(EOC)
+	@$(MAKE) -C libft -s
 
 $(NAME): $(ALL_OBJS) $(LIB)
+	@echo $(CYAN) "Compiling $@...🛠️" $(EOC)
 	@$(CC) $(ALL_OBJS) -I include $(LIB)  -Lminilibx-linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME)
 
 run:
@@ -111,13 +117,13 @@ run:
 
 clean:
 	@$(RM) $(LINKED_OBJS)
-	@$(MAKE) clean -C $(MINILIBX_DIR) -s
-	@cd libft && $(MAKE) clean
+	@$(MAKE) clean -C libft -s
 	@echo $(RED) "Cleaned..." $(EOC)
 
 fclean: clean
 	@$(RM) $(NAME)
-	@cd libft && $(MAKE) fclean
+	@$(RM) $(MINILIBX_DIR)
+	@$(MAKE) fclean -C libft -s
 	@echo $(PURPLE) "Full Cleaned...🧹" $(EOC)
 
 re: fclean all
